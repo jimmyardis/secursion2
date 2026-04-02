@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secursion — Intelligence Layered. Threats Unraveled.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:            #050a14;
+      --surface:       #09152a;
+      --surface-2:     #0f1e38;
+      --accent:        #00d4f0;
+      --accent-glow:   rgba(0, 212, 240, 0.12);
+      --accent-border: rgba(0, 212, 240, 0.22);
+      --text:          #dde8f5;
+      --text-muted:    #5a7898;
+      --text-dim:      #2c4160;
+      --border:        #122033;
+      --font:          'Space Grotesk', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--text-dim); }
+
+    /* ── NAV ─────────────────────────────────────────── */
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 28px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(5,10,20,0.92) 0%, transparent 100%);
+    }
+
+    .logo {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo .a { color: var(--accent); }
+
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ────────────────────────────────────────── */
+
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 640px;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    /* Subtle grid behind canvas */
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 1;
+      background-image:
+        linear-gradient(rgba(0,212,240,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,240,0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+      background-position: -1px -1px;
+    }
+
+    #hero-canvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      z-index: 2;
+    }
+
+    /* Left-edge gradient so text stays readable */
+    .hero-edge {
+      position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      background:
+        linear-gradient(to right, rgba(5,10,20,0.78) 0%, rgba(5,10,20,0.3) 38%, transparent 60%),
+        linear-gradient(to top, rgba(5,10,20,0.6) 0%, transparent 22%);
+    }
+
+    /* Radial vignette */
+    .hero-vignette {
+      position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      background: radial-gradient(
+        ellipse 85% 85% at 68% 50%,
+        transparent 35%,
+        rgba(5,10,20,0.55) 100%
+      );
+    }
+
+    .hero-content {
+      position: absolute;
+      left: 56px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      max-width: 560px;
+    }
+
+    .hero-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 30px;
+      opacity: 0.85;
+    }
+
+    h1.tagline {
+      font-size: clamp(50px, 6.5vw, 90px);
+      font-weight: 700;
+      letter-spacing: -0.028em;
+      line-height: 0.96;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+    h1.tagline .a { color: var(--accent); }
+
+    .hero-sub {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 400px;
+      margin-bottom: 44px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 28px;
+      border: 1px solid var(--accent-border);
+      background: transparent;
+      color: var(--accent);
+      font-family: var(--font);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.22s, color 0.22s, border-color 0.22s, box-shadow 0.22s;
+    }
+    .btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      box-shadow: 0 0 40px rgba(0,212,240,0.22);
+    }
+    .btn .arrow { transition: transform 0.2s; }
+    .btn:hover .arrow { transform: translateX(5px); }
+
+    /* Scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 38px; left: 56px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0.32;
+    }
+    .scroll-hint span {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .scroll-bar {
+      width: 44px; height: 1px;
+      background: var(--text-dim);
+      position: relative; overflow: hidden;
+    }
+    .scroll-bar::after {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: var(--accent);
+      animation: scan 2.8s ease-in-out infinite;
+    }
+    @keyframes scan {
+      0%       { left: -100%; }
+      50%, 100%{ left: 110%; }
+    }
+
+    /* ── COMMON ──────────────────────────────────────── */
+
+    .section { padding: 112px 0; }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 56px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(30px, 3.6vw, 46px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 56px;
+    }
+
+    /* ── SERVICES ────────────────────────────────────── */
+
+    #services {
+      border-top: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .card {
+      background: var(--surface);
+      padding: 48px 40px 44px;
+      transition: background 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.45s ease;
+    }
+    .card:hover::after { transform: scaleX(1); }
+    .card:hover { background: var(--surface-2); }
+
+    .card-num {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.22em;
+      color: var(--text-dim);
+      margin-bottom: 36px;
+    }
+    .card-title {
+      font-size: 21px; font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .card-body {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.78;
+    }
+    .card-tag {
+      display: inline-block;
+      margin-top: 30px;
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent-border);
+      padding: 5px 12px;
+    }
+
+    /* ── WHY ─────────────────────────────────────────── */
+
+    #why {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .why-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: start;
+    }
+
+    .why-pull {
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 500;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+    .why-pull strong { color: var(--accent); font-weight: 600; }
+
+    .why-body {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.82;
+    }
+    .why-body p + p { margin-top: 20px; }
+
+    /* Credentials */
+    .creds { list-style: none; border-top: 1px solid var(--border); }
+    .cred {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 26px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cred-mark {
+      width: 7px; height: 7px;
+      min-width: 7px;
+      background: var(--accent);
+      transform: rotate(45deg);
+      margin-top: 8px;
+      opacity: 0.75;
+    }
+    .cred-label {
+      font-size: 13px; font-weight: 600;
+      letter-spacing: 0.01em;
+      margin-bottom: 5px;
+    }
+    .cred-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── CONTACT ─────────────────────────────────────── */
+
+    #contact {
+      border-top: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.45fr;
+      gap: 96px;
+      align-items: start;
+    }
+
+    .contact-heading {
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .contact-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.78;
+      margin-bottom: 40px;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 12px; }
+    .contact-links a {
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .contact-links a:hover { opacity: 0.7; }
+
+    /* Form */
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+    }
+    .field label {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 18px 20px 0;
+    }
+    .field input,
+    .field textarea {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid transparent;
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 14px;
+      padding: 6px 20px 18px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      resize: none;
+      -webkit-appearance: none;
+    }
+    .field input:focus,
+    .field textarea:focus {
+      border-bottom-color: var(--accent);
+      background: rgba(0,212,240,0.03);
+    }
+    .field textarea { min-height: 130px; }
+
+    .btn-submit {
+      display: block;
+      width: 100%;
+      padding: 18px;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      font-family: var(--font);
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s, box-shadow 0.2s;
+    }
+    .btn-submit:hover { opacity: 0.9; box-shadow: 0 0 44px rgba(0,212,240,0.2); }
+    .btn-submit:disabled {
+      background: var(--surface-2);
+      color: var(--accent);
+      cursor: default;
+      opacity: 1;
+      box-shadow: none;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .footer-logo .a { color: var(--accent); }
+    .footer-copy { font-size: 11px; color: var(--text-dim); letter-spacing: 0.04em; }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+
+    @media (max-width: 1024px) {
+      .why-layout,
+      .contact-layout { grid-template-columns: 1fr; gap: 52px; }
+      .services-grid  { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+
+      .hero-content {
+        position: absolute;
+        left: 24px; right: 24px;
+        top: auto; bottom: 80px;
+        transform: none;
+        max-width: 100%;
+      }
+
+      .hero-edge {
+        background:
+          linear-gradient(to top, rgba(5,10,20,0.88) 0%, rgba(5,10,20,0.3) 45%, transparent 65%),
+          linear-gradient(to right, rgba(5,10,20,0.4) 0%, transparent 50%);
+      }
+
+      .scroll-hint { left: 24px; bottom: 30px; }
+
+      .container { padding: 0 24px; }
+      .section   { padding: 80px 0; }
+
+      .services-grid { grid-template-columns: 1fr; }
+      .card          { padding: 36px 28px 32px; }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      footer {
+        padding: 24px;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── NAV ───────────────────────────────────────── -->
+  <nav>
+    <a href="#" class="logo">SECUR<span class="a">S</span>ION</a>
+    <ul class="nav-links">
+      <li><a href="#services">Capabilities</a></li>
+      <li><a href="#why">About</a></li>
+      <li><a href="#contact">Engage</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ──────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-grid"></div>
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-vignette"></div>
+    <div class="hero-edge"></div>
+
+    <div class="hero-content">
+      <p class="hero-label">AI-Powered Cybersecurity</p>
+      <h1 class="tagline">
+        Intelligence<br>
+        layered.<br>
+        <span class="a">Threats</span><br>
+        unraveled.
+      </h1>
+      <p class="hero-sub">
+        We operate at the intersection of AI capability and deep security expertise —
+        built by people who understand both sides of the threat surface.
+      </p>
+      <a href="#contact" class="btn">
+        Engage Secursion <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-bar"></div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ───────────────────────────────────── -->
+  <section id="services" class="section">
+    <div class="container">
+      <span class="eyebrow">Capabilities</span>
+      <h2 class="section-title">What We Do</h2>
+      <div class="services-grid">
+
+        <article class="card">
+          <p class="card-num">01</p>
+          <h3 class="card-title">AI Security<br>Review</h3>
+          <p class="card-body">
+            Automated threat modeling, architecture analysis, and code-level
+            vulnerability discovery. We train on attack patterns, not compliance
+            checklists — and we surface what automated scanners miss.
+          </p>
+          <span class="card-tag">AI-Augmented Analysis</span>
+        </article>
+
+        <article class="card">
+          <p class="card-num">02</p>
+          <h3 class="card-title">Compliance<br>Automation</h3>
+          <p class="card-body">
+            Federal framework alignment — NIST 800-53, FedRAMP, CMMC 2.0 — delivered
+            through intelligent policy engines that understand context, not just controls.
+            Fewer gaps. Faster authorization.
+          </p>
+          <span class="card-tag">Federal-Grade</span>
+        </article>
+
+        <article class="card">
+          <p class="card-num">03</p>
+          <h3 class="card-title">Penetration Testing<br>&amp; Reporting</h3>
+          <p class="card-body">
+            Adversarial testing with attacker mindset and auditor discipline.
+            Red team depth. Federal-grade documentation. We find the vectors
+            before your adversaries do.
+          </p>
+          <span class="card-tag">Adversarial</span>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHY SECURSION ──────────────────────────────── -->
+  <section id="why" class="section">
+    <div class="container">
+      <span class="eyebrow">Authority</span>
+      <h2 class="section-title">Why Secursion</h2>
+      <div class="why-layout">
+
+        <div>
+          <p class="why-pull">
+            The name is a portmanteau of <strong>security</strong> and
+            <strong>recursion</strong> — signal intelligence that thinks in layers.
+          </p>
+          <div class="why-body">
+            <p>
+              Secursion was founded by a veteran federal compliance consultant and a
+              credentialed cybersecurity researcher who holds patents in security
+              architecture. This is not a consultancy that added an AI layer. This is not
+              an AI company that discovered security. This is the real thing — domain
+              expertise and technical depth, combined.
+            </p>
+            <p>
+              We work with federal contractors, cleared organizations, and technology
+              leaders navigating the new attack surface that AI systems introduce.
+              Boutique by design: every engagement involves the principals, not a team
+              trained to present them.
+            </p>
+          </div>
+        </div>
+
+        <ul class="creds">
+          <li class="cred">
+            <div class="cred-mark"></div>
+            <div>
+              <p class="cred-label">Patents in Security Architecture</p>
+              <p class="cred-desc">
+                Issued patents held by our founders in security systems design
+                and adversarial detection methodology.
+              </p>
+            </div>
+          </li>
+          <li class="cred">
+            <div class="cred-mark"></div>
+            <div>
+              <p class="cred-label">Federal Program Experience</p>
+              <p class="cred-desc">
+                Decades navigating cleared environments, federal compliance programs,
+                and agency-level security operations.
+              </p>
+            </div>
+          </li>
+          <li class="cred">
+            <div class="cred-mark"></div>
+            <div>
+              <p class="cred-label">AI Architecture Expertise</p>
+              <p class="cred-desc">
+                Deep technical knowledge of AI system design, adversarial ML,
+                and the new threat surfaces AI introduces to enterprise environments.
+              </p>
+            </div>
+          </li>
+          <li class="cred">
+            <div class="cred-mark"></div>
+            <div>
+              <p class="cred-label">Boutique by Design</p>
+              <p class="cred-desc">
+                We do not scale by diluting expertise. Every engagement involves
+                principals — the people who built the capabilities.
+              </p>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ────────────────────────────────────── -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="contact-layout">
+
+        <div>
+          <span class="eyebrow">Engage</span>
+          <h2 class="contact-heading">Serious work<br>starts here.</h2>
+          <p class="contact-sub">
+            We work with federal contractors, security teams, and technology leaders
+            navigating complex threat environments. If that describes your situation,
+            we should talk.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:engage@secursion.ai">engage@secursion.ai</a>
+            <a href="https://secursion.ai">secursion.ai</a>
+          </div>
+        </div>
+
+        <form class="form" id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="f-name">Name</label>
+              <input type="text" id="f-name" name="name" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="f-email">Email</label>
+              <input type="email" id="f-email" name="email" autocomplete="email" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-org">Organization</label>
+            <input type="text" id="f-org" name="organization" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="f-msg">Message</label>
+            <textarea id="f-msg" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit" id="submit-btn">
+            Send Message &nbsp;→
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────── -->
+  <footer>
+    <div class="footer-logo">SECUR<span class="a">S</span>ION</div>
+    <div class="footer-copy">© 2025 Secursion. All rights reserved.</div>
+  </footer>
+
+  <!-- CDN scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <script>
+  /* ================================================================
+     SECURSION — HERO 3D ANIMATION
+     Icosahedron explode / reassemble  ·  Three.js r128 + GSAP 3
+  ================================================================ */
+  (function () {
+    'use strict';
+
+    var canvas   = document.getElementById('hero-canvas');
+    var mobile   = window.innerWidth < 768;
+    var W        = window.innerWidth;
+    var H        = window.innerHeight;
+
+    /* ── Renderer ───────────────────────────────────── */
+    var renderer = new THREE.WebGLRenderer({
+      canvas    : canvas,
+      antialias : !mobile,
+      alpha     : true,
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1 : 1.5));
+    renderer.setSize(W, H);
+    renderer.setClearColor(0x000000, 0);
+
+    /* ── Scene / Camera ─────────────────────────────── */
+    var scene  = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(52, W / H, 0.1, 100);
+    camera.position.set(0, 0, 6);
+
+    /* ── Lighting ───────────────────────────────────── */
+    scene.add(new THREE.AmbientLight(0x0d1f40, 8));
+
+    var key  = new THREE.PointLight(0x00d4f0, 5, 22);
+    key.position.set(5, 6, 5);
+    scene.add(key);
+
+    var fill = new THREE.PointLight(0x004488, 2, 20);
+    fill.position.set(-6, -4, -3);
+    scene.add(fill);
+
+    /* ── Root group: offset right on desktop ────────── */
+    var group = new THREE.Group();
+    group.position.set(mobile ? 0 : 2.1, mobile ? 0.4 : 0, 0);
+    scene.add(group);
+
+    /* ── Build icosahedron face pieces ──────────────── */
+    var RADIUS    = mobile ? 1.1  : 1.6;
+    var EXPLODE_D = mobile ? 2.4  : 3.6;
+
+    var icoGeom  = new THREE.IcosahedronGeometry(RADIUS, 0);
+    var posAttr  = icoGeom.attributes.position;
+    var FACES    = posAttr.count / 3; // always 20
+
+    var pieces   = [];
+
+    for (var i = 0; i < FACES; i++) {
+      /* Three vertices of this face */
+      var verts = [];
+      for (var j = 0; j < 3; j++) {
+        verts.push(new THREE.Vector3(
+          posAttr.getX(i * 3 + j),
+          posAttr.getY(i * 3 + j),
+          posAttr.getZ(i * 3 + j)
+        ));
+      }
+
+      /* Face centroid → outward explosion direction */
+      var centroid = new THREE.Vector3()
+        .add(verts[0]).add(verts[1]).add(verts[2])
+        .divideScalar(3);
+      var dir = centroid.clone().normalize();
+
+      /* Triangle geometry */
+      var geom = new THREE.BufferGeometry();
+      geom.setAttribute('position', new THREE.BufferAttribute(
+        new Float32Array([
+          verts[0].x, verts[0].y, verts[0].z,
+          verts[1].x, verts[1].y, verts[1].z,
+          verts[2].x, verts[2].y, verts[2].z,
+        ]), 3
+      ));
+      geom.computeVertexNormals();
+
+      /* Dark navy face */
+      var mat = new THREE.MeshStandardMaterial({
+        color            : 0x05182e,
+        emissive         : new THREE.Color(0x00d4f0),
+        emissiveIntensity: 0.04,
+        metalness        : 0.85,
+        roughness        : 0.2,
+        side             : THREE.DoubleSide,
+        transparent      : true,
+        opacity          : 0.88,
+      });
+
+      var mesh = new THREE.Mesh(geom, mat);
+
+      /* Cyan edge lines */
+      var edgeMat = new THREE.LineBasicMaterial({
+        color      : 0x00d4f0,
+        transparent: true,
+        opacity    : 0.55,
+      });
+      mesh.add(new THREE.LineSegments(new THREE.EdgesGeometry(geom), edgeMat));
+
+      /* Metadata for animation */
+      mesh.userData.target = dir.clone().multiplyScalar(EXPLODE_D);
+      mesh.userData.rrot   = {
+        x: (Math.random() - 0.5) * Math.PI * 1.4,
+        y: (Math.random() - 0.5) * Math.PI * 1.4,
+        z: (Math.random() - 0.5) * Math.PI * 0.9,
+      };
+
+      pieces.push(mesh);
+      group.add(mesh);
+    }
+
+    /* ── State machine ──────────────────────────────── */
+    var phase   = 'idle';   // idle | exploding | exploded | assembling | done
+    var fired   = false;    // has reassemble been triggered
+
+    /* ── Explode ────────────────────────────────────── */
+    function explode() {
+      if (phase !== 'idle') return;
+      phase = 'exploding';
+
+      var tl = gsap.timeline({ onComplete: function () { phase = 'exploded'; } });
+
+      pieces.forEach(function (p, idx) {
+        var t   = p.userData.target;
+        var r   = p.userData.rrot;
+        var pos = idx * 0.038;           // timeline position (stagger)
+
+        tl.to(p.position,              { x: t.x, y: t.y, z: t.z, duration: 1.35, ease: 'power2.out'  }, pos);
+        tl.to(p.rotation,              { x: r.x, y: r.y, z: r.z, duration: 1.35, ease: 'power2.out'  }, pos);
+        tl.to(p.children[0].material,  { opacity: 0.18, duration: 0.9 }, pos);
+        tl.to(p.material,              { opacity: 0.65, emissiveIntensity: 0.0, duration: 0.85 }, pos);
+      });
+    }
+
+    /* ── Reassemble ─────────────────────────────────── */
+    function reassemble() {
+      if (phase !== 'exploded' || fired) return;
+      fired = true;
+      phase = 'assembling';
+
+      /* Sort: top-face-first for a falling-into-place feel */
+      var sorted = pieces.slice().sort(function (a, b) {
+        return b.userData.target.y - a.userData.target.y;
+      });
+
+      var tl = gsap.timeline({ onComplete: function () { phase = 'done'; } });
+
+      sorted.forEach(function (p, idx) {
+        var pos = idx * 0.042;
+
+        tl.to(p.position,             { x: 0, y: 0, z: 0, duration: 1.7, ease: 'expo.inOut' }, pos);
+        tl.to(p.rotation,             { x: 0, y: 0, z: 0, duration: 1.7, ease: 'expo.inOut' }, pos);
+        tl.to(p.children[0].material, { opacity: 0.55, duration: 1.1 }, pos + 0.5);
+        tl.to(p.material,             { opacity: 0.88, emissiveIntensity: 0.09, duration: 1.2 }, pos + 0.3);
+      });
+
+      /* Lock-in glow pulse */
+      var allMats = pieces.map(function (p) { return p.material; });
+      tl.to(allMats, { emissiveIntensity: 0.32, duration: 0.38, ease: 'power2.in'  })
+        .to(allMats, { emissiveIntensity: 0.07, duration: 1.1,  ease: 'power2.out' });
+    }
+
+    /* ── Timing ─────────────────────────────────────── */
+    setTimeout(explode,    500);
+    setTimeout(function () { if (!fired) reassemble(); }, 4400);
+
+    window.addEventListener('scroll', function () {
+      if (!fired && phase === 'exploded') reassemble();
+    }, { passive: true });
+
+    /* ── Hero content fade-in ───────────────────────── */
+    gsap.from('.hero-content', { opacity: 0, duration: 1.6, delay: 0.4, ease: 'power2.out' });
+    gsap.from('.scroll-hint',  { opacity: 0, duration: 1.2, delay: 1.4, ease: 'power2.out' });
+
+    /* ── Render loop ────────────────────────────────── */
+    var clock = new THREE.Clock();
+
+    (function tick() {
+      requestAnimationFrame(tick);
+      var t = clock.getElapsedTime();
+
+      if (phase === 'done') {
+        group.rotation.y += 0.003;
+        group.rotation.x  = Math.sin(t * 0.22) * 0.06;
+        group.position.y  = (mobile ? 0.4 : 0) + Math.sin(t * 0.38) * 0.1;
+      }
+
+      /* Subtle camera breathe */
+      if (!mobile) {
+        camera.position.x = Math.sin(t * 0.14) * 0.32;
+        camera.position.y = Math.cos(t * 0.09) * 0.18;
+        camera.lookAt(group.position);
+      }
+
+      renderer.render(scene, camera);
+    }());
+
+    /* ── Resize ─────────────────────────────────────── */
+    window.addEventListener('resize', function () {
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    });
+
+  }());
+
+  /* ── Contact form ───────────────────────────────── */
+  document.getElementById('contact-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn      = document.getElementById('submit-btn');
+    btn.textContent = 'Message received.';
+    btn.disabled = true;
+  });
+  </script>
+</body>
+</html>
