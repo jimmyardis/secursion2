@@ -686,6 +686,64 @@ select.input{cursor:pointer;appearance:none;
   .workspace{grid-template-columns:240px 1fr}
   .ws-panel:last-child{display:none}
 }
+
+/* ── Iteration 2: Decision bar, Evidence cards, Control chips, Trust strip ── */
+.decision-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--surface);flex-shrink:0}
+.db-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:var(--radius);font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--txt-secondary);transition:all .15s;white-space:nowrap;line-height:1}
+.db-btn svg{width:12px;height:12px}
+.db-btn:hover{color:var(--txt-primary);border-color:var(--txt-muted)}
+.db-btn.db-approve{border-color:rgba(34,197,94,.35);color:var(--status-ok)}
+.db-btn.db-approve:hover{background:rgba(34,197,94,.1)}
+.db-btn.db-review{border-color:rgba(245,158,11,.35);color:var(--status-warn)}
+.db-btn.db-review:hover{background:rgba(245,158,11,.1)}
+.db-btn.db-block{border-color:rgba(239,68,68,.35);color:var(--status-err)}
+.db-btn.db-block:hover{background:rgba(239,68,68,.1)}
+.db-sep{width:1px;height:18px;background:var(--border);flex-shrink:0;margin:0 2px}
+
+.ws-progress{display:flex;align-items:center;gap:12px;padding:7px 14px;border-bottom:1px solid var(--border);background:var(--bg);font-size:11px;flex-shrink:0}
+.wsp-item{display:flex;align-items:center;gap:4px;color:var(--txt-muted)}
+.wsp-item svg{width:11px;height:11px}
+.wsp-item strong{color:var(--txt-primary);font-weight:600}
+
+.ev-card{border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;margin-bottom:8px;background:var(--bg)}
+.ev-card-hd{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px}
+.ev-badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:.4px;flex-shrink:0;margin-top:1px}
+.ev-badge-report{background:rgba(20,184,166,.15);color:#0d9488}
+.ev-badge-policy{background:rgba(67,97,238,.15);color:#4361ee}
+.ev-badge-config{background:rgba(245,158,11,.15);color:#b45309}
+.ev-badge-trust{background:rgba(99,102,241,.15);color:#6366f1}
+.ev-name{font-size:12px;font-weight:500;color:var(--txt-primary);line-height:1.35}
+.ev-meta-row{display:flex;gap:12px;font-size:10.5px;color:var(--txt-muted);margin-bottom:5px}
+.ev-relevance{font-size:11.5px;color:var(--txt-secondary);line-height:1.55;padding:6px 8px;background:var(--surface);border-radius:4px;border-left:2px solid rgba(67,97,238,.4)}
+
+.ctrl-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
+.ctrl-chip{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:4px;font-size:10.5px;background:var(--surface-raised);border:1px solid var(--border);color:var(--txt-secondary)}
+.ctrl-chip-fw{font-weight:700;color:var(--txt-primary);margin-right:1px}
+
+.trust-strip{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-top:6px}
+.trust-strip-hd{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--surface-raised);font-size:11px}
+.trust-cov-tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.3px}
+.trust-cov-full{background:rgba(34,197,94,.15);color:var(--status-ok)}
+.trust-cov-partial{background:rgba(245,158,11,.15);color:var(--status-warn)}
+.trust-doc-row{display:flex;align-items:center;gap:8px;padding:6px 12px;border-top:1px solid var(--border);font-size:11.5px;color:var(--txt-secondary)}
+.tcov-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.tcov-dot.full{background:var(--status-ok)}
+.tcov-dot.partial{background:var(--status-warn)}
+
+.gap-exec{border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 22px;margin-bottom:20px;background:var(--surface)}
+.gap-exec-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px;border-top:1px solid var(--border);padding-top:14px}
+.gap-exec-kpi{text-align:center}
+.gap-exec-num{font-size:26px;font-weight:800;line-height:1}
+.gap-exec-lbl{font-size:11px;color:var(--txt-muted);margin-top:3px}
+
+.rem-proj{border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);padding:9px 12px;margin-top:6px;background:var(--surface)}
+.rem-proj-title{font-size:12px;font-weight:600;color:var(--txt-primary);margin-bottom:5px}
+.rem-proj-meta{display:flex;flex-wrap:wrap;gap:12px;font-size:11px;color:var(--txt-muted)}
+
+.blocked-banner{border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.05);border-radius:var(--radius);padding:12px 14px;margin-bottom:14px}
+.blocked-banner-title{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--status-err);margin-bottom:5px}
+.blocked-banner-title svg{width:13px;height:13px}
+.blocked-banner-body{font-size:12px;color:var(--txt-secondary);line-height:1.6}
 </style>
 </head>
 <body>
@@ -953,7 +1011,13 @@ const DATA = {
     q1: [
       { id:'q1_01', text:'Does your organization maintain a current SOC 2 Type II attestation report? Please provide the period covered and the trust service criteria included.', status:'approved', confidence:97, tags:['SOC 2','Certifications'],
         answer:`Yes. Secursion maintains a SOC 2 Type II attestation report issued by Armanino LLP covering the Security, Availability, and Confidentiality trust service criteria. The most recent report covers the period from January 1 to December 31, 2024, and was issued on February 28, 2025. The report is available under NDA to qualified customers and prospects through our Trust Center.`,
-        sources:['SOC 2 Type II Report — 2024 (Armanino LLP)','Security Policy v3.2','Trust Center: Certifications'],
+        sources:[
+          {name:'SOC 2 Type II Report — 2024 (Armanino LLP)',type:'report',lastReviewed:'Feb 28, 2025',period:'Jan–Dec 2024',relevance:'Primary attestation report covering Security, Availability, and Confidentiality TSC — directly evidences continuous monitoring and logical access controls within scope.'},
+          {name:'Security Policy v3.2',type:'policy',lastReviewed:'Jan 10, 2025',relevance:'Defines ISMS scope and security objectives that form the audit boundary for the SOC 2 engagement.'},
+          {name:'Trust Center: Certifications',type:'trust',lastReviewed:'Mar 1, 2025',relevance:'Customer-facing certification page with NDA-gated report access — customers directed here to obtain the full attestation under mutual NDA.'}
+        ],
+        controls:[{fw:'SOC 2',ref:'CC9.1',label:'Risk Mitigation'},{fw:'SOC 2',ref:'CC6.1',label:'Logical Access'},{fw:'ISO 27001',ref:'A.18.1',label:'Legal Requirements'}],
+        trustDocs:[{name:'Security Certifications',docId:'d04',coverage:'full'},{name:'Security Overview',docId:'d01',coverage:'partial'}],
         notes:[{author:'Sarah Chen', time:'2 days ago', text:'Confirmed period covers full calendar year. Armanino engagement signed for 2025 cycle already.'}] },
       { id:'q1_02', text:'Describe your encryption standards for data at rest, including key management practices and rotation schedules.', status:'approved', confidence:92, tags:['Encryption','Data Protection'],
         answer:`All customer data at rest is encrypted using AES-256. Encryption keys are managed via AWS Key Management Service (KMS) with customer master keys (CMKs) scoped to individual tenants. Automated key rotation is enforced on a 90-day cycle. Hardware Security Modules (HSMs) are used for root key material. Database-level encryption is applied to all RDS instances and S3 buckets housing customer data.`,
@@ -965,7 +1029,12 @@ const DATA = {
         notes:[] },
       { id:'q1_04', text:'Describe your incident response plan. What is your customer notification SLA in the event of a confirmed data breach affecting PHI?', status:'needs_review', confidence:64, tags:['Incident Response','HIPAA','SLA'],
         answer:`Secursion maintains a documented Incident Response Plan (IRP) aligned to NIST SP 800-61r2. The IRP covers detection, containment, eradication, recovery, and post-incident review phases. A designated Security Incident Response Team (SIRT) is on-call 24/7. For incidents involving PHI, we follow HIPAA Breach Notification Rule requirements — affected business associates are notified within 60 days of discovery. Our target for initial customer communication is within 72 hours of breach confirmation.`,
-        sources:['Incident Response Plan v2.0','HIPAA Breach Notification Procedure'],
+        sources:[
+          {name:'Incident Response Plan v2.0',type:'policy',lastReviewed:'Nov 15, 2024',relevance:'Defines SIRT structure and NIST 800-61r2 response phases — does not yet include a formalized customer notification SLA clause. Core gap.'},
+          {name:'HIPAA Breach Notification Procedure',type:'policy',lastReviewed:'Aug 20, 2024',relevance:'Documents the statutory 60-day PHI notification requirement. Internal 72-hour target is mentioned operationally but not contractually committed in any current document.'}
+        ],
+        controls:[{fw:'HIPAA',ref:'§164.408',label:'Breach Notification'},{fw:'SOC 2',ref:'CC7.3',label:'Incident Response'},{fw:'NIST 800-61',ref:'§3.1',label:'IR Plan'}],
+        trustDocs:[{name:'Incident Response Plan',docId:'d08',coverage:'partial'}],
         notes:[{author:'Marcus Webb', time:'1 day ago', text:'Customer SLA of 72 hours is our internal target but not yet formally documented in the IRP. Need legal review before approving.'}],
         missing:'Formal customer notification SLA is not yet documented in the current IRP. Legal review required before this answer can be approved.' },
       { id:'q1_05', text:'Do you have a Business Associate Agreement (BAA) available, and does it cover all subprocessors with access to PHI?', status:'approved', confidence:99, tags:['HIPAA','BAA','Legal'],
@@ -1002,7 +1071,13 @@ const DATA = {
         notes:[] },
       { id:'q1_13', text:'Describe your log retention, SIEM capabilities, and security monitoring coverage.', status:'needs_review', confidence:66, tags:['Logging','SIEM','Monitoring'],
         answer:`Secursion retains security logs for a minimum of 12 months in hot storage and 7 years in cold (S3 Glacier). Logs are ingested into Datadog SIEM with correlation rules for critical event types including failed login bursts, privilege escalation, anomalous data egress, and configuration changes. Our Security Operations team reviews SIEM alerts continuously during business hours; after-hours critical alerts page the on-call security engineer via PagerDuty.`,
-        sources:['Log Management Policy v1.9','Datadog SIEM Configuration','Security Operations Runbook'],
+        sources:[
+          {name:'Log Management Policy v1.9',type:'policy',lastReviewed:'Oct 5, 2024',relevance:'States 7-year cold storage requirement via S3 Glacier lifecycle rules. Policy exists — operational evidence of configuration is the pending gap.'},
+          {name:'Datadog SIEM Configuration',type:'config',lastReviewed:'Mar 22, 2025',relevance:'Confirms active correlation rules and alert routing for critical event types. Business-hours review SLA not yet reflected in customer-facing commitments.'},
+          {name:'Security Operations Runbook',type:'policy',lastReviewed:'Dec 1, 2024',relevance:'Documents on-call escalation and incident routing — SLA language needs reconciliation with actual operational capability before approval.'}
+        ],
+        controls:[{fw:'SOC 2',ref:'CC7.2',label:'System Monitoring'},{fw:'HIPAA',ref:'§164.312(b)',label:'Audit Controls'},{fw:'ISO 27001',ref:'A.8.15',label:'Logging'}],
+        trustDocs:[{name:'Security Overview',docId:'d01',coverage:'partial'}],
         notes:[{author:'Priya Nair', time:'3 hours ago', text:'Our log retention meets HIPAA 6-year minimum but confirm 7-year cold storage is implemented end-to-end, not just policy. Need infra team confirmation.'}],
         missing:'7-year cold storage retention requires infrastructure confirmation. Current policy states the requirement but operational evidence is pending.' },
       { id:'q1_14', text:'How do you handle customer data deletion requests, and what is your SLA?', status:'approved', confidence:88, tags:['Data Governance','Privacy','HIPAA'],
@@ -1024,6 +1099,8 @@ const DATA = {
       { id:'q1_18', text:'Do you have an AI or machine learning usage policy? How is AI governed within your environment?', status:'blocked', confidence:22, tags:['AI Governance','Policy'],
         answer:`Secursion is currently formalizing our AI Acceptable Use Policy. Internally, AI tools are permitted under interim guidelines that prohibit inputting customer data, confidential information, or PHI into third-party AI systems without explicit approval from the Security team. Our formal AI governance framework is in development with a target completion of Q3 2025.`,
         sources:[],
+        controls:[{fw:'ISO 27001',ref:'A.5.1',label:'Security Policies'},{fw:'SOC 2',ref:'CC1.4',label:'Competence Commitment'}],
+        trustDocs:[{name:'Responsible AI Disclosure',docId:'d14',coverage:'partial'}],
         notes:[{author:'Sarah Chen', time:'1 day ago', text:'We cannot answer this credibly with no formal AI policy. Mark blocked — this is a gap we need to remediate before sending.'}],
         missing:'No approved AI Governance Policy exists. This question cannot be answered with sufficient supporting evidence. Remediation required before submission.' },
       { id:'q1_19', text:'Describe your change management process, including how security reviews are integrated into production changes.', status:'approved', confidence:86, tags:['Change Management','SDLC'],
@@ -1248,7 +1325,13 @@ const DATA = {
       { id:'g1', title:'MFA enforcement not verified for all contractor accounts', severity:'high',
         desc:'Contractor accounts provisioned via Okta are not confirmed to have MFA enforced at the policy level. Audit of contractor MFA enrollment shows 3 accounts without TOTP or WebAuthn enrolled.',
         rem:'Audit all contractor accounts in Okta → enforce MFA policy group. Complete within 7 days.',
-        questionnaires:['q1','q2'] },
+        questionnaires:['q1','q2'],
+        affectedAnswers:['Q3 — MFA enforcement for all employees and administrative accounts','Q8 — Production access control, audit, and periodic access review'],
+        missingControls:[{fw:'SOC 2',ref:'CC6.1',label:'Logical Access Controls'},{fw:'ISO 27001',ref:'A.8.5',label:'Secure Authentication'}],
+        remediation:[
+          {title:'Audit all contractor accounts in Okta; enforce MFA policy group for 3 non-compliant accounts',effort:'Low · ~4 hrs',owner:'IT Security',target:'7 days'},
+          {title:'Document contractor MFA verification as evidence in next quarterly access review report',effort:'Low · ~1 hr',owner:'GRC',target:'Next review cycle'}
+        ] },
       { id:'g2', title:'Privileged access review overdue for 4 accounts', severity:'medium',
         desc:'Quarterly access review is 12 days past due for 4 privileged accounts in production environment. Risk of accumulation of unnecessary permissions.',
         rem:'Complete overdue access review in Vanta. Revoke any stale entitlements.',
@@ -1258,7 +1341,13 @@ const DATA = {
       { id:'g3', title:'7-year cold storage retention not operationally confirmed', severity:'high',
         desc:'Log Management Policy specifies 7-year cold storage retention, but operational configuration of S3 Glacier lifecycle rules has not been verified or documented as evidence.',
         rem:'Run S3 lifecycle policy audit. Generate evidence report. Update operational runbook.',
-        questionnaires:['q1'] },
+        questionnaires:['q1'],
+        affectedAnswers:['Q13 — Log retention, SIEM capabilities, and security monitoring coverage'],
+        missingControls:[{fw:'SOC 2',ref:'CC7.2',label:'Monitoring of Security Events'},{fw:'HIPAA',ref:'§164.312(b)',label:'Audit Controls'}],
+        remediation:[
+          {title:'Run S3 Glacier lifecycle policy audit; generate evidence screenshot and JSON configuration export',effort:'Medium · ~1 day',owner:'Cloud Infrastructure',target:'14 days'},
+          {title:'Update Security Operations Runbook with confirmed lifecycle configuration and retention proof',effort:'Low · ~2 hrs',owner:'GRC',target:'14 days'}
+        ] },
       { id:'g4', title:'After-hours SIEM coverage gap', severity:'medium',
         desc:'Security monitoring is described as continuous, but on-call rotation currently has a 15-minute response SLA not reflected in contractual commitments. Gap between policy language and operational reality.',
         rem:'Update IRP SLA section to accurately reflect on-call response time. Consider tiered SLA language.',
@@ -1280,7 +1369,13 @@ const DATA = {
       { id:'g7', title:'No approved AI Governance Policy for enterprise sales', severity:'high',
         desc:'Multiple enterprise questionnaires include AI governance questions that cannot be fully answered. The AI Acceptable Use Policy (AUP) exists but a comprehensive AI Governance Framework is not yet ratified.',
         rem:'Finalize and ratify AI Governance Framework. Target: Q3 2025. Interim: reference AUP for questionnaires.',
-        questionnaires:['q1','q5','q2'] },
+        questionnaires:['q1','q5','q2'],
+        affectedAnswers:['Q18 — AI or machine learning usage policy and internal governance','Q10 — SDLC security controls including AI-assisted development tools'],
+        missingControls:[{fw:'ISO 27001',ref:'A.5.1',label:'Information Security Policies'},{fw:'SOC 2',ref:'CC1.4',label:'Commitment to Competence'}],
+        remediation:[
+          {title:'Draft and ratify AI Governance Framework — policy scope, roles, approved tool registry, risk classification tiers',effort:'High · 2–3 weeks',owner:'CISO + Legal',target:'Q3 2025'},
+          {title:'Publish updated Responsible AI Disclosure in Trust Center referencing the ratified framework',effort:'Low · ~4 hrs',owner:'GRC + Marketing',target:'After framework ratification'}
+        ] },
       { id:'g8', title:'AI red team exercise not yet completed', severity:'low',
         desc:'AI-specific security testing (prompt injection, data extraction, model manipulation) has not been conducted. Referenced in questionnaire responses as "planned" which may not satisfy enterprise customers.',
         rem:'Include AI attack scenarios in next NCC Group pentest scope. Document commitment in IRP.',
@@ -1699,6 +1794,11 @@ function renderWorkspace() {
   const q = DATA.questionnaires.find(x=>x.id===STATE.activeQId);
   const qs = DATA.questions[STATE.activeQId] || [];
 
+  const approved = qs.filter(x=>x.status==='approved').length;
+  const review   = qs.filter(x=>x.status==='needs_review').length;
+  const blocked  = qs.filter(x=>x.status==='blocked').length;
+  const pct      = qs.length ? Math.round(approved/qs.length*100) : 0;
+
   const el = document.createElement('div');
   el.className = 'page active';
   el.style.overflow = 'hidden';
@@ -1722,6 +1822,13 @@ function renderWorkspace() {
           <option value="auto_drafted">Auto</option>
         </select>
       </div>
+    </div>
+    <div class="ws-progress">
+      <div class="wsp-item">${I.check}&nbsp;<strong>${approved}</strong>&nbsp;approved</div>
+      <div class="wsp-item">${I.clock}&nbsp;<strong>${review}</strong>&nbsp;review</div>
+      ${blocked?`<div class="wsp-item" style="color:var(--status-err)">${I.x}&nbsp;<strong>${blocked}</strong>&nbsp;blocked</div>`:''}
+      <div style="flex:1"></div>
+      <span style="font-size:11px;color:var(--txt-muted)">${pct}%</span>
     </div>
     <div class="ws-pb" id="q-list">
       ${qs.map((question,i)=>`
@@ -1797,7 +1904,7 @@ function renderQuestionDetail() {
 
   const ccls = confClass(q.confidence);
   const isBlocked = q.status==='blocked';
-  const isNeedsReview = q.status==='needs_review';
+  const isAuto = q.status==='auto_drafted'||q.status==='needs_review';
 
   // Status bar
   const sb = $('center-status-bar');
@@ -1809,33 +1916,33 @@ function renderQuestionDetail() {
   center.innerHTML = `
 <div class="q-title">${q.text}</div>
 
-${q.missing?`<div class="missing-ev">${I.alert}<div class="missing-ev-txt"><strong>Missing Evidence — </strong>${q.missing}</div></div>`:''}
+${isBlocked?`<div class="blocked-banner"><div class="blocked-banner-title">${I.x} Blocked — Cannot Submit</div><div class="blocked-banner-body">${q.missing||'This question is marked blocked and requires remediation before it can be included in a submission.'}</div></div>`:''}
+${!isBlocked&&q.missing?`<div class="missing-ev">${I.alert}<div class="missing-ev-txt"><strong>Evidence Gap — </strong>${q.missing}</div></div>`:''}
 
-${q.status==='auto_drafted'||q.status==='needs_review'?`<div class="gen-progress"><div class="spinner"></div>AI-generated answer · Review recommended before approving</div>`:''}
+<div class="decision-bar">
+  <div style="display:flex;gap:6px;flex:1;flex-wrap:wrap">
+    <button class="db-btn db-approve" onclick="setStatus('${q.id}','approved')">${I.check} Approve</button>
+    <button class="db-btn db-review" onclick="setStatus('${q.id}','needs_review')">${I.clock} Needs Review</button>
+    <button class="db-btn db-block" onclick="setStatus('${q.id}','blocked')">${I.x} Block</button>
+  </div>
+  <div class="db-sep"></div>
+  <button class="db-btn">${I.user} Assign</button>
+  <button class="db-btn">${I.edit} Edit</button>
+</div>
+
+${isAuto?`<div class="gen-progress"><div class="spinner"></div>AI-generated answer · Review recommended before approving</div>`:''}
 
 <div class="ws-label">Generated Answer <span class="badge">AI Draft</span></div>
-<div class="gen-answer">${q.answer || '<span style="color:var(--txt-muted);font-style:italic">No answer generated — insufficient knowledge base evidence for this question.</span>'}</div>
+<div class="gen-answer">${q.answer||'<span style="color:var(--txt-muted);font-style:italic">No answer generated — insufficient knowledge base evidence for this question.</span>'}</div>
 
 <div class="ws-label">Editable Response</div>
 <div class="edit-area">
   <textarea class="input w-full" id="edit-answer" rows="5" style="min-height:90px">${q.answer||''}</textarea>
 </div>
 
-<div class="ws-actions">
-  <button class="btn btn-ok btn-sm" onclick="setStatus('${q.id}','approved')">${I.check} Approve</button>
-  <button class="btn btn-warn btn-sm" onclick="setStatus('${q.id}','needs_review')">${I.clock} Needs Review</button>
-  <button class="btn btn-err btn-sm" onclick="setStatus('${q.id}','blocked')">${I.x} Block</button>
-  <button class="btn btn-ghost btn-sm">${I.user} Assign</button>
-  <button class="btn btn-ghost btn-sm">${I.edit} Edit</button>
-</div>
-
 <div class="divider"></div>
-<div class="ws-label">Why this answer was suggested</div>
-<div style="font-size:12px;color:var(--txt-secondary);line-height:1.6;margin-bottom:14px">
-  ${q.sources?.length ? `Matched ${q.sources.length} knowledge base source${q.sources.length>1?'s':''} with relevance scores above 0.78. Answer assembled using RAG from approved policy documents and prior responses.` : `No strong knowledge base matches found. Answer could not be auto-generated with sufficient confidence.`}
-</div>
 
-${q.notes?.length ? `
+${q.notes?.length?`
 <div class="ws-label">Internal Notes</div>
 <div class="note-area">
   ${q.notes.map(n=>`
@@ -1847,7 +1954,7 @@ ${q.notes?.length ? `
     </div>
     ${n.text}
   </div>`).join('')}
-</div>` : ''}
+</div>`:''}
 
 <div class="mt-3">
   <div class="input-wrap">
@@ -1858,6 +1965,35 @@ ${q.notes?.length ? `
   // Right panel
   const right = $('ws-right');
   if(!right) return;
+
+  // Build evidence cards (handles both string and rich-object sources)
+  const typeMap={report:'ev-badge-report',policy:'ev-badge-policy',config:'ev-badge-config',trust:'ev-badge-trust'};
+  const evCards = (q.sources||[]).map(s=>{
+    if(typeof s==='string') {
+      return `<div class="ev-card"><div class="ev-card-hd"><span class="ev-badge ev-badge-policy">Doc</span><span class="ev-name">${s}</span></div><div class="ev-meta-row"><span>Knowledge base match</span><span>relevance &gt; 0.82</span></div></div>`;
+    }
+    const typeCls=typeMap[s.type]||'ev-badge-policy';
+    return `<div class="ev-card">
+      <div class="ev-card-hd"><span class="ev-badge ${typeCls}">${(s.type||'doc').toUpperCase()}</span><span class="ev-name">${s.name}</span></div>
+      <div class="ev-meta-row"><span>Reviewed ${s.lastReviewed}</span>${s.period?`<span>Period: ${s.period}</span>`:''}</div>
+      ${s.relevance?`<div class="ev-relevance">${s.relevance}</div>`:''}
+    </div>`;
+  }).join('');
+
+  // Control chips
+  const ctrlChips=(q.controls||[]).map(c=>`<span class="ctrl-chip"><span class="ctrl-chip-fw">${c.fw}</span>${c.ref} · ${c.label}</span>`).join('');
+
+  // Trust coverage strip
+  const trustRows=(q.trustDocs||[]).map(td=>{
+    const doc=DATA.trustCenter.find(d=>d.id===td.docId)||{name:td.name};
+    return `<div class="trust-doc-row">
+      <div class="tcov-dot ${td.coverage}"></div>
+      <span style="flex:1;font-size:11.5px">${doc.name}</span>
+      <span class="trust-cov-tag ${td.coverage==='full'?'trust-cov-full':'trust-cov-partial'}">${td.coverage==='full'?'Full':'Partial'}</span>
+    </div>`;
+  }).join('');
+  const overallCov=(q.trustDocs||[]).length?((q.trustDocs.every(t=>t.coverage==='full')?'full':'partial')):null;
+
   right.innerHTML = `
 <div style="padding:14px 14px 10px">
   <div style="font-size:11px;font-weight:600;color:var(--txt-muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px">Confidence Score</div>
@@ -1865,28 +2001,34 @@ ${q.notes?.length ? `
     <div class="conf-bar"><div class="conf-fill" style="width:${q.confidence}%"></div></div>
     <span class="conf-lbl">${q.confidence}%</span>
   </div>
-  <div style="font-size:11px;color:var(--txt-muted)">
+  <div style="font-size:11px;color:var(--txt-muted);margin-top:4px">
     ${q.confidence>=80?'High confidence — auto-approval recommended':q.confidence>=60?'Medium confidence — human review recommended':'Low confidence — manual answer required'}
   </div>
 </div>
-<div style="border-top:1px solid var(--border);padding:12px 14px 8px">
+<div style="border-top:1px solid var(--border);padding:10px 14px 8px">
   <div style="font-size:11px;font-weight:600;color:var(--txt-muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Tags</div>
   <div style="display:flex;flex-wrap:wrap;gap:5px">${renderTags(q.tags)}</div>
 </div>
-<div style="border-top:1px solid var(--border);padding:12px 14px 0">
-  <div style="font-size:11px;font-weight:600;color:var(--txt-muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Source Citations</div>
-  ${q.sources?.length ? q.sources.map(s=>`
-    <div class="src-card">
-      <div class="src-name">${I.doc} ${s}</div>
-      <div class="src-meta">Knowledge base match · relevance &gt; 0.82</div>
-    </div>`).join('') : `<div style="font-size:12px;color:var(--txt-muted);padding:8px 0">No sources retrieved — knowledge gap detected.</div>`}
+<div style="border-top:1px solid var(--border);padding:12px 14px 6px">
+  <div style="font-size:11px;font-weight:600;color:var(--txt-muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px">Evidence &amp; Provenance</div>
+  ${evCards||`<div style="font-size:12px;color:var(--txt-muted);padding:4px 0 10px">No sources retrieved — knowledge gap detected.</div>`}
 </div>
-${q.sources?.length ? `
-<div style="border-top:1px solid var(--border);padding:12px 14px">
-  <div style="font-size:11px;font-weight:600;color:var(--txt-muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Related Approved Answers</div>
-  <div style="font-size:12px;color:var(--accent);cursor:pointer;margin-bottom:5px">→ ${q.sources[0]}</div>
-  ${q.sources[1]?`<div style="font-size:12px;color:var(--accent);cursor:pointer">→ ${q.sources[1]}</div>`:''}
-</div>` : ''}`;
+${ctrlChips?`
+<div style="border-top:1px solid var(--border);padding:12px 14px 12px">
+  <div style="font-size:11px;font-weight:600;color:var(--txt-muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Framework Controls</div>
+  <div class="ctrl-chips">${ctrlChips}</div>
+</div>`:''}
+${trustRows?`
+<div style="border-top:1px solid var(--border);padding:12px 14px 14px">
+  <div style="font-size:11px;font-weight:600;color:var(--txt-muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Trust Center Coverage</div>
+  <div class="trust-strip">
+    <div class="trust-strip-hd">
+      <span style="color:var(--txt-secondary)">Covered by ${(q.trustDocs||[]).length} document${(q.trustDocs||[]).length>1?'s':''}</span>
+      ${overallCov?`<span class="trust-cov-tag ${overallCov==='full'?'trust-cov-full':'trust-cov-partial'}">${overallCov==='full'?'Fully covered':'Partially covered'}</span>`:''}
+    </div>
+    ${trustRows}
+  </div>
+</div>`:''}`;
 }
 
 function setStatus(questionId, newStatus) {
@@ -2101,7 +2243,10 @@ function renderReview() {
    ================================================================ */
 function renderGaps() {
   const totalGaps = DATA.gaps.reduce((s,g)=>s+g.items.length,0);
-  const highGaps = DATA.gaps.reduce((s,g)=>s+g.items.filter(i=>i.severity==='high').length,0);
+  const highGaps  = DATA.gaps.reduce((s,g)=>s+g.items.filter(i=>i.severity==='high').length,0);
+  const medGaps   = DATA.gaps.reduce((s,g)=>s+g.items.filter(i=>i.severity==='medium').length,0);
+  const lowGaps   = DATA.gaps.reduce((s,g)=>s+g.items.filter(i=>i.severity==='low').length,0);
+  const affectedQs= [...new Set(DATA.gaps.flatMap(g=>g.items.flatMap(i=>i.questionnaires)))].length;
 
   const el = document.createElement('div');
   el.className = 'page active flex-col';
@@ -2110,24 +2255,43 @@ function renderGaps() {
 <div class="pg-hd">
   <div>
     <div class="pg-title">Gaps &amp; Risks</div>
-    <div class="pg-sub">${totalGaps} identified gaps — ${highGaps} high severity · Remediation recommendations included</div>
+    <div class="pg-sub">${totalGaps} identified gaps — ${highGaps} high severity · Remediation projects included</div>
   </div>
   <div class="pg-actions">
     <button class="btn btn-primary">${I.download} Export Gap Report</button>
   </div>
 </div>
 <div class="pg-body">
-  <div style="background:var(--status-err-bg);border:1px solid rgba(239,68,68,.2);border-radius:var(--radius-lg);padding:14px 18px;margin-bottom:20px;display:flex;align-items:flex-start;gap:12px">
-    ${I.alert}
-    <div>
-      <div style="font-size:13px;font-weight:600;color:var(--status-err);margin-bottom:3px">${highGaps} High-Severity Gaps Require Immediate Attention</div>
-      <div style="font-size:12px;color:var(--txt-secondary);line-height:1.55">
-        These gaps may prevent you from accurately answering active questionnaires or may expose your organization to compliance risk.
-        Remediation guidance is provided for each item. Consider engaging a GRC advisor to accelerate remediation —
-        <a href="#" style="color:var(--accent)">learn about advisory services →</a>
+
+  <!-- Executive Summary -->
+  <div class="gap-exec">
+    <div style="font-size:14px;font-weight:700;color:var(--txt-primary);margin-bottom:6px">Gap Analysis Summary</div>
+    <div style="font-size:12.5px;color:var(--txt-secondary);line-height:1.65">
+      ${totalGaps} control gaps identified across ${DATA.gaps.length} risk domains.
+      <strong>${highGaps} high-severity gaps</strong> require remediation before questionnaire submission.
+      Estimated total effort across security, engineering, and legal: <strong>3–5 weeks</strong>.
+      Gaps currently affect <strong>${affectedQs} active questionnaires</strong> — closing them will unlock blocked and needs-review answers.
+    </div>
+    <div class="gap-exec-kpis">
+      <div class="gap-exec-kpi">
+        <div class="gap-exec-num" style="color:var(--status-err)">${highGaps}</div>
+        <div class="gap-exec-lbl">High Severity</div>
+      </div>
+      <div class="gap-exec-kpi">
+        <div class="gap-exec-num" style="color:var(--status-warn)">${medGaps}</div>
+        <div class="gap-exec-lbl">Medium Severity</div>
+      </div>
+      <div class="gap-exec-kpi">
+        <div class="gap-exec-num" style="color:var(--txt-muted)">${lowGaps}</div>
+        <div class="gap-exec-lbl">Low Severity</div>
+      </div>
+      <div class="gap-exec-kpi">
+        <div class="gap-exec-num" style="color:var(--txt-primary)">${affectedQs}</div>
+        <div class="gap-exec-lbl">Questionnaires Affected</div>
       </div>
     </div>
   </div>
+
   ${DATA.gaps.map(g=>`
   <div class="gap-group">
     <div class="gap-group-hd">
@@ -2143,11 +2307,31 @@ function renderGaps() {
       <div class="gap-body">
         <div class="gap-title">${item.title}</div>
         <div class="gap-desc">${item.desc}</div>
-        <div class="gap-rem">Remediation: ${item.rem}</div>
-        <div style="margin-top:8px;display:flex;align-items:center;gap:8px">
+        ${item.affectedAnswers?.length?`
+        <div style="margin:9px 0 4px;font-size:10.5px;font-weight:700;color:var(--txt-muted);text-transform:uppercase;letter-spacing:.4px">Affected Questions</div>
+        <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:4px">
+          ${item.affectedAnswers.map(a=>`<span style="font-size:11.5px;color:var(--txt-secondary)">› ${a}</span>`).join('')}
+        </div>`:''}
+        ${item.missingControls?.length?`
+        <div style="margin:9px 0 5px;font-size:10.5px;font-weight:700;color:var(--txt-muted);text-transform:uppercase;letter-spacing:.4px">Missing Controls</div>
+        <div class="ctrl-chips">
+          ${item.missingControls.map(c=>`<span class="ctrl-chip"><span class="ctrl-chip-fw">${c.fw}</span>${c.ref} · ${c.label}</span>`).join('')}
+        </div>`:''}
+        ${item.remediation?.length?`
+        <div style="margin:10px 0 4px;font-size:10.5px;font-weight:700;color:var(--txt-muted);text-transform:uppercase;letter-spacing:.4px">Remediation Projects</div>
+        ${item.remediation.map(r=>`
+        <div class="rem-proj">
+          <div class="rem-proj-title">${r.title}</div>
+          <div class="rem-proj-meta">
+            <span>Effort: ${r.effort}</span>
+            <span>Owner: ${r.owner}</span>
+            <span>Target: ${r.target}</span>
+          </div>
+        </div>`).join('')}`:`<div class="gap-rem">Remediation: ${item.rem}</div>`}
+        <div style="margin-top:10px;display:flex;align-items:center;gap:8px">
           <span class="sev-badge sev-${item.severity}">${item.severity}</span>
           ${item.questionnaires.map(qId=>{
-            const qData = DATA.questionnaires.find(q=>q.id===qId);
+            const qData=DATA.questionnaires.find(q=>q.id===qId);
             return qData?`<span class="tag" style="font-size:10px">${qData.customer.split(' ')[0]}</span>`:'';
           }).join('')}
           <button class="btn btn-ghost btn-sm" style="margin-left:auto;font-size:11px" onclick="toast('Remediation ticket created in Jira','ok')">Create Ticket</button>
@@ -2202,276 +2386,4 @@ function renderSettings() {
       <div class="settings-group">
         <div class="settings-group-lbl">Answer Confidence Thresholds</div>
         <div class="form-row">
-          <div class="form-group"><label class="form-lbl">Auto-approve above</label><input class="input" type="number" value="85"> <span style="font-size:11px;color:var(--txt-muted);margin-top:3px">% confidence</span></div>
-          <div class="form-group"><label class="form-lbl">Flag for review below</label><input class="input" type="number" value="70"> <span style="font-size:11px;color:var(--txt-muted);margin-top:3px">% confidence</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="settings-sec" id="st-fw">
-      <div class="settings-group">
-        <div class="settings-group-lbl">Active Frameworks</div>
-        ${['SOC 2 Type II','ISO 27001','HIPAA','FedRAMP Moderate','PCI DSS 4.0','CMMC Level 2','NIST CSF 2.0','AI Governance'].map((fw,i)=>`
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-sub)">
-          <div>
-            <div style="font-size:13px;font-weight:500">${fw}</div>
-            <div style="font-size:11px;color:var(--txt-muted)">${['Current · Renews Jan 2026','In progress · Targeting Q4 2025','Active · BAA required','Active · Authorization in progress','Current · SAQ-A','Not started','Active','Ratified March 2025'][i]}</div>
-          </div>
-          <button class="toggle ${i<5||(i===6)||(i===7)?'on':''}" onclick="this.classList.toggle('on')"></button>
-        </div>`).join('')}
-      </div>
-    </div>
-
-    <div class="settings-sec" id="st-llm">
-      <div class="settings-group">
-        <div class="settings-group-lbl">AI Model Configuration</div>
-        <div style="background:var(--status-warn-bg);border:1px solid rgba(245,158,11,.2);border-radius:var(--radius-md);padding:12px 14px;margin-bottom:16px;font-size:12px;color:var(--status-warn)">
-          ${I.alert} LLM provider settings are for demonstration only in this prototype.
-        </div>
-        <div class="form-group mb-3"><label class="form-lbl">Provider</label><select class="input"><option>Anthropic (Claude)</option><option>OpenAI</option><option>Azure OpenAI</option><option>AWS Bedrock</option></select></div>
-        <div class="form-group mb-3"><label class="form-lbl">Model</label><select class="input"><option>claude-sonnet-4-6</option><option>claude-opus-4-6</option><option>claude-haiku-4-5</option></select></div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-lbl">Temperature</label><input class="input" type="number" step="0.1" value="0.2"></div>
-          <div class="form-group"><label class="form-lbl">Max Output Tokens</label><input class="input" type="number" value="1024"></div>
-        </div>
-        <div class="form-group mb-3"><label class="form-lbl">RAG Chunk Size</label><input class="input" type="number" value="512"></div>
-        <div class="form-group mb-3"><label class="form-lbl">Similarity Threshold</label><input class="input" type="number" step="0.01" value="0.78"></div>
-      </div>
-    </div>
-
-    <div class="settings-sec" id="st-int">
-      <div class="settings-group">
-        <div class="settings-group-lbl">Connected Integrations</div>
-        ${[
-          {icon:'📁',name:'Google Drive',desc:'Sync knowledge base from Drive folders',on:true},
-          {icon:'📄',name:'SharePoint / OneDrive',desc:'Pull policies and certifications from SharePoint',on:false},
-          {icon:'📝',name:'Confluence',desc:'Import approved answers from Confluence spaces',on:false},
-          {icon:'🎫',name:'Jira',desc:'Create remediation tickets directly from gap items',on:true},
-          {icon:'🔗',name:'Slack',desc:'Review notifications and approval workflows in Slack',on:false},
-          {icon:'📊',name:'Vanta',desc:'Pull evidence and compliance data from Vanta',on:false},
-        ].map(int=>`
-        <div class="int-card">
-          <div class="int-icon">${int.icon}</div>
-          <div class="int-info">
-            <div class="int-name">${int.name}</div>
-            <div class="int-desc">${int.desc}</div>
-          </div>
-          <button class="btn btn-secondary btn-sm" style="margin-right:8px">${int.on?'Configure':'Connect'}</button>
-          <button class="toggle ${int.on?'on':''}" onclick="this.classList.toggle('on')"></button>
-        </div>`).join('')}
-      </div>
-    </div>
-
-    <div class="settings-sec" id="st-rules">
-      <div class="settings-group">
-        <div class="settings-group-lbl">Approval Rules</div>
-        ${[
-          {label:'Auto-approve answers above confidence threshold',desc:'Applies to all frameworks',on:false},
-          {label:'Require dual approval for FedRAMP responses',desc:'Two reviewers must approve before export',on:true},
-          {label:'Block export if any answers are in Blocked status',desc:'Prevents incomplete exports',on:true},
-          {label:'Notify CISO on new blocked answers',desc:'Sends Slack notification to security lead',on:true},
-          {label:'Auto-assign low-confidence answers to security team',desc:'Below configured threshold',on:false},
-        ].map(r=>`
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border-sub)">
-          <div>
-            <div style="font-size:13px;font-weight:500">${r.label}</div>
-            <div style="font-size:11.5px;color:var(--txt-muted)">${r.desc}</div>
-          </div>
-          <button class="toggle ${r.on?'on':''}" onclick="this.classList.toggle('on')"></button>
-        </div>`).join('')}
-      </div>
-    </div>
-
-    <div class="settings-sec" id="st-roles">
-      <div class="settings-group">
-        <div class="settings-group-lbl">Reviewer Roles</div>
-        ${[
-          {name:'Sarah Chen', email:'sarah@secursion.com', role:'CISO / Security Lead', perms:'Full access · Can approve, block, export'},
-          {name:'Marcus Webb', email:'marcus@secursion.com', role:'GRC Analyst', perms:'Review · Can approve, flag, comment'},
-          {name:'Priya Nair', email:'priya@secursion.com', role:'Security Engineer', perms:'Technical review · Can approve technical questions'},
-          {name:'Ryan Torres', email:'ryan@secursion.com', role:'Sales Engineer', perms:'Read-only + Submit · No approval rights'},
-        ].map(u=>`
-        <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border-sub)">
-          <div class="av" style="width:32px;height:32px;font-size:11px">${u.name.split(' ').map(w=>w[0]).join('')}</div>
-          <div style="flex:1">
-            <div style="font-size:13px;font-weight:500">${u.name}</div>
-            <div style="font-size:11.5px;color:var(--txt-muted)">${u.email} · ${u.role}</div>
-            <div style="font-size:11px;color:var(--txt-secondary);margin-top:2px">${u.perms}</div>
-          </div>
-          <button class="btn btn-secondary btn-sm">Edit Role</button>
-        </div>`).join('')}
-        <div style="margin-top:14px"><button class="btn btn-ghost btn-sm">${I.plus} Invite team member</button></div>
-      </div>
-    </div>
-
-    <div class="settings-sec" id="st-notif">
-      <div class="settings-group"><div class="settings-group-lbl">Notification Preferences</div>
-        <p style="font-size:13px;color:var(--txt-secondary)">Notification settings — prototype placeholder</p>
-      </div>
-    </div>
-    <div class="settings-sec" id="st-api">
-      <div class="settings-group"><div class="settings-group-lbl">API & Webhooks</div>
-        <p style="font-size:13px;color:var(--txt-secondary)">API keys and webhooks — prototype placeholder</p>
-      </div>
-    </div>
-  </div>
-</div>`;
-
-  // Activate first settings nav
-  const firstActive = el.querySelector('.settings-nav-item.active') || el.querySelector('.settings-nav-item');
-  if(firstActive) {
-    const tab = firstActive.getAttribute('onclick')?.match(/'([^']+)'\)/)?.[1] || 'org';
-    setTimeout(()=>{ el.querySelectorAll('.settings-sec').forEach(s=>s.classList.remove('active'));
-      const target = el.querySelector(`#st-${tab}`); if(target) target.classList.add('active'); }, 0);
-  }
-
-  return el;
-}
-
-function switchSettingsTab(btn, tab) {
-  document.querySelectorAll('.settings-nav-item').forEach(n=>n.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.settings-sec').forEach(s=>s.classList.remove('active'));
-  const target = document.querySelector(`#st-${tab}`);
-  if(target) target.classList.add('active');
-  STATE.settingsTab = tab;
-}
-
-/* ================================================================
-   COMMAND PALETTE
-   ================================================================ */
-const CMD_ITEMS = [
-  { label:'Dashboard', desc:'Overview', nav:'dashboard', icon:'dash' },
-  { label:'Questionnaires', desc:'All questionnaires', nav:'questionnaires', icon:'doc' },
-  { label:'Knowledge Base', desc:'Approved answers & policies', nav:'knowledge', icon:'book' },
-  { label:'Trust Center', desc:'Documents & certifications', nav:'trust', icon:'shield' },
-  { label:'Review Queue', desc:'12 items pending', nav:'review', icon:'clock' },
-  { label:'Gaps & Risks', desc:'7 gaps identified', nav:'gaps', icon:'alert' },
-  { label:'Settings', desc:'Configure workspace', nav:'settings', icon:'settings' },
-  { label:'Upload Questionnaire', desc:'Start new questionnaire', action:'upload', icon:'upload' },
-  { label:'Export Response', desc:'Export current questionnaire', action:'export', icon:'download' },
-  { label:'Sentinel Health — Workspace', desc:'68% complete · 24 questions', nav:'workspace', qId:'q1', icon:'doc' },
-  { label:'Veritas Capital — Workspace', desc:'45% complete · 32 questions', nav:'workspace', qId:'q2', icon:'doc' },
-  { label:'Luminary AI — Workspace', desc:'72% complete · 18 questions', nav:'workspace', qId:'q5', icon:'doc' },
-];
-
-let cmdIdx = 0;
-
-function openCmd() {
-  $('cmd-bg').classList.add('open');
-  $('cmd-input').value='';
-  renderCmdResults(CMD_ITEMS);
-  $('cmd-input').focus();
-  cmdIdx=0;
-}
-
-function closeCmd() { $('cmd-bg').classList.remove('open'); }
-
-function renderCmdResults(items) {
-  $('cmd-results').innerHTML = `
-    <div class="cmd-sec-lbl">Navigation & Actions</div>
-    ${items.map((item,i)=>`
-    <div class="cmd-item ${i===cmdIdx?'focused':''}" data-idx="${i}" onclick="execCmd(${i})">
-      ${I[item.icon]||I.doc}
-      <span class="cmd-item-lbl">${item.label}</span>
-      <span class="cmd-item-desc">${item.desc}</span>
-    </div>`).join('')}`;
-}
-
-function execCmd(idx) {
-  const item = CMD_ITEMS[idx];
-  if(!item) return;
-  closeCmd();
-  if(item.action==='upload') { openUpload(); return; }
-  if(item.action==='export') { openExport(); return; }
-  if(item.nav) {
-    const extra = item.qId ? { activeQId: item.qId, activeQuestionId: DATA.questions[item.qId]?.[0]?.id||'' } : {};
-    navigate(item.nav, extra);
-  }
-}
-
-$('cmd-input').addEventListener('input', e => {
-  const s = e.target.value.toLowerCase();
-  const filtered = s ? CMD_ITEMS.filter(i=>i.label.toLowerCase().includes(s)||i.desc.toLowerCase().includes(s)) : CMD_ITEMS;
-  cmdIdx=0;
-  renderCmdResults(filtered);
-});
-
-$('cmd-input').addEventListener('keydown', e => {
-  const items = $('cmd-results').querySelectorAll('.cmd-item');
-  if(e.key==='ArrowDown') { cmdIdx=Math.min(cmdIdx+1,items.length-1); items.forEach((el,i)=>el.classList.toggle('focused',i===cmdIdx)); e.preventDefault(); }
-  if(e.key==='ArrowUp') { cmdIdx=Math.max(cmdIdx-1,0); items.forEach((el,i)=>el.classList.toggle('focused',i===cmdIdx)); e.preventDefault(); }
-  if(e.key==='Enter') { execCmd(cmdIdx); }
-  if(e.key==='Escape') { closeCmd(); }
-});
-
-$('cmd-bg').addEventListener('click', e => { if(e.target===$('cmd-bg')) closeCmd(); });
-$('open-cmd').addEventListener('click', openCmd);
-
-/* ================================================================
-   MODALS
-   ================================================================ */
-function openUpload() { $('upload-modal').classList.add('open'); }
-function closeUpload() { $('upload-modal').classList.remove('open'); }
-
-$('close-upload').addEventListener('click', closeUpload);
-$('cancel-upload').addEventListener('click', closeUpload);
-$('upload-modal').addEventListener('click', e => { if(e.target===$('upload-modal')) closeUpload(); });
-
-$('confirm-upload').addEventListener('click', () => {
-  const customer = $('upload-customer').value || 'New Customer';
-  closeUpload();
-  toast(`Parsing questionnaire for ${customer}…`, 'ok');
-  setTimeout(()=>toast('18 questions detected and queued for AI processing','ok'),1200);
-  setTimeout(()=>toast('AI draft generation complete — 13 auto-answered (72%)','ok'),3000);
-});
-
-const uploadZone = $('upload-zone');
-uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('over'); });
-uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('over'));
-uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('over');
-  uploadZone.innerHTML = `<div style="font-size:14px;font-weight:600;color:var(--status-ok)">${I.check} File received — ready to parse</div>`; });
-
-function openExport() { $('export-modal').classList.add('open'); }
-function closeExport() { $('export-modal').classList.remove('open'); }
-
-$('close-export').addEventListener('click', closeExport);
-$('cancel-export').addEventListener('click', closeExport);
-$('export-modal').addEventListener('click', e => { if(e.target===$('export-modal')) closeExport(); });
-
-$('confirm-export').addEventListener('click', () => {
-  closeExport();
-  toast('Building response package…','ok');
-  setTimeout(()=>toast('Export complete — 3 files ready for download','ok'),1800);
-});
-
-/* ================================================================
-   NAV WIRING
-   ================================================================ */
-document.querySelectorAll('[data-nav]').forEach(item => {
-  item.addEventListener('click', () => navigate(item.dataset.nav));
-});
-
-/* ================================================================
-   KEYBOARD SHORTCUTS
-   ================================================================ */
-document.addEventListener('keydown', e => {
-  if((e.metaKey||e.ctrlKey) && e.key==='k') { e.preventDefault(); openCmd(); }
-  if(e.key==='Escape' && $('cmd-bg').classList.contains('open')) closeCmd();
-});
-
-/* ================================================================
-   THEME TOGGLE
-   ================================================================ */
-$('toggle-theme').addEventListener('click', () => {
-  const html = document.documentElement;
-  html.setAttribute('data-theme', html.getAttribute('data-theme')==='dark'?'light':'dark');
-});
-
-/* ================================================================
-   INIT
-   ================================================================ */
-navigate('dashboard');
-</script>
-</body>
-</html>
+          <div class="form-group"><label class="form-lbl">Auto-approve above</label><input class="input" type="number" value="85"> <span style="font-size:11px;color:var(--txt-muted);margin-top:3px">% confidence</span></
