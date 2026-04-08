@@ -744,6 +744,26 @@ select.input{cursor:pointer;appearance:none;
 .blocked-banner-title{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--status-err);margin-bottom:5px}
 .blocked-banner-title svg{width:13px;height:13px}
 .blocked-banner-body{font-size:12px;color:var(--txt-secondary);line-height:1.6}
+
+/* ── Iteration 3: Explanation, shortcuts, gap linkage, trust stat ── */
+.how-generated{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:14px 0}
+.how-generated summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:8px 12px;font-size:11.5px;font-weight:500;color:var(--txt-secondary);cursor:pointer;user-select:none;background:var(--surface)}
+.how-generated summary::-webkit-details-marker{display:none}
+.how-generated summary::after{content:'›';font-size:14px;line-height:1;color:var(--txt-muted);transition:transform .2s}
+.how-generated[open] summary::after{transform:rotate(90deg)}
+.how-generated-body{padding:12px 14px;font-size:12px;color:var(--txt-secondary);line-height:1.7;border-top:1px solid var(--border);background:var(--bg)}
+.how-generated-body p{margin:0 0 8px}
+.how-generated-body p:last-child{margin:0}
+
+.kb-hint{display:flex;align-items:center;gap:14px;padding:6px 14px;border-top:1px solid var(--border);background:var(--surface);font-size:10.5px;color:var(--txt-muted);flex-shrink:0;flex-wrap:wrap}
+.kb-hint-item{display:flex;align-items:center;gap:5px}
+kbd{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:16px;padding:0 4px;border-radius:3px;border:1px solid var(--border);background:var(--surface-raised);font-size:9.5px;font-family:var(--font-mono);color:var(--txt-primary);line-height:1}
+
+.gap-link-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;background:var(--surface-raised);border:1px solid var(--border);color:var(--txt-muted);cursor:pointer;margin-top:4px}
+.gap-link-badge:hover{border-color:var(--accent);color:var(--accent)}
+
+.trust-stat-bar{display:flex;align-items:center;gap:14px;padding:10px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:20px;font-size:12.5px;flex-wrap:wrap}
+.trust-stat-bar svg{width:14px;height:14px;flex-shrink:0;color:var(--status-ok)}
 </style>
 </head>
 <body>
@@ -1407,9 +1427,9 @@ const DATA = {
 
   /* REVIEW QUEUE */
   reviewItems: [
-    { id:'r1', qName:'Sentinel Health Systems', question:'Incident response customer notification SLA', reason:'SLA not formally documented in IRP', severity:'high', owner:'Sarah Chen', due:'2025-04-10', qId:'q1', questionId:'q1_04' },
-    { id:'r2', qName:'Sentinel Health Systems', question:'Log retention — 7-year cold storage verification', reason:'Policy claims 7-year retention; operational evidence pending', severity:'high', owner:'Priya Nair', due:'2025-04-12', qId:'q1', questionId:'q1_13' },
-    { id:'r3', qName:'Sentinel Health Systems', question:'AI/ML governance policy', reason:'No approved AI governance framework; cannot answer credibly', severity:'high', owner:'Sarah Chen', due:'2025-04-08', qId:'q1', questionId:'q1_18' },
+    { id:'r1', qName:'Sentinel Health Systems', question:'Incident response customer notification SLA', reason:'SLA not formally documented in IRP', severity:'high', owner:'Sarah Chen', due:'2025-04-10', qId:'q1', questionId:'q1_04', gapGroup:'Logging & Monitoring', gapId:'g4' },
+    { id:'r2', qName:'Sentinel Health Systems', question:'Log retention — 7-year cold storage verification', reason:'Policy claims 7-year retention; operational evidence pending', severity:'high', owner:'Priya Nair', due:'2025-04-12', qId:'q1', questionId:'q1_13', gapGroup:'Logging & Monitoring', gapId:'g3' },
+    { id:'r3', qName:'Sentinel Health Systems', question:'AI/ML governance policy', reason:'No approved AI governance framework; cannot answer credibly', severity:'high', owner:'Sarah Chen', due:'2025-04-08', qId:'q1', questionId:'q1_18', gapGroup:'AI Governance', gapId:'g7' },
     { id:'r4', qName:'Veritas Capital Partners', question:'Risk acceptance criteria documentation', reason:'Formal risk threshold not yet in policy', severity:'medium', owner:'Marcus Webb', due:'2025-04-15', qId:'q2', questionId:'q2_03' },
     { id:'r5', qName:'Veritas Capital Partners', question:'ISMS control effectiveness measurement', reason:'Measurement methodology is informal; not documented', severity:'medium', owner:'Marcus Webb', due:'2025-04-18', qId:'q2', questionId:'q2_06' },
     { id:'r6', qName:'Meridian Federal Solutions', question:'FedRAMP authorization status', reason:'Must not overstate FedRAMP posture to a federal agency', severity:'high', owner:'Priya Nair', due:'2025-04-09', qId:'q3', questionId:'q3_01' },
@@ -1417,7 +1437,7 @@ const DATA = {
     { id:'r8', qName:'Meridian Federal Solutions', question:'FedRAMP continuous monitoring strategy', reason:'ConMon plan is aspirational; not operational', severity:'medium', owner:'Priya Nair', due:'2025-04-22', qId:'q3', questionId:'q3_05' },
     { id:'r9', qName:'Luminary AI Platform', question:'AI output accuracy review process', reason:'Answer references product functionality — needs product team confirmation', severity:'medium', owner:'Sarah Chen', due:'2025-04-16', qId:'q5', questionId:'q5_02' },
     { id:'r10', qName:'Luminary AI Platform', question:'AI-specific security testing (red team)', reason:'Referenced as planned but not confirmed in pentest scope', severity:'medium', owner:'Sarah Chen', due:'2025-04-20', qId:'q5', questionId:'q5_05' },
-    { id:'r11', qName:'Sentinel Health Systems', question:'Cryptographic key management lifecycle', reason:'Auto-drafted with medium confidence — DEK rotation gap identified', severity:'medium', owner:'Priya Nair', due:'2025-04-14', qId:'q1', questionId:'q1_16' },
+    { id:'r11', qName:'Sentinel Health Systems', question:'Cryptographic key management lifecycle', reason:'Auto-drafted with medium confidence — DEK rotation gap identified', severity:'medium', owner:'Priya Nair', due:'2025-04-14', qId:'q1', questionId:'q1_16', gapGroup:'Encryption', gapId:'g5' },
     { id:'r12', qName:'Sentinel Health Systems', question:'Third-party vendor access controls', reason:'Evidence for all vendor access records not yet compiled', severity:'low', owner:'Marcus Webb', due:'2025-04-20', qId:'q1', questionId:'q1_11' },
   ],
 };
@@ -1557,7 +1577,7 @@ function renderDashboard() {
 
   el.innerHTML = `
 <div class="pg-hd">
-  <div><div class="pg-title">Overview</div><div class="pg-sub">Security questionnaire pipeline — updated just now</div></div>
+  <div><div class="pg-title">Overview</div><div class="pg-sub">Security review pipeline — updated just now</div></div>
   <div class="pg-actions">
     <button class="btn btn-primary" onclick="openUpload()">${I.plus} New Questionnaire</button>
   </div>
@@ -1566,7 +1586,7 @@ function renderDashboard() {
   <div class="kpi-grid">
     <div class="kpi">
       <div class="kpi-bar" style="background:var(--accent)"></div>
-      <div class="kpi-lbl">In Progress</div>
+      <div class="kpi-lbl">Active Questionnaires</div>
       <div class="kpi-val">4</div>
       <div class="kpi-delta up">↑ 1 from last week</div>
     </div>
@@ -1578,15 +1598,15 @@ function renderDashboard() {
     </div>
     <div class="kpi">
       <div class="kpi-bar" style="background:var(--status-warn)"></div>
-      <div class="kpi-lbl">Needs Review</div>
+      <div class="kpi-lbl">Pending Review</div>
       <div class="kpi-val">12</div>
-      <div class="kpi-delta">across all active questionnaires</div>
+      <div class="kpi-delta">across 4 questionnaires</div>
     </div>
     <div class="kpi">
       <div class="kpi-bar" style="background:var(--status-err)"></div>
       <div class="kpi-lbl">Unsupported Claims</div>
       <div class="kpi-val">7</div>
-      <div class="kpi-delta down">↑ 2 new this week</div>
+      <div class="kpi-delta down">↑ 2 identified this week</div>
     </div>
     <div class="kpi">
       <div class="kpi-bar" style="background:#14b8a6"></div>
@@ -1594,6 +1614,16 @@ function renderDashboard() {
       <div class="kpi-val">${avgComp}%</div>
       <div class="kpi-delta up">↑ 11pp from last week</div>
     </div>
+  </div>
+
+  <div class="trust-stat-bar">
+    ${I.shield}
+    <span><strong style="color:var(--txt-primary)">Trust Center:</strong> 34 questions answered from existing documents this week</span>
+    <span style="color:var(--border)">·</span>
+    <span>8 questionnaires with partial or full document coverage</span>
+    <span style="color:var(--border)">·</span>
+    <span>Estimated 12 hrs of manual drafting avoided</span>
+    <button class="btn btn-ghost btn-sm" onclick="navigate('trust')" style="margin-left:auto;white-space:nowrap">View Trust Center ${I.chevR}</button>
   </div>
 
   <div class="grid-2 section-gap">
@@ -1894,6 +1924,43 @@ function bindWorkspace() {
   filterInput?.addEventListener('input', filterFn);
   statusFilter?.addEventListener('change', filterFn);
 
+  // keyboard shortcuts — scoped to workspace view
+  document.removeEventListener('keydown', window._wsKbHandler);
+  window._wsKbHandler = (e) => {
+    if(STATE.view !== 'workspace') return;
+    if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+    const allQs = DATA.questions[STATE.activeQId]||[];
+    const idx = allQs.findIndex(q=>q.id===STATE.activeQuestionId);
+    const selectQ = (newIdx) => {
+      if(newIdx < 0 || newIdx >= allQs.length) return;
+      STATE.activeQuestionId = allQs[newIdx].id;
+      document.querySelectorAll('.q-item').forEach(i=>i.classList.remove('sel'));
+      const next = document.querySelector(`.q-item[data-qid="${STATE.activeQuestionId}"]`);
+      if(next) { next.classList.add('sel'); next.scrollIntoView({block:'nearest'}); }
+      renderQuestionDetail();
+    };
+    if(e.key==='j'||e.key==='ArrowDown') { e.preventDefault(); selectQ(idx+1); }
+    else if(e.key==='k'||e.key==='ArrowUp') { e.preventDefault(); selectQ(idx-1); }
+    else if(e.key==='a' && !e.metaKey && !e.ctrlKey) setStatus(STATE.activeQuestionId,'approved');
+    else if(e.key==='r' && !e.metaKey && !e.ctrlKey) setStatus(STATE.activeQuestionId,'needs_review');
+    else if(e.key==='b' && !e.metaKey && !e.ctrlKey) setStatus(STATE.activeQuestionId,'blocked');
+  };
+  document.addEventListener('keydown', window._wsKbHandler);
+
+  // shortcut hint bar in center panel
+  const center = $('ws-center');
+  if(center && center.parentElement) {
+    const hint = document.createElement('div');
+    hint.className = 'kb-hint';
+    hint.innerHTML = `
+      <span style="font-size:10px;font-weight:600;color:var(--txt-muted);text-transform:uppercase;letter-spacing:.3px;margin-right:2px">Shortcuts</span>
+      <span class="kb-hint-item"><kbd>j</kbd><kbd>k</kbd> navigate</span>
+      <span class="kb-hint-item"><kbd>a</kbd> approve</span>
+      <span class="kb-hint-item"><kbd>r</kbd> needs review</span>
+      <span class="kb-hint-item"><kbd>b</kbd> block</span>`;
+    center.parentElement.appendChild(hint);
+  }
+
   renderQuestionDetail();
 }
 
@@ -1930,10 +1997,20 @@ ${!isBlocked&&q.missing?`<div class="missing-ev">${I.alert}<div class="missing-e
   <button class="db-btn">${I.edit} Edit</button>
 </div>
 
-${isAuto?`<div class="gen-progress"><div class="spinner"></div>AI-generated answer · Review recommended before approving</div>`:''}
+${isAuto?`<div class="gen-progress"><div class="spinner"></div>AI-drafted — human review required before approving</div>`:''}
+
+<details class="how-generated">
+  <summary>How this answer was generated</summary>
+  <div class="how-generated-body">
+    <p>The response engine performed semantic search across your knowledge base — ${q.sources?.length||0} source${(q.sources?.length||0)!==1?'s':''} matched this question above the relevance threshold (0.78). ${q.sources?.length?'The answer was assembled by combining matching passages from the retrieved documents.':'No documents matched with sufficient confidence; the answer could not be auto-drafted.'}</p>
+    <p><strong>Confidence (${q.confidence}%)</strong> reflects the average semantic similarity of the top-ranked sources, weighted by document recency and prior approval rate for similar questions. Scores above 80% indicate strong evidence alignment; scores below 60% indicate the answer should be written or substantially edited by a reviewer.</p>
+    ${q.missing?`<p><strong>Evidence gap flag:</strong> One or more claims in the answer could not be traced to a document in the knowledge base. The flagged text may be inferred from policy intent rather than direct evidence, which may not satisfy auditor scrutiny.</p>`:''}
+    ${isBlocked?`<p><strong>Blocked status:</strong> This question was flagged because no sufficient evidence exists to support a credible response. It should not be included in a submission until the underlying control gap is remediated.</p>`:''}
+  </div>
+</details>
 
 <div class="ws-label">Generated Answer <span class="badge">AI Draft</span></div>
-<div class="gen-answer">${q.answer||'<span style="color:var(--txt-muted);font-style:italic">No answer generated — insufficient knowledge base evidence for this question.</span>'}</div>
+<div class="gen-answer">${q.answer||'<span style="color:var(--txt-muted);font-style:italic">No answer generated — no matching evidence in the knowledge base for this question.</span>'}</div>
 
 <div class="ws-label">Editable Response</div>
 <div class="edit-area">
@@ -2004,6 +2081,7 @@ ${q.notes?.length?`
   <div style="font-size:11px;color:var(--txt-muted);margin-top:4px">
     ${q.confidence>=80?'High confidence — auto-approval recommended':q.confidence>=60?'Medium confidence — human review recommended':'Low confidence — manual answer required'}
   </div>
+  ${overallCov==='full'?`<div style="margin-top:8px;padding:7px 9px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:var(--radius);font-size:11px;color:var(--status-ok);">${I.check} Fully covered by Trust Center documents</div>`:''}
 </div>
 <div style="border-top:1px solid var(--border);padding:10px 14px 8px">
   <div style="font-size:11px;font-weight:600;color:var(--txt-muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Tags</div>
@@ -2175,6 +2253,7 @@ function renderTrustCard(d) {
    REVIEW QUEUE
    ================================================================ */
 function renderReview() {
+  const gapLinked = DATA.reviewItems.filter(r=>r.gapId).length;
   const el = document.createElement('div');
   el.className = 'page active flex-col';
   el.style.overflow = 'hidden';
@@ -2182,7 +2261,7 @@ function renderReview() {
 <div class="pg-hd">
   <div>
     <div class="pg-title">Review Queue</div>
-    <div class="pg-sub">${DATA.reviewItems.length} items requiring attention — prioritized by severity</div>
+    <div class="pg-sub">${DATA.reviewItems.length} items pending review — sorted by severity and due date${gapLinked?` · ${gapLinked} linked to open control gaps`:''}</div>
   </div>
   <div class="pg-actions">
     <button class="btn btn-secondary btn-sm">${I.download} Export</button>
@@ -2203,18 +2282,21 @@ function renderReview() {
   <div class="tbl-wrap" style="border-radius:0;border-left:none;border-right:none;border-bottom:none">
     <table>
       <thead><tr>
-        <th>Question</th><th>Customer</th><th>Reason</th><th>Severity</th>
+        <th>Question</th><th>Customer</th><th>Reason / Gap</th><th>Severity</th>
         <th>Owner</th><th>Due</th><th>Actions</th>
       </tr></thead>
       <tbody>
         ${DATA.reviewItems.map(r=>`
         <tr>
           <td>
-            <div style="font-size:12.5px;font-weight:500;max-width:220px;cursor:pointer;color:var(--accent)"
+            <div style="font-size:12.5px;font-weight:500;max-width:210px;cursor:pointer;color:var(--accent)"
                  onclick="navigate('workspace',{activeQId:'${r.qId}',activeQuestionId:'${r.questionId}'})">${r.question}</div>
           </td>
-          <td style="font-size:12px;color:var(--txt-secondary);white-space:nowrap">${r.qName}</td>
-          <td style="font-size:11.5px;color:var(--txt-secondary);max-width:200px">${r.reason}</td>
+          <td style="font-size:12px;color:var(--txt-secondary);white-space:nowrap">${r.qName.split(' ').slice(0,2).join(' ')}</td>
+          <td style="max-width:210px">
+            <div style="font-size:11.5px;color:var(--txt-secondary)">${r.reason}</div>
+            ${r.gapGroup?`<div class="gap-link-badge" onclick="navigate('gaps')" title="View gap details">${I.alert} ${r.gapGroup} gap →</div>`:''}
+          </td>
           <td><span class="sev-badge sev-${r.severity}">${r.severity}</span></td>
           <td>
             <div style="display:flex;align-items:center;gap:6px">
@@ -2225,9 +2307,9 @@ function renderReview() {
           <td style="font-size:11.5px;color:${new Date(r.due)<new Date()?'var(--status-err)':'var(--txt-muted)'};white-space:nowrap">${r.due}</td>
           <td>
             <div class="review-action-btns">
-              <button class="btn btn-ok btn-sm" onclick="toast('Approved — moved to workspace','ok')">${I.check}</button>
-              <button class="btn btn-secondary btn-sm" onclick="navigate('workspace',{activeQId:'${r.qId}',activeQuestionId:'${r.questionId}'})">${I.edit}</button>
-              <button class="btn btn-ghost btn-sm" onclick="toast('Escalated to security team','warn')">${I.arrowR}</button>
+              <button class="btn btn-ok btn-sm" title="Approve" onclick="toast('Answer approved','ok')">${I.check}</button>
+              <button class="btn btn-secondary btn-sm" title="Open in workspace" onclick="navigate('workspace',{activeQId:'${r.qId}',activeQuestionId:'${r.questionId}'})">${I.edit}</button>
+              <button class="btn btn-ghost btn-sm" title="Escalate" onclick="toast('Escalated to security team','warn')">${I.arrowR}</button>
             </div>
           </td>
         </tr>`).join('')}
