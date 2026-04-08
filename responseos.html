@@ -2386,4 +2386,276 @@ function renderSettings() {
       <div class="settings-group">
         <div class="settings-group-lbl">Answer Confidence Thresholds</div>
         <div class="form-row">
-          <div class="form-group"><label class="form-lbl">Auto-approve above</label><input class="input" type="number" value="85"> <span style="font-size:11px;color:var(--txt-muted);margin-top:3px">% confidence</span></
+          <div class="form-group"><label class="form-lbl">Auto-approve above</label><input class="input" type="number" value="85"> <span style="font-size:11px;color:var(--txt-muted);margin-top:3px">% confidence</span></div>
+          <div class="form-group"><label class="form-lbl">Flag for review below</label><input class="input" type="number" value="70"> <span style="font-size:11px;color:var(--txt-muted);margin-top:3px">% confidence</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-sec" id="st-fw">
+      <div class="settings-group">
+        <div class="settings-group-lbl">Active Frameworks</div>
+        ${['SOC 2 Type II','ISO 27001','HIPAA','FedRAMP Moderate','PCI DSS 4.0','CMMC Level 2','NIST CSF 2.0','AI Governance'].map((fw,i)=>`
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-sub)">
+          <div>
+            <div style="font-size:13px;font-weight:500">${fw}</div>
+            <div style="font-size:11px;color:var(--txt-muted)">${['Current · Renews Jan 2026','In progress · Targeting Q4 2025','Active · BAA required','Active · Authorization in progress','Current · SAQ-A','Not started','Active','Ratified March 2025'][i]}</div>
+          </div>
+          <button class="toggle ${i<5||(i===6)||(i===7)?'on':''}" onclick="this.classList.toggle('on')"></button>
+        </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="settings-sec" id="st-llm">
+      <div class="settings-group">
+        <div class="settings-group-lbl">AI Model Configuration</div>
+        <div style="background:var(--status-warn-bg);border:1px solid rgba(245,158,11,.2);border-radius:var(--radius-md);padding:12px 14px;margin-bottom:16px;font-size:12px;color:var(--status-warn)">
+          ${I.alert} LLM provider settings are for demonstration only in this prototype.
+        </div>
+        <div class="form-group mb-3"><label class="form-lbl">Provider</label><select class="input"><option>Anthropic (Claude)</option><option>OpenAI</option><option>Azure OpenAI</option><option>AWS Bedrock</option></select></div>
+        <div class="form-group mb-3"><label class="form-lbl">Model</label><select class="input"><option>claude-sonnet-4-6</option><option>claude-opus-4-6</option><option>claude-haiku-4-5</option></select></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-lbl">Temperature</label><input class="input" type="number" step="0.1" value="0.2"></div>
+          <div class="form-group"><label class="form-lbl">Max Output Tokens</label><input class="input" type="number" value="1024"></div>
+        </div>
+        <div class="form-group mb-3"><label class="form-lbl">RAG Chunk Size</label><input class="input" type="number" value="512"></div>
+        <div class="form-group mb-3"><label class="form-lbl">Similarity Threshold</label><input class="input" type="number" step="0.01" value="0.78"></div>
+      </div>
+    </div>
+
+    <div class="settings-sec" id="st-int">
+      <div class="settings-group">
+        <div class="settings-group-lbl">Connected Integrations</div>
+        ${[
+          {icon:'📁',name:'Google Drive',desc:'Sync knowledge base from Drive folders',on:true},
+          {icon:'📄',name:'SharePoint / OneDrive',desc:'Pull policies and certifications from SharePoint',on:false},
+          {icon:'📝',name:'Confluence',desc:'Import approved answers from Confluence spaces',on:false},
+          {icon:'🎫',name:'Jira',desc:'Create remediation tickets directly from gap items',on:true},
+          {icon:'🔗',name:'Slack',desc:'Review notifications and approval workflows in Slack',on:false},
+          {icon:'📊',name:'Vanta',desc:'Pull evidence and compliance data from Vanta',on:false},
+        ].map(int=>`
+        <div class="int-card">
+          <div class="int-icon">${int.icon}</div>
+          <div class="int-info">
+            <div class="int-name">${int.name}</div>
+            <div class="int-desc">${int.desc}</div>
+          </div>
+          <button class="btn btn-secondary btn-sm" style="margin-right:8px">${int.on?'Configure':'Connect'}</button>
+          <button class="toggle ${int.on?'on':''}" onclick="this.classList.toggle('on')"></button>
+        </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="settings-sec" id="st-rules">
+      <div class="settings-group">
+        <div class="settings-group-lbl">Approval Rules</div>
+        ${[
+          {label:'Auto-approve answers above confidence threshold',desc:'Applies to all frameworks',on:false},
+          {label:'Require dual approval for FedRAMP responses',desc:'Two reviewers must approve before export',on:true},
+          {label:'Block export if any answers are in Blocked status',desc:'Prevents incomplete exports',on:true},
+          {label:'Notify CISO on new blocked answers',desc:'Sends Slack notification to security lead',on:true},
+          {label:'Auto-assign low-confidence answers to security team',desc:'Below configured threshold',on:false},
+        ].map(r=>`
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border-sub)">
+          <div>
+            <div style="font-size:13px;font-weight:500">${r.label}</div>
+            <div style="font-size:11.5px;color:var(--txt-muted)">${r.desc}</div>
+          </div>
+          <button class="toggle ${r.on?'on':''}" onclick="this.classList.toggle('on')"></button>
+        </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="settings-sec" id="st-roles">
+      <div class="settings-group">
+        <div class="settings-group-lbl">Reviewer Roles</div>
+        ${[
+          {name:'Sarah Chen', email:'sarah@secursion.com', role:'CISO / Security Lead', perms:'Full access · Can approve, block, export'},
+          {name:'Marcus Webb', email:'marcus@secursion.com', role:'GRC Analyst', perms:'Review · Can approve, flag, comment'},
+          {name:'Priya Nair', email:'priya@secursion.com', role:'Security Engineer', perms:'Technical review · Can approve technical questions'},
+          {name:'Ryan Torres', email:'ryan@secursion.com', role:'Sales Engineer', perms:'Read-only + Submit · No approval rights'},
+        ].map(u=>`
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border-sub)">
+          <div class="av" style="width:32px;height:32px;font-size:11px">${u.name.split(' ').map(w=>w[0]).join('')}</div>
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:500">${u.name}</div>
+            <div style="font-size:11.5px;color:var(--txt-muted)">${u.email} · ${u.role}</div>
+            <div style="font-size:11px;color:var(--txt-secondary);margin-top:2px">${u.perms}</div>
+          </div>
+          <button class="btn btn-secondary btn-sm">Edit Role</button>
+        </div>`).join('')}
+        <div style="margin-top:14px"><button class="btn btn-ghost btn-sm">${I.plus} Invite team member</button></div>
+      </div>
+    </div>
+
+    <div class="settings-sec" id="st-notif">
+      <div class="settings-group"><div class="settings-group-lbl">Notification Preferences</div>
+        <p style="font-size:13px;color:var(--txt-secondary)">Notification settings — prototype placeholder</p>
+      </div>
+    </div>
+    <div class="settings-sec" id="st-api">
+      <div class="settings-group"><div class="settings-group-lbl">API & Webhooks</div>
+        <p style="font-size:13px;color:var(--txt-secondary)">API keys and webhooks — prototype placeholder</p>
+      </div>
+    </div>
+  </div>
+</div>`;
+
+  // Activate first settings nav
+  const firstActive = el.querySelector('.settings-nav-item.active') || el.querySelector('.settings-nav-item');
+  if(firstActive) {
+    const tab = firstActive.getAttribute('onclick')?.match(/'([^']+)'\)/)?.[1] || 'org';
+    setTimeout(()=>{ el.querySelectorAll('.settings-sec').forEach(s=>s.classList.remove('active'));
+      const target = el.querySelector(`#st-${tab}`); if(target) target.classList.add('active'); }, 0);
+  }
+
+  return el;
+}
+
+function switchSettingsTab(btn, tab) {
+  document.querySelectorAll('.settings-nav-item').forEach(n=>n.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.settings-sec').forEach(s=>s.classList.remove('active'));
+  const target = document.querySelector(`#st-${tab}`);
+  if(target) target.classList.add('active');
+  STATE.settingsTab = tab;
+}
+
+/* ================================================================
+   COMMAND PALETTE
+   ================================================================ */
+const CMD_ITEMS = [
+  { label:'Dashboard', desc:'Overview', nav:'dashboard', icon:'dash' },
+  { label:'Questionnaires', desc:'All questionnaires', nav:'questionnaires', icon:'doc' },
+  { label:'Knowledge Base', desc:'Approved answers & policies', nav:'knowledge', icon:'book' },
+  { label:'Trust Center', desc:'Documents & certifications', nav:'trust', icon:'shield' },
+  { label:'Review Queue', desc:'12 items pending', nav:'review', icon:'clock' },
+  { label:'Gaps & Risks', desc:'7 gaps identified', nav:'gaps', icon:'alert' },
+  { label:'Settings', desc:'Configure workspace', nav:'settings', icon:'settings' },
+  { label:'Upload Questionnaire', desc:'Start new questionnaire', action:'upload', icon:'upload' },
+  { label:'Export Response', desc:'Export current questionnaire', action:'export', icon:'download' },
+  { label:'Sentinel Health — Workspace', desc:'68% complete · 24 questions', nav:'workspace', qId:'q1', icon:'doc' },
+  { label:'Veritas Capital — Workspace', desc:'45% complete · 32 questions', nav:'workspace', qId:'q2', icon:'doc' },
+  { label:'Luminary AI — Workspace', desc:'72% complete · 18 questions', nav:'workspace', qId:'q5', icon:'doc' },
+];
+
+let cmdIdx = 0;
+
+function openCmd() {
+  $('cmd-bg').classList.add('open');
+  $('cmd-input').value='';
+  renderCmdResults(CMD_ITEMS);
+  $('cmd-input').focus();
+  cmdIdx=0;
+}
+
+function closeCmd() { $('cmd-bg').classList.remove('open'); }
+
+function renderCmdResults(items) {
+  $('cmd-results').innerHTML = `
+    <div class="cmd-sec-lbl">Navigation & Actions</div>
+    ${items.map((item,i)=>`
+    <div class="cmd-item ${i===cmdIdx?'focused':''}" data-idx="${i}" onclick="execCmd(${i})">
+      ${I[item.icon]||I.doc}
+      <span class="cmd-item-lbl">${item.label}</span>
+      <span class="cmd-item-desc">${item.desc}</span>
+    </div>`).join('')}`;
+}
+
+function execCmd(idx) {
+  const item = CMD_ITEMS[idx];
+  if(!item) return;
+  closeCmd();
+  if(item.action==='upload') { openUpload(); return; }
+  if(item.action==='export') { openExport(); return; }
+  if(item.nav) {
+    const extra = item.qId ? { activeQId: item.qId, activeQuestionId: DATA.questions[item.qId]?.[0]?.id||'' } : {};
+    navigate(item.nav, extra);
+  }
+}
+
+$('cmd-input').addEventListener('input', e => {
+  const s = e.target.value.toLowerCase();
+  const filtered = s ? CMD_ITEMS.filter(i=>i.label.toLowerCase().includes(s)||i.desc.toLowerCase().includes(s)) : CMD_ITEMS;
+  cmdIdx=0;
+  renderCmdResults(filtered);
+});
+
+$('cmd-input').addEventListener('keydown', e => {
+  const items = $('cmd-results').querySelectorAll('.cmd-item');
+  if(e.key==='ArrowDown') { cmdIdx=Math.min(cmdIdx+1,items.length-1); items.forEach((el,i)=>el.classList.toggle('focused',i===cmdIdx)); e.preventDefault(); }
+  if(e.key==='ArrowUp') { cmdIdx=Math.max(cmdIdx-1,0); items.forEach((el,i)=>el.classList.toggle('focused',i===cmdIdx)); e.preventDefault(); }
+  if(e.key==='Enter') { execCmd(cmdIdx); }
+  if(e.key==='Escape') { closeCmd(); }
+});
+
+$('cmd-bg').addEventListener('click', e => { if(e.target===$('cmd-bg')) closeCmd(); });
+$('open-cmd').addEventListener('click', openCmd);
+
+/* ================================================================
+   MODALS
+   ================================================================ */
+function openUpload() { $('upload-modal').classList.add('open'); }
+function closeUpload() { $('upload-modal').classList.remove('open'); }
+
+$('close-upload').addEventListener('click', closeUpload);
+$('cancel-upload').addEventListener('click', closeUpload);
+$('upload-modal').addEventListener('click', e => { if(e.target===$('upload-modal')) closeUpload(); });
+
+$('confirm-upload').addEventListener('click', () => {
+  const customer = $('upload-customer').value || 'New Customer';
+  closeUpload();
+  toast(`Parsing questionnaire for ${customer}…`, 'ok');
+  setTimeout(()=>toast('18 questions detected and queued for AI processing','ok'),1200);
+  setTimeout(()=>toast('AI draft generation complete — 13 auto-answered (72%)','ok'),3000);
+});
+
+const uploadZone = $('upload-zone');
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('over'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('over'));
+uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('over');
+  uploadZone.innerHTML = `<div style="font-size:14px;font-weight:600;color:var(--status-ok)">${I.check} File received — ready to parse</div>`; });
+
+function openExport() { $('export-modal').classList.add('open'); }
+function closeExport() { $('export-modal').classList.remove('open'); }
+
+$('close-export').addEventListener('click', closeExport);
+$('cancel-export').addEventListener('click', closeExport);
+$('export-modal').addEventListener('click', e => { if(e.target===$('export-modal')) closeExport(); });
+
+$('confirm-export').addEventListener('click', () => {
+  closeExport();
+  toast('Building response package…','ok');
+  setTimeout(()=>toast('Export complete — 3 files ready for download','ok'),1800);
+});
+
+/* ================================================================
+   NAV WIRING
+   ================================================================ */
+document.querySelectorAll('[data-nav]').forEach(item => {
+  item.addEventListener('click', () => navigate(item.dataset.nav));
+});
+
+/* ================================================================
+   KEYBOARD SHORTCUTS
+   ================================================================ */
+document.addEventListener('keydown', e => {
+  if((e.metaKey||e.ctrlKey) && e.key==='k') { e.preventDefault(); openCmd(); }
+  if(e.key==='Escape' && $('cmd-bg').classList.contains('open')) closeCmd();
+});
+
+/* ================================================================
+   THEME TOGGLE
+   ================================================================ */
+$('toggle-theme').addEventListener('click', () => {
+  const html = document.documentElement;
+  html.setAttribute('data-theme', html.getAttribute('data-theme')==='dark'?'light':'dark');
+});
+
+/* ================================================================
+   INIT
+   ================================================================ */
+navigate('dashboard');
+</script>
+</body>
+</html>
