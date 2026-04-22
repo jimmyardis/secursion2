@@ -168,6 +168,39 @@
       box-shadow: 0 0 40px rgba(0,212,240,0.22);
     }
 
+    /* Scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 38px; left: 56px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0.32;
+    }
+    .scroll-hint span {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .scroll-bar {
+      width: 44px; height: 1px;
+      background: var(--text-dim);
+      position: relative; overflow: hidden;
+    }
+    .scroll-bar::after {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: var(--accent);
+      animation: scan 2.8s ease-in-out infinite;
+    }
+    @keyframes scan {
+      0%       { left: -100%; }
+      50%, 100%{ left: 110%; }
+    }
+
     /* ── SECTIONS ────────────────────────────────────── */
 
     .section { padding: 112px 0; }
@@ -379,6 +412,11 @@
         Engage Secursion <span class="arrow">→</span>
       </a>
     </div>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-bar"></div>
+    </div>
   </section>
 
   <section id="services" class="section">
@@ -447,10 +485,6 @@
               <a href="mailto:noah@secursion.ai" style="display: block; margin-bottom: 8px;">noah@secursion.ai</a>
               <a href="mailto:jimmy@secursion.ai" style="display: block;">jimmy@secursion.ai</a>
             </div>
-            <div>
-              <p class="contact-label">General Inquiries</p>
-              <a href="mailto:engage@secursion.ai">engage@secursion.ai</a>
-            </div>
           </div>
         </div>
 
@@ -475,43 +509,123 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script>
-    /* ANIMATION SCRIPT - Icosahedron Logic
-    */
-    (function () {
-      var canvas = document.getElementById('hero-canvas');
-      var W = window.innerWidth, H = window.innerHeight;
-      var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-      renderer.setSize(W, H);
-      var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera(52, W / H, 0.1, 100);
-      camera.position.z = 6;
-      scene.add(new THREE.AmbientLight(0x0d1f40, 8));
-      var light = new THREE.PointLight(0x00d4f0, 5, 22);
-      light.position.set(5, 5, 5);
-      scene.add(light);
+  /* ================================================================
+     SECURSION — HERO 3D ANIMATION (Original "Exploding" Version)
+  ================================================================ */
+  (function () {
+    'use strict';
 
-      var group = new THREE.Group();
-      group.position.set(2.1, 0, 0);
-      if (W < 768) group.position.set(0, 0.5, 0);
-      scene.add(group);
+    var canvas   = document.getElementById('hero-canvas');
+    var mobile   = window.innerWidth < 768;
+    var W        = window.innerWidth;
+    var H        = window.innerHeight;
 
-      var geo = new THREE.IcosahedronGeometry(1.6, 0);
-      var mat = new THREE.MeshStandardMaterial({ color: 0x05182e, metalness: 0.8, roughness: 0.2, wireframe: true });
-      var mesh = new THREE.Mesh(geo, mat);
-      group.add(mesh);
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: !mobile, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1 : 1.5));
+    renderer.setSize(W, H);
+    renderer.setClearColor(0x000000, 0);
 
-      function animate() {
-        requestAnimationFrame(animate);
-        group.rotation.y += 0.005;
-        renderer.render(scene, camera);
+    var scene   = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(52, W / H, 0.1, 100);
+    camera.position.set(0, 0, 6);
+
+    scene.add(new THREE.AmbientLight(0x0d1f40, 8));
+    var key  = new THREE.PointLight(0x00d4f0, 5, 22);
+    key.position.set(5, 6, 5);
+    scene.add(key);
+    var fill = new THREE.PointLight(0x004488, 2, 20);
+    fill.position.set(-6, -4, -3);
+    scene.add(fill);
+
+    var group = new THREE.Group();
+    group.position.set(mobile ? 0 : 2.1, mobile ? 0.4 : 0, 0);
+    scene.add(group);
+
+    var RADIUS    = mobile ? 1.1  : 1.6;
+    var EXPLODE_D = mobile ? 2.4  : 3.6;
+    var icoGeom   = new THREE.IcosahedronGeometry(RADIUS, 0);
+    var posAttr   = icoGeom.attributes.position;
+    var FACES     = posAttr.count / 3;
+    var pieces    = [];
+
+    for (var i = 0; i < FACES; i++) {
+      var verts = [];
+      for (var j = 0; j < 3; j++) {
+        verts.push(new THREE.Vector3(posAttr.getX(i * 3 + j), posAttr.getY(i * 3 + j), posAttr.getZ(i * 3 + j)));
       }
-      animate();
-      window.addEventListener('resize', () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
+      var centroid = new THREE.Vector3().add(verts[0]).add(verts[1]).add(verts[2]).divideScalar(3);
+      var dir = centroid.clone().normalize();
+      var geom = new THREE.BufferGeometry();
+      geom.setAttribute('position', new THREE.BufferAttribute(new Float32Array([verts[0].x, verts[0].y, verts[0].z, verts[1].x, verts[1].y, verts[1].z, verts[2].x, verts[2].y, verts[2].z]), 3));
+      geom.computeVertexNormals();
+      var mat = new THREE.MeshStandardMaterial({ color: 0x05182e, emissive: new THREE.Color(0x00d4f0), emissiveIntensity: 0.04, metalness: 0.85, roughness: 0.2, side: THREE.DoubleSide, transparent: true, opacity: 0.88 });
+      var mesh = new THREE.Mesh(geom, mat);
+      var edgeMat = new THREE.LineBasicMaterial({ color: 0x00d4f0, transparent: true, opacity: 0.55 });
+      mesh.add(new THREE.LineSegments(new THREE.EdgesGeometry(geom), edgeMat));
+      mesh.userData.target = dir.clone().multiplyScalar(EXPLODE_D);
+      mesh.userData.rrot   = { x: (Math.random() - 0.5) * Math.PI * 1.4, y: (Math.random() - 0.5) * Math.PI * 1.4, z: (Math.random() - 0.5) * Math.PI * 0.9 };
+      pieces.push(mesh);
+      group.add(mesh);
+    }
+
+    var phase = 'idle', fired = false;
+
+    function explode() {
+      if (phase !== 'idle') return; phase = 'exploding';
+      var tl = gsap.timeline({ onComplete: function () { phase = 'exploded'; } });
+      pieces.forEach(function (p, idx) {
+        var t = p.userData.target, r = p.userData.rrot, pos = idx * 0.038;
+        tl.to(p.position, { x: t.x, y: t.y, z: t.z, duration: 1.35, ease: 'power2.out' }, pos);
+        tl.to(p.rotation, { x: r.x, y: r.y, z: r.z, duration: 1.35, ease: 'power2.out' }, pos);
+        tl.to(p.children[0].material, { opacity: 0.18, duration: 0.9 }, pos);
+        tl.to(p.material, { opacity: 0.65, emissiveIntensity: 0.0, duration: 0.85 }, pos);
       });
-    })();
+    }
+
+    function reassemble() {
+      if (phase !== 'exploded' || fired) return; fired = true; phase = 'assembling';
+      var sorted = pieces.slice().sort(function (a, b) { return b.userData.target.y - a.userData.target.y; });
+      var tl = gsap.timeline({ onComplete: function () { phase = 'done'; } });
+      sorted.forEach(function (p, idx) {
+        var pos = idx * 0.042;
+        tl.to(p.position, { x: 0, y: 0, z: 0, duration: 1.7, ease: 'expo.inOut' }, pos);
+        tl.to(p.rotation, { x: 0, y: 0, z: 0, duration: 1.7, ease: 'expo.inOut' }, pos);
+        tl.to(p.children[0].material, { opacity: 0.55, duration: 1.1 }, pos + 0.5);
+        tl.to(p.material, { opacity: 0.88, emissiveIntensity: 0.09, duration: 1.2 }, pos + 0.3);
+      });
+      var allMats = pieces.map(function (p) { return p.material; });
+      tl.to(allMats, { emissiveIntensity: 0.32, duration: 0.38, ease: 'power2.in' })
+        .to(allMats, { emissiveIntensity: 0.07, duration: 1.1, ease: 'power2.out' });
+    }
+
+    setTimeout(explode, 500);
+    setTimeout(reassemble, 4400);
+    window.addEventListener('scroll', function () { if (!fired && phase === 'exploded') reassemble(); }, { passive: true });
+    gsap.from('.hero-content', { opacity: 0, duration: 1.6, delay: 0.4, ease: 'power2.out' });
+    gsap.from('.scroll-hint', { opacity: 0, duration: 1.2, delay: 1.4, ease: 'power2.out' });
+
+    var clock = new THREE.Clock();
+    (function tick() {
+      requestAnimationFrame(tick);
+      var t = clock.getElapsedTime();
+      if (phase === 'done') {
+        group.rotation.y += 0.003;
+        group.rotation.x = Math.sin(t * 0.22) * 0.06;
+        group.position.y = (mobile ? 0.4 : 0) + Math.sin(t * 0.38) * 0.1;
+      }
+      if (!mobile) {
+        camera.position.x = Math.sin(t * 0.14) * 0.32;
+        camera.position.y = Math.cos(t * 0.09) * 0.18;
+        camera.lookAt(group.position);
+      }
+      renderer.render(scene, camera);
+    }());
+
+    window.addEventListener('resize', function () {
+      W = window.innerWidth; H = window.innerHeight;
+      camera.aspect = W / H; camera.updateProjectionMatrix(); renderer.setSize(W, H);
+    });
+  }());
   </script>
 </body>
 </html>
