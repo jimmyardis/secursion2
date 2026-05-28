@@ -3,746 +3,581 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Secursion — Security for the AI-era federal supply chain</title>
-  <meta name="description" content="A Charleston-based security practice pairing two decades of CISO leadership and Top Secret-cleared work with modern AI engineering velocity. Federal contractors, regulated enterprise, mission systems.">
+  <title>Secursion — Federal-grade security, shipped at AI speed</title>
+  <meta name="description" content="A Charleston-based security practice pairing two decades of CISO leadership and Top Secret-cleared work with the velocity of a modern AI shop.">
   <meta property="og:title" content="Secursion">
-  <meta property="og:description" content="Security for the AI-era federal supply chain.">
+  <meta property="og:description" content="Federal-grade security, shipped at AI speed.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.secursion.ai">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root{
-      --canvas:        #f4f0e6;     /* cream / bone */
-      --canvas-2:      #ede8da;     /* slightly deeper cream */
-      --ink:           #0d1726;     /* near-black with blue undertone */
-      --ink-2:         #1d2b40;
-      --slate:         #3a4a64;     /* secondary slate-blue */
-      --slate-mute:    #6b7a92;
-      --rule:          #c9c0a8;     /* hairline rule */
-      --rule-strong:   #9d9276;
-      --brass:         #9a6e30;     /* restrained accent */
-      --oxblood:       #7b2230;     /* critical accent, used very sparingly */
-      --serif:         'Spectral', 'Iowan Old Style', Georgia, serif;
-      --sans:          'Inter', system-ui, -apple-system, sans-serif;
-      --mono:          'IBM Plex Mono', 'JetBrains Mono', ui-monospace, monospace;
-    }
-
-    html{scroll-behavior:smooth;background:var(--canvas)}
-    body{
-      font-family:var(--sans);
-      background:var(--canvas);
-      color:var(--ink);
-      line-height:1.55;
-      font-weight:400;
-      font-size:16px;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+    :root {
+      --bg:            #050a14;
+      --surface:       #09152a;
+      --surface-2:     #0f1e38;
+      --accent:        #00d4f0;
+      --accent-glow:   rgba(0, 212, 240, 0.12);
+      --accent-border: rgba(0, 212, 240, 0.22);
+      --accent-dim:    rgba(0, 212, 240, 0.55);
+      --text:          #dde8f5;
+      --text-muted:    #5a7898;
+      --text-dim:      #2c4160;
+      --border:        #122033;
+      --font:          'Space Grotesk', system-ui, sans-serif;
     }
 
-    ::selection{background:var(--ink);color:var(--canvas)}
-    a{color:inherit;text-decoration:none}
+    html { scroll-behavior: smooth; background: var(--bg); }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--accent); color: var(--bg); }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--text-dim); }
 
-    /* ============================================================
-       TYPOGRAPHY UTILITIES
-       ============================================================ */
-    .mono{font-family:var(--mono);font-weight:500;letter-spacing:0.04em}
-    .serif{font-family:var(--serif)}
-    .ital{font-style:italic}
+    a { color: inherit; text-decoration: none; }
 
-    .micro-label{
-      font-family:var(--mono);
-      font-size:10.5px;
-      font-weight:500;
-      letter-spacing:0.22em;
-      text-transform:uppercase;
-      color:var(--slate);
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 28px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(5,10,20,0.92) 0%, transparent 100%);
     }
-    .label-rule{
-      display:flex;
-      align-items:center;
-      gap:14px;
+    .logo {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text);
     }
-    .label-rule::after{
-      content:'';
-      flex:1;
-      height:1px;
-      background:var(--rule);
+    .logo .a { color: var(--accent); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.2s;
     }
+    .nav-links a:hover { color: var(--accent); }
 
-    /* ============================================================
-       LAYOUT
-       ============================================================ */
-    .container{
-      max-width:1180px;
-      margin:0 auto;
-      padding:0 56px;
+    /* ── HERO ────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 660px;
+      overflow: hidden;
+      background: var(--bg);
     }
-    .container-narrow{
-      max-width:880px;
-      margin:0 auto;
-      padding:0 56px;
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 1;
+      background-image:
+        linear-gradient(rgba(0,212,240,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,240,0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+      background-position: -1px -1px;
     }
-
-    section{position:relative}
-    .section{padding:120px 0}
-    .section-top-rule{
-      height:1px;
-      background:var(--rule);
-      max-width:1180px;
-      margin:0 auto;
+    #hero-canvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      z-index: 2;
     }
-
-    /* ============================================================
-       DOC BAND (top metadata strip)
-       ============================================================ */
-    .docband{
-      border-bottom:1px solid var(--rule);
-      background:var(--canvas);
-      position:relative;
-      z-index:50;
+    .hero-edge {
+      position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      background:
+        linear-gradient(to right, rgba(5,10,20,0.78) 0%, rgba(5,10,20,0.3) 38%, transparent 60%),
+        linear-gradient(to top, rgba(5,10,20,0.6) 0%, transparent 22%);
     }
-    .docband-inner{
-      max-width:1180px;
-      margin:0 auto;
-      padding:13px 56px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      font-family:var(--mono);
-      font-size:10.5px;
-      font-weight:500;
-      letter-spacing:0.18em;
-      text-transform:uppercase;
-      color:var(--slate);
+    .hero-vignette {
+      position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      background: radial-gradient(
+        ellipse 85% 85% at 68% 50%,
+        transparent 35%,
+        rgba(5,10,20,0.55) 100%
+      );
     }
-    .docband-left,.docband-right{display:flex;gap:28px}
-    .docband-right span:first-child{color:var(--ink)}
-
-    /* ============================================================
-       NAV
-       ============================================================ */
-    nav.primary{
-      border-bottom:1px solid var(--rule);
-      background:var(--canvas);
-      position:sticky;
-      top:0;
-      z-index:40;
-      backdrop-filter:saturate(140%) blur(4px);
+    .hero-content {
+      position: absolute;
+      left: 56px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      max-width: 640px;
     }
-    .nav-inner{
-      max-width:1180px;
-      margin:0 auto;
-      padding:22px 56px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px;
     }
-    .brand{
-      font-family:var(--serif);
-      font-size:22px;
-      font-weight:500;
-      letter-spacing:-0.005em;
-      color:var(--ink);
+    h1.tagline {
+      font-size: clamp(42px, 5.2vw, 68px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 22px;
     }
-    .brand sup{
-      font-family:var(--mono);
-      font-size:9px;
-      font-weight:500;
-      letter-spacing:0.18em;
-      color:var(--slate);
-      margin-left:6px;
-      vertical-align:8px;
+    h1.tagline .accent { color: var(--accent); }
+    .hero-sub {
+      font-size: 16.5px;
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 500px;
+      margin-bottom: 36px;
     }
-    .nav-links{
-      list-style:none;
-      display:flex;
-      gap:38px;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 28px;
+      border: 1px solid var(--accent-border);
+      background: transparent;
+      color: var(--accent);
+      font-family: var(--font);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.22s;
     }
-    .nav-links a{
-      font-family:var(--mono);
-      font-size:11px;
-      font-weight:500;
-      letter-spacing:0.18em;
-      text-transform:uppercase;
-      color:var(--slate);
-      transition:color .15s;
-    }
-    .nav-links a:hover{color:var(--ink)}
-
-    /* ============================================================
-       HERO
-       ============================================================ */
-    #hero{
-      padding:120px 0 140px;
-      position:relative;
-      border-bottom:1px solid var(--rule);
-    }
-    .hero-inner{
-      display:grid;
-      grid-template-columns:1.5fr 1fr;
-      gap:80px;
-      align-items:end;
-    }
-    .hero-eyebrow{margin-bottom:34px}
-    .hero-headline{
-      font-family:var(--serif);
-      font-weight:400;
-      font-size:clamp(48px,6vw,84px);
-      line-height:1.02;
-      letter-spacing:-0.018em;
-      color:var(--ink);
-      margin-bottom:36px;
-    }
-    .hero-headline em{
-      font-style:italic;
-      font-weight:400;
-      color:var(--brass);
-    }
-    .hero-sub{
-      font-size:18px;
-      line-height:1.55;
-      color:var(--ink-2);
-      max-width:580px;
-      margin-bottom:44px;
-    }
-    .hero-cta{
-      display:inline-flex;
-      align-items:center;
-      gap:14px;
-      padding:16px 28px;
-      background:var(--ink);
-      color:var(--canvas);
-      font-family:var(--mono);
-      font-size:11px;
-      font-weight:500;
-      letter-spacing:0.22em;
-      text-transform:uppercase;
-      transition:background .15s;
-    }
-    .hero-cta:hover{background:var(--ink-2)}
-    .hero-cta .arr{font-family:var(--sans);font-weight:400;font-size:14px}
-
-    .hero-side{
-      border-left:1px solid var(--rule);
-      padding:24px 0 24px 36px;
-      align-self:end;
-    }
-    .hero-side-block{
-      margin-bottom:32px;
-    }
-    .hero-side-block:last-child{margin-bottom:0}
-    .hero-side-label{
-      font-family:var(--mono);
-      font-size:10px;
-      font-weight:500;
-      letter-spacing:0.22em;
-      text-transform:uppercase;
-      color:var(--slate);
-      margin-bottom:10px;
-    }
-    .hero-side-text{
-      font-family:var(--serif);
-      font-size:15px;
-      line-height:1.5;
-      color:var(--ink-2);
+    .btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      box-shadow: 0 0 40px rgba(0,212,240,0.22);
     }
 
-    /* ============================================================
-       SECTION TITLES
-       ============================================================ */
-    .section-num{
-      display:inline-block;
-      font-family:var(--mono);
-      font-size:11px;
-      font-weight:500;
-      letter-spacing:0.22em;
-      color:var(--brass);
-      margin-bottom:18px;
+    /* Scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 38px; left: 56px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0.32;
     }
-    .section-title{
-      font-family:var(--serif);
-      font-weight:400;
-      font-size:clamp(34px,4vw,52px);
-      line-height:1.08;
-      letter-spacing:-0.012em;
-      color:var(--ink);
-      margin-bottom:24px;
-      max-width:840px;
+    .scroll-hint span {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
-    .section-title em{font-style:italic;color:var(--brass)}
-    .section-lede{
-      font-family:var(--serif);
-      font-size:21px;
-      line-height:1.5;
-      color:var(--ink-2);
-      max-width:740px;
+    .scroll-bar {
+      width: 44px; height: 1px;
+      background: var(--text-dim);
+      position: relative; overflow: hidden;
     }
-
-    /* ============================================================
-       POSITIONING
-       ============================================================ */
-    #positioning{
-      background:var(--canvas);
+    .scroll-bar::after {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: var(--accent);
+      animation: scan 2.8s ease-in-out infinite;
     }
-    .pos-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:96px;
-      margin-top:80px;
-    }
-    .pos-pillar-num{
-      font-family:var(--mono);
-      font-size:11px;
-      font-weight:500;
-      letter-spacing:0.22em;
-      color:var(--brass);
-      margin-bottom:14px;
-    }
-    .pos-pillar-title{
-      font-family:var(--serif);
-      font-size:22px;
-      font-weight:500;
-      color:var(--ink);
-      margin-bottom:12px;
-      letter-spacing:-0.005em;
-    }
-    .pos-pillar-body{
-      font-size:15.5px;
-      line-height:1.6;
-      color:var(--ink-2);
+    @keyframes scan {
+      0%       { left: -100%; }
+      50%, 100%{ left: 110%; }
     }
 
-    /* ============================================================
-       CAPABILITIES
-       ============================================================ */
-    #capabilities{
-      border-top:1px solid var(--rule);
-      background:var(--canvas-2);
+    /* ── SHARED SECTION SHELL ────────────────────────── */
+    .section { padding: 120px 0; }
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 56px;
     }
-    .cap-list{
-      margin-top:80px;
-      border-top:1px solid var(--rule-strong);
+    .eyebrow {
+      display: inline-block;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
     }
-    .cap-row{
-      display:grid;
-      grid-template-columns:80px 1fr 2fr;
-      gap:48px;
-      padding:36px 0 38px;
-      border-bottom:1px solid var(--rule);
-      align-items:start;
+    .section-title {
+      font-size: clamp(30px, 3.4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.022em;
+      line-height: 1.1;
+      margin-bottom: 28px;
+      max-width: 880px;
     }
-    .cap-num{
-      font-family:var(--mono);
-      font-size:13px;
-      font-weight:500;
-      color:var(--brass);
-      letter-spacing:0.1em;
-      padding-top:6px;
-    }
-    .cap-title{
-      font-family:var(--serif);
-      font-size:24px;
-      font-weight:500;
-      color:var(--ink);
-      letter-spacing:-0.005em;
-      padding-top:2px;
-    }
-    .cap-body{
-      font-size:15.5px;
-      line-height:1.62;
-      color:var(--ink-2);
-    }
-    .cap-body strong{font-weight:600;color:var(--ink)}
-
-    /* ============================================================
-       IN DEVELOPMENT
-       ============================================================ */
-    #in-flight{
-      border-top:1px solid var(--rule);
-      background:var(--canvas);
-    }
-    .flight-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:32px;
-      margin-top:64px;
-    }
-    .flight-card{
-      border:1px solid var(--rule);
-      padding:36px 36px 32px;
-      background:var(--canvas);
-      transition:background .2s, border-color .2s;
-    }
-    .flight-card:hover{
-      background:var(--canvas-2);
-      border-color:var(--rule-strong);
-    }
-    .flight-meta{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:22px;
-    }
-    .flight-codename{
-      font-family:var(--mono);
-      font-size:10.5px;
-      font-weight:500;
-      letter-spacing:0.22em;
-      text-transform:uppercase;
-      color:var(--slate);
-    }
-    .flight-status{
-      font-family:var(--mono);
-      font-size:9.5px;
-      font-weight:500;
-      letter-spacing:0.22em;
-      text-transform:uppercase;
-      padding:4px 10px;
-      border:1px solid var(--rule-strong);
-      color:var(--brass);
-    }
-    .flight-status.active{color:var(--ink);border-color:var(--ink)}
-    .flight-title{
-      font-family:var(--serif);
-      font-size:26px;
-      font-weight:500;
-      color:var(--ink);
-      letter-spacing:-0.005em;
-      margin-bottom:14px;
-    }
-    .flight-body{
-      font-size:15px;
-      line-height:1.6;
-      color:var(--ink-2);
-      margin-bottom:18px;
-    }
-    .flight-link{
-      font-family:var(--mono);
-      font-size:10.5px;
-      font-weight:500;
-      letter-spacing:0.22em;
-      text-transform:uppercase;
-      color:var(--brass);
-      transition:color .15s;
-    }
-    .flight-link:hover{color:var(--ink)}
-
-    /* ============================================================
-       FOUNDERS
-       ============================================================ */
-    #founders{
-      border-top:1px solid var(--rule);
-      background:var(--canvas-2);
-    }
-    .founders-list{
-      margin-top:80px;
-    }
-    .founder{
-      display:grid;
-      grid-template-columns:1fr 2.2fr;
-      gap:72px;
-      padding-top:56px;
-      padding-bottom:56px;
-      border-top:1px solid var(--rule);
-    }
-    .founder:last-child{border-bottom:1px solid var(--rule)}
-    .founder-id{padding-top:6px}
-    .founder-mono{
-      font-family:var(--mono);
-      font-size:10.5px;
-      font-weight:500;
-      letter-spacing:0.22em;
-      text-transform:uppercase;
-      color:var(--slate);
-      margin-bottom:12px;
-    }
-    .founder-name{
-      font-family:var(--serif);
-      font-size:34px;
-      font-weight:400;
-      line-height:1.05;
-      color:var(--ink);
-      letter-spacing:-0.012em;
-      margin-bottom:6px;
-    }
-    .founder-role{
-      font-family:var(--serif);
-      font-style:italic;
-      font-size:17px;
-      color:var(--brass);
-      line-height:1.3;
-    }
-    .founder-bio p{
-      font-size:16px;
-      line-height:1.7;
-      color:var(--ink-2);
-      margin-bottom:18px;
-    }
-    .founder-bio p:last-child{margin-bottom:0}
-    .founder-bio strong{font-weight:600;color:var(--ink)}
-    .founder-creds{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-      gap:24px;
-      margin-top:28px;
-      padding-top:24px;
-      border-top:1px solid var(--rule);
-    }
-    .founder-cred-label{
-      font-family:var(--mono);
-      font-size:9.5px;
-      font-weight:500;
-      letter-spacing:0.22em;
-      text-transform:uppercase;
-      color:var(--slate);
-      margin-bottom:6px;
-    }
-    .founder-cred-value{
-      font-family:var(--serif);
-      font-size:14.5px;
-      color:var(--ink);
-      line-height:1.4;
+    .section-title .accent { color: var(--accent); }
+    .section-lede {
+      font-size: 18px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 720px;
     }
 
-    /* ============================================================
-       APPROACH
-       ============================================================ */
-    #approach{
-      border-top:1px solid var(--rule);
-      background:var(--canvas);
+    /* ── POSITIONING ─────────────────────────────────── */
+    #positioning {
+      border-top: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
     }
-    .approach-grid{
-      margin-top:72px;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:1px;
-      background:var(--rule);
-      border:1px solid var(--rule);
+    .pos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-top: 72px;
     }
-    .approach-item{
-      background:var(--canvas);
-      padding:44px 40px;
+    .pos-pillar-num {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.3em;
+      color: var(--accent);
+      margin-bottom: 12px;
     }
-    .approach-num{
-      font-family:var(--mono);
-      font-size:11px;
-      font-weight:500;
-      letter-spacing:0.22em;
-      color:var(--brass);
-      margin-bottom:14px;
+    .pos-pillar-title {
+      font-size: 21px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
     }
-    .approach-title{
-      font-family:var(--serif);
-      font-size:22px;
-      font-weight:500;
-      color:var(--ink);
-      letter-spacing:-0.005em;
-      margin-bottom:12px;
-    }
-    .approach-body{
-      font-size:15px;
-      line-height:1.62;
-      color:var(--ink-2);
+    .pos-pillar-body {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
     }
 
-    /* ============================================================
-       CONTACT
-       ============================================================ */
-    #contact{
-      border-top:1px solid var(--rule);
-      background:var(--ink);
-      color:var(--canvas);
+    /* ── CAPABILITIES ────────────────────────────────── */
+    #capabilities {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
     }
-    #contact .section-num{color:var(--brass)}
-    #contact .section-title{color:var(--canvas)}
-    #contact .section-title em{color:var(--brass)}
+    .cap-list {
+      margin-top: 64px;
+      border-top: 1px solid var(--border);
+    }
+    .cap-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 2fr;
+      gap: 48px;
+      padding: 36px 0 38px;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+      transition: background 0.2s;
+    }
+    .cap-row:hover { background: var(--surface-2); padding-left: 18px; padding-right: 18px; margin: 0 -18px; }
+    .cap-num {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      padding-top: 6px;
+    }
+    .cap-title {
+      font-size: 21px;
+      font-weight: 600;
+      color: var(--text);
+      padding-top: 2px;
+    }
+    .cap-body {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+    .cap-body strong { font-weight: 600; color: var(--text); }
 
-    .contact-layout{
-      display:grid;
-      grid-template-columns:1.2fr 1fr;
-      gap:96px;
-      align-items:start;
-      margin-top:60px;
+    /* ── IN DEVELOPMENT ──────────────────────────────── */
+    #in-flight {
+      border-top: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
     }
-    .contact-left p{
-      font-family:var(--serif);
-      font-size:18px;
-      line-height:1.55;
-      color:var(--canvas);
-      opacity:0.86;
-      margin-bottom:28px;
-      max-width:520px;
+    .flight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 56px;
     }
-    .contact-cards{
-      display:flex;
-      flex-direction:column;
-      gap:1px;
-      background:var(--slate);
-      border:1px solid var(--slate);
+    .flight-card {
+      background: var(--surface);
+      padding: 36px 36px 32px;
+      transition: background 0.25s;
     }
-    .contact-card{
-      background:var(--ink);
-      padding:28px 32px;
+    .flight-card:hover { background: var(--surface-2); }
+    .flight-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
     }
-    .contact-card-label{
-      font-family:var(--mono);
-      font-size:10px;
-      font-weight:500;
-      letter-spacing:0.22em;
-      text-transform:uppercase;
-      color:var(--slate-mute);
-      margin-bottom:10px;
+    .flight-codename {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
-    .contact-card-name{
-      font-family:var(--serif);
-      font-size:20px;
-      font-weight:500;
-      color:var(--canvas);
-      margin-bottom:6px;
-      letter-spacing:-0.005em;
+    .flight-status {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border: 1px solid var(--accent-border);
+      color: var(--accent);
     }
-    .contact-card-role{
-      font-family:var(--serif);
-      font-style:italic;
-      font-size:14px;
-      color:var(--brass);
-      margin-bottom:14px;
+    .flight-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
     }
-    .contact-card-link{
-      font-family:var(--mono);
-      font-size:12.5px;
-      font-weight:500;
-      color:var(--canvas);
-      transition:color .15s;
-      letter-spacing:0.02em;
+    .flight-body {
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 18px;
     }
-    .contact-card-link:hover{color:var(--brass)}
+    .flight-link {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      transition: opacity 0.15s;
+    }
+    .flight-link:hover { opacity: 0.7; }
 
-    /* ============================================================
-       FOOTER
-       ============================================================ */
-    footer{
-      background:var(--ink);
-      color:var(--slate-mute);
-      border-top:1px solid var(--slate);
+    /* ── PRINCIPALS ──────────────────────────────────── */
+    #founders {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
     }
-    .footer-inner{
-      max-width:1180px;
-      margin:0 auto;
-      padding:32px 56px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:16px;
-      font-family:var(--mono);
-      font-size:10.5px;
-      font-weight:500;
-      letter-spacing:0.18em;
-      text-transform:uppercase;
+    .founders-list { margin-top: 64px; }
+    .founder {
+      display: grid;
+      grid-template-columns: 1fr 2.4fr;
+      gap: 64px;
+      padding: 56px 0;
+      border-top: 1px solid var(--border);
     }
-    .footer-brand{color:var(--canvas)}
+    .founder:last-child { border-bottom: 1px solid var(--border); }
+    .founder-id { padding-top: 4px; }
+    .founder-mono {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .founder-name {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--text);
+      letter-spacing: -0.018em;
+      margin-bottom: 8px;
+    }
+    .founder-role {
+      font-size: 14px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+    .founder-bio p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+    .founder-bio p:last-child { margin-bottom: 0; }
+    .founder-bio strong { font-weight: 600; color: var(--text); }
 
-    /* ============================================================
-       RESPONSIVE
-       ============================================================ */
-    @media (max-width: 1024px){
-      .hero-inner{grid-template-columns:1fr;gap:56px}
-      .hero-side{border-left:none;border-top:1px solid var(--rule);padding:32px 0 0}
-      .pos-grid,.flight-grid,.contact-layout{grid-template-columns:1fr;gap:48px}
-      .approach-grid{grid-template-columns:1fr}
-      .founder{grid-template-columns:1fr;gap:32px}
-      .cap-row{grid-template-columns:60px 1fr;gap:24px}
-      .cap-body{grid-column:2}
+    /* ── APPROACH ────────────────────────────────────── */
+    #approach {
+      border-top: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
     }
-    @media (max-width: 768px){
-      .container,.container-narrow,.nav-inner,.docband-inner,.footer-inner{padding-left:24px;padding-right:24px}
-      .section{padding:80px 0}
-      #hero{padding:60px 0 80px}
-      .docband-inner{flex-direction:column;align-items:flex-start;gap:8px;font-size:9.5px}
-      .docband-left,.docband-right{flex-wrap:wrap;gap:14px}
-      .nav-links{display:none}
-      .founder-creds{grid-template-columns:1fr 1fr}
+    .approach-grid {
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .approach-item {
+      background: var(--surface);
+      padding: 40px 36px;
+      transition: background 0.25s;
+    }
+    .approach-item:hover { background: var(--surface-2); }
+    .approach-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .approach-title {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .approach-body {
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    /* ── CONTACT ─────────────────────────────────────── */
+    #contact {
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 48px;
+    }
+    .contact-left p {
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      max-width: 460px;
+    }
+    .contact-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .contact-card {
+      background: var(--surface);
+      padding: 26px 30px;
+      transition: background 0.2s;
+    }
+    .contact-card:hover { background: var(--surface-2); }
+    .contact-card-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+    .contact-card-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .contact-card-role {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
+    .contact-card-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      transition: opacity 0.15s;
+    }
+    .contact-card-link:hover { opacity: 0.7; }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+    }
+    .footer-logo { font-size: 11px; font-weight: 700; color: var(--text-dim); letter-spacing: 0.22em; }
+    .footer-logo .a { color: var(--accent); }
+    .footer-copy { font-size: 11px; color: var(--text-dim); }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .pos-grid, .flight-grid, .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+      .approach-grid { grid-template-columns: 1fr; }
+      .founder { grid-template-columns: 1fr; gap: 24px; }
+      .cap-row { grid-template-columns: 56px 1fr; gap: 24px; }
+      .cap-body { grid-column: 2; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .hero-content { left: 24px; bottom: 80px; top: auto; transform: none; }
+      .container { padding: 0 24px; }
+      footer { padding: 24px; flex-direction: column; gap: 12px; align-items: flex-start; }
+      .section { padding: 80px 0; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ============================================================
-       DOC METADATA BAND
-       ============================================================ -->
-  <div class="docband">
-    <div class="docband-inner">
-      <div class="docband-left">
-        <span>Charleston · South Carolina</span>
-        <span>Est. 2026</span>
-      </div>
-      <div class="docband-right">
-        <span>Secursion LLC</span>
-        <span>Registry — 0001</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============================================================
-       NAV
-       ============================================================ -->
-  <nav class="primary">
-    <div class="nav-inner">
-      <a href="#" class="brand">Secursion<sup>AI</sup></a>
-      <ul class="nav-links">
-        <li><a href="#positioning">Practice</a></li>
-        <li><a href="#capabilities">Capabilities</a></li>
-        <li><a href="#in-flight">In Development</a></li>
-        <li><a href="#founders">Principals</a></li>
-        <li><a href="#contact">Engage</a></li>
-      </ul>
-    </div>
+  <nav>
+    <a href="#" class="logo">SECUR<span class="a">S</span>ION</a>
+    <ul class="nav-links">
+      <li><a href="#positioning">Practice</a></li>
+      <li><a href="#capabilities">Capabilities</a></li>
+      <li><a href="#in-flight">In Development</a></li>
+      <li><a href="#founders">Principals</a></li>
+      <li><a href="#contact">Engage</a></li>
+    </ul>
   </nav>
 
   <!-- ============================================================
        HERO
        ============================================================ -->
   <section id="hero">
-    <div class="container">
-      <div class="hero-inner">
-        <div class="hero-main">
-          <div class="hero-eyebrow micro-label label-rule">
-            <span>§ A Security Practice</span>
-          </div>
-          <h1 class="hero-headline">
-            Federal-grade security,<br>
-            <em>shipped at AI speed.</em>
-          </h1>
-          <p class="hero-sub">
-            A Charleston-based security practice pairing two decades of CISO leadership and Top Secret-cleared work with the application-building velocity of a modern AI shop. Built for federal contractors, regulated enterprise, and the mission systems they're racing to bring online.
-          </p>
-          <a href="#contact" class="hero-cta">
-            Brief Us On Your Problem <span class="arr">→</span>
-          </a>
-        </div>
-        <aside class="hero-side">
-          <div class="hero-side-block">
-            <div class="hero-side-label">Posture</div>
-            <div class="hero-side-text">Boutique by design. Two principals on every engagement.</div>
-          </div>
-          <div class="hero-side-block">
-            <div class="hero-side-label">Clearances</div>
-            <div class="hero-side-text">DoD Top Secret · FBI Top Secret · USAF veteran-led</div>
-          </div>
-          <div class="hero-side-block">
-            <div class="hero-side-label">Served</div>
-            <div class="hero-side-text">Defense, intelligence, and civil-sector clients across two decades.</div>
-          </div>
-        </aside>
-      </div>
+    <div class="hero-grid"></div>
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-vignette"></div>
+    <div class="hero-edge"></div>
+
+    <div class="hero-content">
+      <span class="hero-eyebrow">A Security Practice · Charleston, SC</span>
+      <h1 class="tagline">
+        Federal-grade security,<br>
+        <span class="accent">shipped at AI speed.</span>
+      </h1>
+      <p class="hero-sub">
+        Two decades of CISO leadership and Top Secret-cleared work, paired with the velocity of a modern AI shop. For federal contractors, regulated enterprise, and the mission systems they're racing to bring online.
+      </p>
+      <a href="#contact" class="btn">
+        Brief Us On Your Problem <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-bar"></div>
     </div>
   </section>
 
@@ -751,12 +586,12 @@
        ============================================================ -->
   <section id="positioning" class="section">
     <div class="container">
-      <div class="section-num">§ 01 — Why Secursion exists</div>
+      <span class="eyebrow">§ 01 — Practice</span>
       <h2 class="section-title">
-        Most security firms either understand the <em>regulatory perimeter</em> or they can actually build software. Few do both at the speed AI is creating new exposure.
+        Most security firms either understand the <span class="accent">regulatory perimeter</span> or they can actually build software. Few do both.
       </h2>
       <p class="section-lede">
-        Secursion was founded to close that gap. We pair a quarter-century of Chief Information Security Officer leadership — including Top Secret-cleared work for federal and intelligence-sector clients — with the engineering velocity of a modern AI development practice. We work on what the threat models actually call for, in formats the auditors can sign.
+        Secursion closes that gap — pairing twenty-five years of CISO leadership and Top Secret-cleared federal work with the engineering velocity of a modern AI practice. We work on what the threat models actually call for, in formats the auditors can sign.
       </p>
 
       <div class="pos-grid">
@@ -764,14 +599,14 @@
           <div class="pos-pillar-num">I.</div>
           <h3 class="pos-pillar-title">Credibility that travels.</h3>
           <p class="pos-pillar-body">
-            Our security lead holds DoD and FBI Top Secret clearances and has served as CISO and Chief Technology Advisor inside Fortune 500 defense contracting, intelligence-community workloads, and NAVSEA-supporting programs. The threat models we build are the threat models we have actually defended against.
+            Our security lead holds DoD and FBI Top Secret clearances and has served as CISO and Chief Technology Advisor inside Fortune 500 defense contracting and intelligence-community workloads. The threat models we build are the ones we have actually defended against.
           </p>
         </div>
         <div>
           <div class="pos-pillar-num">II.</div>
           <h3 class="pos-pillar-title">Velocity that ships.</h3>
           <p class="pos-pillar-body">
-            Our managing partner is a working AI builder — Carolina Redesign, SCAIO, the Palmetto Zero-Based Budgeting Suite, the Babcock Center re-platform. Production deployments where larger consultancies are still scoping. The pace of AI exposure demands a pace of response that most security shops cannot match.
+            Our managing partner is a working AI builder — Carolina Redesign, SCAIO, the Palmetto Budgeting Suite, the Babcock re-platform — shipping production deployments where larger consultancies are still scoping. AI exposure moves faster than most security shops can respond.
           </p>
         </div>
       </div>
@@ -783,9 +618,9 @@
        ============================================================ -->
   <section id="capabilities" class="section">
     <div class="container">
-      <div class="section-num">§ 02 — What we do</div>
+      <span class="eyebrow">§ 02 — Capabilities</span>
       <h2 class="section-title">
-        Four practice areas, all assembled around <em>what the AI-era federal supply chain actually needs.</em>
+        Four practice areas, all assembled around <span class="accent">what the AI-era federal supply chain actually needs.</span>
       </h2>
 
       <div class="cap-list">
@@ -793,28 +628,28 @@
           <div class="cap-num">01</div>
           <div class="cap-title">LLM &amp; Agent Key Governance</div>
           <div class="cap-body">
-            <strong>Secrets management, access control, and audit infrastructure for organizations deploying LLM and AI-agent systems against CMMC, NIST 800-171, and FedRAMP obligations.</strong> Most enterprise AI rollouts today are running on developer API keys with no auditable access trail. We build the governance layer that turns those deployments into something a CISO can sign.
+            <strong>Secrets management, access control, and audit infrastructure for LLM and agent systems under CMMC, NIST 800-171, and FedRAMP.</strong> Most enterprise AI today runs on developer API keys with no auditable access trail. We build the layer a CISO can sign.
           </div>
         </div>
         <div class="cap-row">
           <div class="cap-num">02</div>
           <div class="cap-title">CMMC &amp; Federal Compliance</div>
           <div class="cap-body">
-            <strong>Pre-assessment readiness, control gap analysis, and program build-out for the Defense Industrial Base.</strong> CMMC Level 2 and 3 work, NIST 800-171 alignment, FAR / DFARS readiness, and FedRAMP advisory. Delivered by practitioners who have lived inside Fortune 500 and federal-contractor compliance programs — not consultants who have only read the standards.
+            <strong>Pre-assessment readiness, gap analysis, and program build-out for the Defense Industrial Base.</strong> CMMC Level 2 and 3, NIST 800-171, DFARS, and FedRAMP advisory — delivered by practitioners who have lived inside the programs, not consultants who have only read the standards.
           </div>
         </div>
         <div class="cap-row">
           <div class="cap-num">03</div>
           <div class="cap-title">AI Red-Teaming &amp; Model Security</div>
           <div class="cap-body">
-            <strong>Adversarial testing of AI deployments, prompt-injection assessments, model-stealing and inversion testing, and threat-modeling for AI-integrated workflows.</strong> Performed by a CISO who has built and run red-team programs at Fortune 500 scale and presented original security research at DEF CON, SOURCE Boston, and IEEE.
+            <strong>Adversarial testing of AI deployments, prompt-injection assessments, model inversion, and threat-modeling for AI-integrated workflows.</strong> Run by a CISO who has built red-team programs at Fortune 500 scale and presented original research at DEF CON, SOURCE Boston, and IEEE.
           </div>
         </div>
         <div class="cap-row">
           <div class="cap-num">04</div>
           <div class="cap-title">Secure AI Infrastructure Builds</div>
           <div class="cap-body">
-            <strong>Custom secure deployments — voice agents, intake systems, document workflows, internal LLM portals — for organizations whose compliance posture rules out off-the-shelf SaaS.</strong> When the client's data cannot leave their controlled environment, but they still need the productivity gains, we build the version that can.
+            <strong>Custom secure deployments — voice agents, intake systems, document workflows, internal LLM portals — for organizations whose compliance posture rules out off-the-shelf SaaS.</strong> When the data cannot leave, we build the version that can.
           </div>
         </div>
       </div>
@@ -826,20 +661,20 @@
        ============================================================ -->
   <section id="in-flight" class="section">
     <div class="container">
-      <div class="section-num">§ 03 — In development</div>
+      <span class="eyebrow">§ 03 — In Development</span>
       <h2 class="section-title">
-        Products in flight — built from the patterns we keep encountering inside <em>federal and regulated engagements.</em>
+        Products in flight — built from the patterns we keep encountering inside <span class="accent">federal and regulated engagements.</span>
       </h2>
 
       <div class="flight-grid">
         <article class="flight-card">
           <div class="flight-meta">
             <span class="flight-codename">Product · ResponseOS</span>
-            <span class="flight-status active">Live Prototype</span>
+            <span class="flight-status">Live Prototype</span>
           </div>
           <h3 class="flight-title">Security Questionnaire Intelligence</h3>
           <p class="flight-body">
-            Most security teams lose dozens of hours per deal answering vendor security questionnaires, DDQs, and RFP security sections — usually by hand, usually from the same recycled answers. ResponseOS turns the corpus of every questionnaire you have ever answered into an auditable answer engine. Drafts in minutes, evidence linked inline, reviewed and signed by the humans who actually own each control.
+            Most security teams lose dozens of hours per deal answering vendor questionnaires, DDQs, and RFP security sections — by hand, from the same recycled answers. ResponseOS turns your existing corpus into an auditable answer engine. Drafts in minutes, evidence linked inline, signed by the humans who own each control.
           </p>
           <a href="/responseos.html" class="flight-link">Open Prototype →</a>
         </article>
@@ -851,7 +686,7 @@
           </div>
           <h3 class="flight-title">LLM Key Governance Platform</h3>
           <p class="flight-body">
-            A secrets-management and access-control layer purpose-built for organizations deploying LLM and AI-agent systems under CMMC and NIST 800-171 obligations. Per-tenant key vaulting, model-level access policy, full audit trail of every prompt and tool call, and the evidence pack auditors actually ask for. Currently in spec; design partners welcome.
+            A secrets-management and access-control layer for LLM and agent systems under CMMC and NIST 800-171. Per-tenant key vaulting, model-level access policy, full audit trail of every prompt and tool call, and the evidence pack auditors actually ask for. In spec; design partners welcome.
           </p>
           <a href="#contact" class="flight-link">Inquire About Design Partnership →</a>
         </article>
@@ -860,18 +695,17 @@
   </section>
 
   <!-- ============================================================
-       FOUNDERS
+       PRINCIPALS
        ============================================================ -->
   <section id="founders" class="section">
     <div class="container">
-      <div class="section-num">§ 04 — Principals</div>
+      <span class="eyebrow">§ 04 — Principals</span>
       <h2 class="section-title">
-        The two-person practice. Both names <em>on every engagement.</em>
+        Two principals. <span class="accent">Both names on every engagement.</span>
       </h2>
 
       <div class="founders-list">
 
-        <!-- NOAH -->
         <article class="founder">
           <div class="founder-id">
             <div class="founder-mono">Principal · I</div>
@@ -880,40 +714,14 @@
           </div>
           <div class="founder-bio">
             <p>
-              For more than twenty-five years, Noah has built security programs for organizations that cannot afford to get it wrong. As <strong>Chief Technology Advisor at KBR</strong> — the Fortune 500 defense, intelligence, and engineering firm — he led red-team strategy and shaped enterprise-wide cybersecurity posture across one of the largest federal contractor portfolios in the country, driving a 95% reduction in measured vulnerabilities under his program.
+              Noah has spent the last twenty-five years building security programs for organizations that cannot afford to get it wrong — Fortune 500 defense contractors, intelligence-community workloads, NAVSEA-supporting programs. Most recently he was <strong>Chief Technology Advisor at KBR</strong>, where his red-team and vulnerability program cut measured exposure by 95% across one of the largest federal contractor portfolios in the country. Before that he ran the CISO function at Wave Sciences and Orbis, securing classified workloads and shipping patented biometric authentication systems.
             </p>
             <p>
-              Earlier appointments as <strong>Chief Information Security Officer at Wave Sciences and Orbis</strong> included securing classified workloads for intelligence-community clients, building and patenting biometric and acoustic authentication systems, and supporting NAVSEA and other military programs. Before that he spent six years as an independent security consultant working with federal contractors across the defense, intelligence, and civil sectors.
+              He holds <strong>DoD and FBI Top Secret clearances</strong>, is the inventor on six U.S. patents in security and communications, and has presented original threat research at DEF CON, SOURCE Boston, and IEEE. He is an M.D. by training — Medical University of South Carolina — with prior degrees from Rutgers in mechanical engineering and cognitive psychology.
             </p>
-            <p>
-              Noah holds <strong>DoD and FBI Top Secret clearances</strong> and is the inventor on six U.S. patents in security, acoustic and optical communication, and medical instrumentation. He has been a regular columnist for Network World and TechTarget Media on offensive security and threat research, and has presented original work at DEF CON, ToorCon, SOURCE Boston, IEEE, ISSA, and the Cloud Security Alliance, among others.
-            </p>
-            <p>
-              He holds an M.D. from the Medical University of South Carolina and degrees in Mechanical and Aerospace Engineering and Cognitive Psychology from Rutgers.
-            </p>
-
-            <div class="founder-creds">
-              <div>
-                <div class="founder-cred-label">Clearances</div>
-                <div class="founder-cred-value">DoD Top Secret<br>FBI Top Secret</div>
-              </div>
-              <div>
-                <div class="founder-cred-label">Recent Tenure</div>
-                <div class="founder-cred-value">KBR · Wave Sciences<br>Orbis · Independent</div>
-              </div>
-              <div>
-                <div class="founder-cred-label">Patents</div>
-                <div class="founder-cred-value">Six U.S. patents in security &amp; communications</div>
-              </div>
-              <div>
-                <div class="founder-cred-label">Education</div>
-                <div class="founder-cred-value">M.D. · MUSC<br>B.S.E. · Rutgers Engineering</div>
-              </div>
-            </div>
           </div>
         </article>
 
-        <!-- JIMMY -->
         <article class="founder">
           <div class="founder-id">
             <div class="founder-mono">Principal · II</div>
@@ -922,36 +730,11 @@
           </div>
           <div class="founder-bio">
             <p>
-              Jimmy brings the build velocity. Through <strong>Carolina Redesign</strong>, his AI transformation studio, he has designed, built, and shipped production AI systems across legal intake, healthcare triage, state government budgeting, workforce development, and cybersecurity compliance — repeatedly delivering deployed systems where larger consultancies were still in scoping. Recent work includes the Palmetto Zero-Based Budgeting Suite for South Carolina state legislators, a HIPAA-compliant AI receptionist running across multiple medical practices, and the digital re-platform of Babcock Center, one of the Midlands' largest disability-services nonprofits.
+              Jimmy is the build side. Through his AI studio <strong>Carolina Redesign</strong>, he has shipped production AI systems across legal intake, healthcare triage, state government budgeting, and cybersecurity compliance — including the Palmetto Zero-Based Budgeting Suite for South Carolina legislators and a HIPAA-compliant AI receptionist running across multiple medical practices. Larger consultancies were still scoping.
             </p>
             <p>
-              Before Carolina Redesign, he spent <strong>fifteen years in federal environmental compliance</strong> — leading 120+ NEPA reviews with zero findings overturned, negotiating a HUD Addendum to a FEMA Programmatic Agreement for South Carolina disaster recovery, and serving as a designated Subject Matter Expert on the HUD Exchange platform. The work demanded fluency in the same federal regulatory machinery that drives CMMC, FISMA, and NIST today — and the same kind of documentation rigor.
+              Before AI he spent fifteen years inside federal environmental compliance — 120+ NEPA reviews with zero findings overturned, a HUD Addendum to a FEMA Programmatic Agreement for South Carolina disaster recovery, a designated Subject Matter Expert seat on the HUD Exchange. The same regulatory machinery that drives CMMC and FISMA today. He is a <strong>six-year Air Force veteran</strong> (A-10 aviation, Incirlik AB), co-founder of the South Carolina Artificial Intelligence Observatory, and holds an MPA from the College of Charleston.
             </p>
-            <p>
-              He is a <strong>six-year veteran of the United States Air Force</strong>, where he served as an A-10 aviation technician and emergency manager at Incirlik Air Base and Davis-Monthan, directing a 200-person emergency response program with consecutive "Excellent" inspection ratings. He is also the co-founder of the South Carolina Artificial Intelligence Observatory (<strong>SCAIO</strong>), the state's public-interest AI research initiative.
-            </p>
-            <p>
-              He holds an M.P.A. in Urban and Regional Planning from the College of Charleston.
-            </p>
-
-            <div class="founder-creds">
-              <div>
-                <div class="founder-cred-label">Service</div>
-                <div class="founder-cred-value">U.S. Air Force<br>2000 – 2006</div>
-              </div>
-              <div>
-                <div class="founder-cred-label">Practice</div>
-                <div class="founder-cred-value">Carolina Redesign<br>The Commons Group</div>
-              </div>
-              <div>
-                <div class="founder-cred-label">Federal Record</div>
-                <div class="founder-cred-value">120+ NEPA reviews<br>Zero findings overturned</div>
-              </div>
-              <div>
-                <div class="founder-cred-label">Education</div>
-                <div class="founder-cred-value">M.P.A. · College of Charleston</div>
-              </div>
-            </div>
           </div>
         </article>
 
@@ -964,9 +747,9 @@
        ============================================================ -->
   <section id="approach" class="section">
     <div class="container">
-      <div class="section-num">§ 05 — How we work</div>
+      <span class="eyebrow">§ 05 — How We Work</span>
       <h2 class="section-title">
-        A small set of operating principles, <em>borrowed from the disciplines that actually have to hold.</em>
+        Four operating principles, borrowed from <span class="accent">the disciplines that actually have to hold.</span>
       </h2>
 
       <div class="approach-grid">
@@ -974,28 +757,28 @@
           <div class="approach-num">i.</div>
           <h3 class="approach-title">Both names on every engagement.</h3>
           <p class="approach-body">
-            We do not subcontract security work. Whatever you commission, both principals work on directly. If the engagement is large enough to warrant a team, we tell you that before we sign.
+            We do not subcontract. Both principals work on every engagement directly. If it needs a larger team, we say so before we sign.
           </p>
         </div>
         <div class="approach-item">
           <div class="approach-num">ii.</div>
-          <h3 class="approach-title">Written for the auditor who will actually read it.</h3>
+          <h3 class="approach-title">Written for the auditor.</h3>
           <p class="approach-body">
-            Our deliverables are designed for the assessor, regulator, or board member who will eventually have to act on them — not for the marketing deck. Evidence is linked, citations are precise, and the rationale is on the page.
+            Deliverables are written for the assessor, regulator, or board member who will eventually have to act on them — not the marketing deck. Evidence linked, citations precise, rationale on the page.
           </p>
         </div>
         <div class="approach-item">
           <div class="approach-num">iii.</div>
           <h3 class="approach-title">Federal-grade controls when required.</h3>
           <p class="approach-body">
-            We hold active DoD and FBI Top Secret clearances. We operate under appropriate handling controls for sensitive engagements and treat client information accordingly — including engagements where the existence of the engagement is itself the sensitive fact.
+            Active DoD and FBI Top Secret clearances. We operate under appropriate handling controls for sensitive engagements — including those where the existence of the engagement is itself the sensitive fact.
           </p>
         </div>
         <div class="approach-item">
           <div class="approach-num">iv.</div>
           <h3 class="approach-title">First conversation costs nothing.</h3>
           <p class="approach-body">
-            Engagements begin with a one-hour scoping call. No NDA required to describe the problem at a high level. If we are not the right team for the work, we will tell you, and where appropriate point you to a team that is.
+            Engagements begin with a one-hour scoping call. No NDA required to describe the problem. If we are not the right team, we will tell you — and where we can, point you to one who is.
           </p>
         </div>
       </div>
@@ -1007,18 +790,18 @@
        ============================================================ -->
   <section id="contact" class="section">
     <div class="container">
-      <div class="section-num">§ 06 — Engage</div>
+      <span class="eyebrow">§ 06 — Engage</span>
       <h2 class="section-title">
-        Serious work <em>starts here.</em>
+        Serious work <span class="accent">starts here.</span>
       </h2>
 
       <div class="contact-layout">
         <div class="contact-left">
           <p>
-            Tell us what you are trying to defend, the regulatory framework you are operating under, and what is currently blocking you. We will respond within one business day.
+            Tell us what you are defending, your regulatory framework, and what is blocking you. Response within one business day.
           </p>
           <p>
-            For sensitive inquiries, use the secure mailbox indicated below; we will reply with secure channel options.
+            For sensitive inquiries, use the direct mailbox; we will respond with secure channel options.
           </p>
         </div>
 
@@ -1046,16 +829,131 @@
     </div>
   </section>
 
-  <!-- ============================================================
-       FOOTER
-       ============================================================ -->
   <footer>
-    <div class="footer-inner">
-      <div class="footer-brand">Secursion · AI</div>
-      <div>Charleston · South Carolina</div>
-      <div>© 2026 Secursion LLC</div>
-    </div>
+    <div class="footer-logo">SECUR<span class="a">S</span>ION</div>
+    <div class="footer-copy">© 2026 Secursion LLC · Charleston, SC</div>
   </footer>
 
+  <!-- ============================================================
+       HERO 3D ANIMATION — original exploding icosahedron
+       ============================================================ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    var canvas   = document.getElementById('hero-canvas');
+    var mobile   = window.innerWidth < 768;
+    var W        = window.innerWidth;
+    var H        = window.innerHeight;
+
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: !mobile, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1 : 1.5));
+    renderer.setSize(W, H);
+    renderer.setClearColor(0x000000, 0);
+
+    var scene   = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(52, W / H, 0.1, 100);
+    camera.position.set(0, 0, 6);
+
+    scene.add(new THREE.AmbientLight(0x0d1f40, 8));
+    var key  = new THREE.PointLight(0x00d4f0, 5, 22);
+    key.position.set(5, 6, 5);
+    scene.add(key);
+    var fill = new THREE.PointLight(0x004488, 2, 20);
+    fill.position.set(-6, -4, -3);
+    scene.add(fill);
+
+    var group = new THREE.Group();
+    group.position.set(mobile ? 0 : 2.1, mobile ? 0.4 : 0, 0);
+    scene.add(group);
+
+    var RADIUS    = mobile ? 1.1  : 1.6;
+    var EXPLODE_D = mobile ? 2.4  : 3.6;
+    var icoGeom   = new THREE.IcosahedronGeometry(RADIUS, 0);
+    var posAttr   = icoGeom.attributes.position;
+    var FACES     = posAttr.count / 3;
+    var pieces    = [];
+
+    for (var i = 0; i < FACES; i++) {
+      var verts = [];
+      for (var j = 0; j < 3; j++) {
+        verts.push(new THREE.Vector3(posAttr.getX(i * 3 + j), posAttr.getY(i * 3 + j), posAttr.getZ(i * 3 + j)));
+      }
+      var centroid = new THREE.Vector3().add(verts[0]).add(verts[1]).add(verts[2]).divideScalar(3);
+      var dir = centroid.clone().normalize();
+      var geom = new THREE.BufferGeometry();
+      geom.setAttribute('position', new THREE.BufferAttribute(new Float32Array([verts[0].x, verts[0].y, verts[0].z, verts[1].x, verts[1].y, verts[1].z, verts[2].x, verts[2].y, verts[2].z]), 3));
+      geom.computeVertexNormals();
+      var mat = new THREE.MeshStandardMaterial({ color: 0x05182e, emissive: new THREE.Color(0x00d4f0), emissiveIntensity: 0.04, metalness: 0.85, roughness: 0.2, side: THREE.DoubleSide, transparent: true, opacity: 0.88 });
+      var mesh = new THREE.Mesh(geom, mat);
+      var edgeMat = new THREE.LineBasicMaterial({ color: 0x00d4f0, transparent: true, opacity: 0.55 });
+      mesh.add(new THREE.LineSegments(new THREE.EdgesGeometry(geom), edgeMat));
+      mesh.userData.target = dir.clone().multiplyScalar(EXPLODE_D);
+      mesh.userData.rrot   = { x: (Math.random() - 0.5) * Math.PI * 1.4, y: (Math.random() - 0.5) * Math.PI * 1.4, z: (Math.random() - 0.5) * Math.PI * 0.9 };
+      pieces.push(mesh);
+      group.add(mesh);
+    }
+
+    var phase = 'idle', fired = false;
+
+    function explode() {
+      if (phase !== 'idle') return; phase = 'exploding';
+      var tl = gsap.timeline({ onComplete: function () { phase = 'exploded'; } });
+      pieces.forEach(function (p, idx) {
+        var t = p.userData.target, r = p.userData.rrot, pos = idx * 0.038;
+        tl.to(p.position, { x: t.x, y: t.y, z: t.z, duration: 1.35, ease: 'power2.out' }, pos);
+        tl.to(p.rotation, { x: r.x, y: r.y, z: r.z, duration: 1.35, ease: 'power2.out' }, pos);
+        tl.to(p.children[0].material, { opacity: 0.18, duration: 0.9 }, pos);
+        tl.to(p.material, { opacity: 0.65, emissiveIntensity: 0.0, duration: 0.85 }, pos);
+      });
+    }
+
+    function reassemble() {
+      if (phase !== 'exploded' || fired) return; fired = true; phase = 'assembling';
+      var sorted = pieces.slice().sort(function (a, b) { return b.userData.target.y - a.userData.target.y; });
+      var tl = gsap.timeline({ onComplete: function () { phase = 'done'; } });
+      sorted.forEach(function (p, idx) {
+        var pos = idx * 0.042;
+        tl.to(p.position, { x: 0, y: 0, z: 0, duration: 1.7, ease: 'expo.inOut' }, pos);
+        tl.to(p.rotation, { x: 0, y: 0, z: 0, duration: 1.7, ease: 'expo.inOut' }, pos);
+        tl.to(p.children[0].material, { opacity: 0.55, duration: 1.1 }, pos + 0.5);
+        tl.to(p.material, { opacity: 0.88, emissiveIntensity: 0.09, duration: 1.2 }, pos + 0.3);
+      });
+      var allMats = pieces.map(function (p) { return p.material; });
+      tl.to(allMats, { emissiveIntensity: 0.32, duration: 0.38, ease: 'power2.in' })
+        .to(allMats, { emissiveIntensity: 0.07, duration: 1.1, ease: 'power2.out' });
+    }
+
+    setTimeout(explode, 500);
+    setTimeout(reassemble, 4400);
+    window.addEventListener('scroll', function () { if (!fired && phase === 'exploded') reassemble(); }, { passive: true });
+    gsap.from('.hero-content', { opacity: 0, duration: 1.6, delay: 0.4, ease: 'power2.out' });
+    gsap.from('.scroll-hint', { opacity: 0, duration: 1.2, delay: 1.4, ease: 'power2.out' });
+
+    var clock = new THREE.Clock();
+    (function tick() {
+      requestAnimationFrame(tick);
+      var t = clock.getElapsedTime();
+      if (phase === 'done') {
+        group.rotation.y += 0.003;
+        group.rotation.x = Math.sin(t * 0.22) * 0.06;
+        group.position.y = (mobile ? 0.4 : 0) + Math.sin(t * 0.38) * 0.1;
+      }
+      if (!mobile) {
+        camera.position.x = Math.sin(t * 0.14) * 0.32;
+        camera.position.y = Math.cos(t * 0.09) * 0.18;
+        camera.lookAt(group.position);
+      }
+      renderer.render(scene, camera);
+    }());
+
+    window.addEventListener('resize', function () {
+      W = window.innerWidth; H = window.innerHeight;
+      camera.aspect = W / H; camera.updateProjectionMatrix(); renderer.setSize(W, H);
+    });
+  }());
+  </script>
 </body>
 </html>
