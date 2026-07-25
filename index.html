@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Secursion — AI security, measured.</title>
-<meta name="description" content="Secursion is an AI-security studio founded by Noah Schiffman. Schiffman-Method audits, red teaming, and self-serve testing for AI systems — honest findings, no inflated red." />
+<meta name="description" content="Secursion is an AI-security studio: Schiffman-Method audits, red teaming, and self-serve testing for AI systems — honest findings, no inflated red. Backed by a team with federal, patent, and Fortune 500 security pedigree." />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -12,13 +12,13 @@
   <div class="wrap">
     <a class="brand" href="index.html">SECURSION<span class="cur">_</span></a>
     <div class="links">
-      <a href="audit.html">Audit</a>
-      <a href="red-team.html">Red Team</a>
-      <a href="https://app.secursion.ai">Vending Machine</a>
-      <a href="https://registry.secursion.ai">Incident Registry</a>
-      <a href="/calculator">Breach Calculator</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#products">Products</a>
+      <a href="#work">Field Notes</a>
+      <a href="#why">Why</a>
+      <a href="#engage">Engage</a>
     </div>
-    <a class="cta" href="audit.html">Request an audit</a>
+    <a class="cta" href="https://app.secursion.ai">Run a free scan</a>
   </div>
 </nav>
 
@@ -26,10 +26,10 @@
   <div class="wrap">
     <div class="eyebrow">Founded by Noah Schiffman · ex-Fortune 500 CISO</div>
     <h1>AI security, <em>measured.</em></h1>
-    <p class="lead">Your AI can be talked out of its rules, tricked into leaking data, or driven to act without permission. We measure exactly how — under a named methodology from a security operator who's spent decades on the other side of the attack — and hand you a report you can put in front of your board.</p>
+    <p class="lead">Your AI can be talked out of its rules, tricked into leaking data, or driven to act without permission. We measure exactly how — under a named methodology, built by people who work both sides of the threat surface — and hand you a report you can put in front of your board. Deep security expertise, not a checklist.</p>
     <div class="btns">
       <a class="btn primary" href="https://app.secursion.ai">Run a free scan</a>
-      <a class="btn ghost" href="/calculator">Estimate your breach cost</a>
+      <a class="btn ghost" href="#engage">Book a scoping call</a>
     </div>
   </div>
 </header>
@@ -40,22 +40,58 @@
   </div>
 </div>
 
-<section class="block">
+<!-- ── CAPABILITIES ─────────────────────────────────── -->
+<section class="block" id="capabilities">
+  <div class="wrap">
+    <div class="sec-eyebrow">Capabilities</div>
+    <h2>What we do.</h2>
+    <p class="sec-lead">Secursion is a security studio first. We go past the checklist, verify the claims other people take on faith, and report what we find plainly — across AI systems and the environments they live in.</p>
+    <div class="grid">
+      <div class="card">
+        <span class="tag">01 · AI-Augmented Analysis</span>
+        <h3>AI Security Review</h3>
+        <p>Automated threat modeling, architecture analysis, and code-level vulnerability discovery. We train on attack patterns, not compliance checklists — and we surface what automated scanners miss.</p>
+      </div>
+      <div class="card">
+        <span class="tag">02 · Federal-Grade</span>
+        <h3>Compliance Automation</h3>
+        <p>Federal framework alignment — NIST 800-53, FedRAMP, CMMC 2.0, plus OWASP LLM Top 10 and the EU AI Act — through policy engines that understand context, not just controls. Fewer gaps. Faster authorization.</p>
+      </div>
+      <div class="card">
+        <span class="tag">03 · Adversarial</span>
+        <h3>Penetration Testing &amp; Reporting</h3>
+        <p>Adversarial testing with attacker mindset and auditor discipline. Red-team depth, federal-grade documentation. We find the vectors before your adversaries do.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRODUCTS / THE FLYWHEEL ──────────────────────── -->
+<section class="block" id="products">
   <div class="wrap">
     <div class="sec-eyebrow">The Studio</div>
-    <h2>One methodology. Seven ways in.</h2>
-    <p class="sec-lead">From a free self-serve scan to a full board-ready audit, every product runs on the same Schiffman-Method engine — the same attack battery, the same honest scoring.</p>
+    <h2>One methodology, every depth.</h2>
+    <p class="sec-lead">The same Schiffman-Method engine runs from a free self-serve scan to a full board-ready audit. You climb it as the stakes rise — every rung is a natural step to the next.</p>
+
+    <div class="journey">
+      <div class="stage"><span class="stage-n">01</span><b>Discover</b><span>Calculator · Registry · newsletter get you in the door.</span></div>
+      <div class="stage"><span class="stage-n">02</span><b>Test</b><span>A free self-serve scan shows your real gaps in minutes.</span></div>
+      <div class="stage"><span class="stage-n">03</span><b>Diagnose</b><span>A paid scan or a full audit — a graded report for your board.</span></div>
+      <div class="stage"><span class="stage-n">04</span><b>Prove &amp; Fix</b><span>A red-team engagement proves impact, then verifies the fix.</span></div>
+      <div class="stage"><span class="stage-n">05</span><b>Trust</b><span>Display a verified badge. It points the next customer back to us.</span></div>
+    </div>
+
     <div class="grid">
       <a class="card" href="audit.html">
         <span class="tag">Flagship · Service</span>
         <h3>Schiffman-Method Audit</h3>
-        <p>A fixed-scope AI security audit, delivered by the team under Noah's named methodology. Signed report, A–F grade, mapped to SOC 2 &amp; the EU AI Act.</p>
+        <p>A fixed-scope AI security audit, delivered by our team under the Schiffman Method. Signed report, A–F grade, mapped to SOC 2 &amp; the EU AI Act. $15K–150K.</p>
         <span class="go">Learn more →</span>
       </a>
       <a class="card" href="red-team.html">
         <span class="tag">Premium · Service</span>
         <h3>Schiffman-Method Red Team</h3>
-        <p>A deeper two-week offensive engagement against your AI — multi-step attack chains, agent abuse, and a full replay log.</p>
+        <p>A deeper two-week offensive engagement against your AI — multi-step attack chains, agent abuse, and a full replay log. Six figures.</p>
         <span class="go">Learn more →</span>
       </a>
       <a class="card" href="https://app.secursion.ai">
@@ -76,27 +112,34 @@
         <p>What would an AI breach actually cost you? A grounded estimate with an AI-specific risk premium, in ninety seconds.</p>
         <span class="go">Estimate now →</span>
       </a>
-      <a class="card" href="mailto:hello@secursion.ai?subject=Children%27s%20AI%20Audit">
+      <a class="card" href="mailto:engage@secursion.ai?subject=Children%27s%20AI%20Audit">
         <span class="tag">Consumer</span>
         <h3>Children's AI Audit</h3>
         <p>A friendly, plain-language safety check of the AI tools your kids use — chatbots, homework helpers, companion apps — with the exact settings to change. A flat $149.</p>
         <span class="go">Book a check →</span>
       </a>
-      <a class="card" href="/schiffman-says">
+      <a class="card" href="mailto:engage@secursion.ai?subject=Schiffman%20Says%20newsletter">
         <span class="tag">Newsletter</span>
         <h3>Schiffman Says</h3>
-        <p>A daily one-paragraph dunk-and-decode of a real security blunder, in Noah's voice. Free. Occasionally merciless.</p>
+        <p>A daily one-paragraph dunk-and-decode of a real security blunder, in the Schiffman Method's blunt voice. Free. Occasionally merciless.</p>
         <span class="go">Subscribe →</span>
+      </a>
+      <a class="card" href="#pricing">
+        <span class="tag">The ladder</span>
+        <h3>See every rung &amp; price</h3>
+        <p>Free scan → Basic → Pro → Expert-Reviewed → Focused Audit → full Audit → Red Team. One honest ladder, priced in the open.</p>
+        <span class="go">View pricing →</span>
       </a>
     </div>
   </div>
 </section>
 
-<section class="block">
+<!-- ── PRICING ──────────────────────────────────────── -->
+<section class="block" id="pricing">
   <div class="wrap">
     <div class="sec-eyebrow">Pricing</div>
     <h2>One ladder, from free to flagship.</h2>
-    <p class="sec-lead">Every rung runs the same Schiffman-Method engine. You climb it as the stakes rise — from an instant self-serve scan to a signed, board-ready audit.</p>
+    <p class="sec-lead">Every rung runs the same Schiffman-Method engine. Climb it as the stakes rise — from an instant self-serve scan to a signed, board-ready audit.</p>
     <div class="price-wrap">
     <table class="pricing">
       <tr><th>Offering</th><th>Price</th><th>What you get</th><th></th></tr>
@@ -104,24 +147,78 @@
       <tr><td>Basic Scan</td><td>$99</td><td>The full automated attack suite, graded report</td><td><a href="https://app.secursion.ai">Run →</a></td></tr>
       <tr><td>Pro Scan</td><td>$499</td><td>Everything incl. AI-judged + agent attacks</td><td><a href="https://app.secursion.ai">Run →</a></td></tr>
       <tr class="hl"><td>Expert-Reviewed Scan</td><td>$1,500</td><td>The Pro scan, then an analyst reviews &amp; signs off (~2 days)</td><td><a href="https://app.secursion.ai">Run →</a></td></tr>
-      <tr class="hl"><td>Focused Audit</td><td>$6,000</td><td>A scoped human audit of one AI system — signed, standards-mapped</td><td><a href="mailto:hello@secursion.ai?subject=Focused%20Audit%20inquiry">Book →</a></td></tr>
+      <tr class="hl"><td>Focused Audit</td><td>$6,000</td><td>A scoped human audit of one AI system — signed, standards-mapped</td><td><a href="#engage">Book →</a></td></tr>
       <tr><td>Schiffman-Method Audit</td><td>$15K–150K</td><td>Full multi-system expert audit, board-ready + badge</td><td><a href="audit.html">Learn →</a></td></tr>
       <tr><td>Schiffman-Method Red Team</td><td>six figures</td><td>Proof of real attack impact, chained, with retest</td><td><a href="red-team.html">Learn →</a></td></tr>
-      <tr><td>Children's AI Audit</td><td>$149</td><td>Plain-language family safety check of the kids' AI tools</td><td><a href="mailto:hello@secursion.ai?subject=Children%27s%20AI%20Audit">Book →</a></td></tr>
+      <tr><td>Children's AI Audit</td><td>$149</td><td>Plain-language family safety check of the kids' AI tools</td><td><a href="mailto:engage@secursion.ai?subject=Children%27s%20AI%20Audit">Book →</a></td></tr>
     </table>
     </div>
-    <p class="sec-lead" style="margin-top:1.4rem;font-size:0.95rem">The two new middle rungs — <b style="color:var(--accent)">Expert-Reviewed</b> and <b style="color:var(--accent)">Focused Audit</b> — bridge self-serve automation and the full audit: automation's speed with an expert's name on it.</p>
+    <p class="sec-lead" style="margin-top:1.4rem;font-size:0.95rem">The two middle rungs — <b style="color:var(--accent)">Expert-Reviewed</b> and <b style="color:var(--accent)">Focused Audit</b> — bridge self-serve automation and the full audit: automation's speed with an expert's name on it.</p>
   </div>
 </section>
 
-<section class="block">
+<!-- ── FIELD NOTES / CASE STUDIES ───────────────────── -->
+<section class="block" id="work">
+  <div class="wrap">
+    <div class="sec-eyebrow">Selected Work</div>
+    <h2>Field Notes.</h2>
+    <p class="sec-lead">A sample of the work our principals have led — anonymized to protect client confidentiality. The pattern is consistent: we go past the checklist, verify the claims others take on faith, and report what we find plainly.</p>
+
+    <div class="cases">
+      <article class="case">
+        <p class="case-sector">Vendor Evaluation · Enterprise Security</p>
+        <h3>Debunking an "AI-powered" security appliance</h3>
+        <p class="case-body">A client was weeks from a six-figure purchase of a network-defense appliance marketed as an AI-driven intrusion-detection and honeypot system. We ran an independent black-box evaluation: hardware teardown, live traffic capture, and claim-by-claim verification. The device was a repurposed embedded PC running an operating system that had reached end-of-life years earlier — we bypassed its proprietary lockout to gain administrative access, and showed its "threat detections" were ordinary internet background noise.</p>
+        <p class="case-outcome"><strong>Outcome:</strong> the client walked away from a costly purchase built on security-through-obscurity.</p>
+      </article>
+      <article class="case">
+        <p class="case-sector">Red Team · Defense &amp; Engineering</p>
+        <h3>Full-scope red team against a defense contractor</h3>
+        <p class="case-body">Reconnaissance mapped an attack surface far larger than the client realized — including a forgotten subdomain vulnerable to takeover and a typo-squatted look-alike domain already serving malware to employees. A tailored spear-phishing campaign, built entirely from open-source intelligence, tested the human layer. Every finding was disclosed responsibly, with remediation guidance.</p>
+        <p class="case-outcome"><strong>Outcome:</strong> live external exposures identified and closed before an adversary reached them.</p>
+      </article>
+      <article class="case">
+        <p class="case-sector">Federal · Connected-Vehicle Security</p>
+        <h3>Data-at-rest risk in a federal vehicle fleet</h3>
+        <p class="case-body">Modern vehicles are data-generation machines on wheels — retaining location history, paired-phone contacts, and cached credentials long after a driver walks away. For a federal fleet program, we assessed whether existing "wipe" and "factory reset" tools actually removed that data. They didn't. We delivered an operational-impact analysis and a phased data-sanitization roadmap.</p>
+        <p class="case-outcome"><strong>Outcome:</strong> a previously unaddressed data-exposure gap closed across a 20,000+ vehicle fleet.</p>
+      </article>
+      <article class="case">
+        <p class="case-sector">Internal Assessment · Operating Company</p>
+        <h3>The network defended only by factory defaults</h3>
+        <p class="case-body">An on-site assessment of a regional operating company found its entire network fronted by ISP gateways still using published factory-default administrator credentials — the only thing standing between the open internet and a flat internal network of workstations, cameras, and access-control systems. We inventoried the environment and delivered a segmentation, firewall, and hardening plan.</p>
+        <p class="case-outcome"><strong>Outcome:</strong> a trivially-breachable perimeter replaced with a defensible, segmented architecture.</p>
+      </article>
+    </div>
+
+    <div class="pedigree">
+      <p class="pedigree-label">Experience we bring</p>
+      <p class="pedigree-note">Secursion is boutique, but its principals didn't start yesterday. Between them, our team's prior security, research, and compliance work spans federal agencies, national laboratories, and Fortune&nbsp;500 enterprises. These reflect the individual track records our founders bring — not client endorsements.</p>
+      <div class="pedigree-list">
+        <span>Oak Ridge National Laboratory</span>
+        <span>PwC</span>
+        <span>KBR</span>
+        <span>Ford</span>
+        <span>U.S. Dept. of Homeland Security</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY SECURSION ────────────────────────────────── -->
+<section class="block" id="why">
   <div class="wrap">
     <div class="sec-eyebrow">Why Secursion</div>
     <h2>Credibility you can't fake, velocity you can't hire.</h2>
+    <p class="sec-lead why-pull">The name is a portmanteau of <b>security</b> and <b>recursion</b> — signal intelligence that thinks in layers.</p>
     <div class="feat">
       <div>
         <h4>A named operator, not a logo</h4>
-        <p>Founded by Noah Schiffman — Fortune 500 CISO, security consultant with top-secret clearance serving federal contractors. The methodology carries his name and his standards.</p>
+        <p>The Schiffman Method is named for Noah Schiffman — an ex-Fortune 500 CISO and security consultant with top-secret clearance serving federal contractors. The methodology carries his name and his standards.</p>
+      </div>
+      <div>
+        <h4>Practitioners, not presenters</h4>
+        <p>Behind the method is a boutique team of federally-cleared researchers — including patent-holders in security architecture. This isn't a consultancy that added an AI layer, or an AI company that discovered security. It's the real thing, combined.</p>
       </div>
       <div>
         <h4>Honest findings, on principle</h4>
@@ -131,20 +228,43 @@
         <h4>Framework-mapped by default</h4>
         <p>Every finding maps to OWASP LLM Top 10, the EU AI Act, SOC 2, and NIST AI RMF — so your audit is also your compliance evidence.</p>
       </div>
+      <div>
+        <h4>Full-spectrum capability</h4>
+        <p>Offensive red-team and pen testing, defensive detection and malware analysis, hardware / RF / embedded research, and federal compliance — under one roof, from the same principals.</p>
+      </div>
+      <div>
+        <h4>Boutique by design</h4>
+        <p>We don't scale by diluting expertise. Every engagement involves principals — the people who built the capabilities, not a team trained to present them.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="block">
+<!-- ── ENGAGE ───────────────────────────────────────── -->
+<section class="block" id="engage">
   <div class="wrap">
-    <div class="band">
-      <div class="sec-eyebrow">Start here</div>
-      <h2>Find out what an attacker already knows.</h2>
-      <p class="sec-lead">Run a free scan in minutes, or book a scoping call for a full Schiffman-Method Audit. Either way, you'll know exactly where your AI can be turned against you.</p>
-      <div class="btns">
-        <a class="btn primary" href="https://app.secursion.ai">Run a free scan</a>
-        <a class="btn ghost" href="mailto:hello@secursion.ai?subject=Schiffman-Method%20Audit%20inquiry">Book an audit scoping call</a>
+    <div class="contact-layout">
+      <div>
+        <div class="sec-eyebrow">Engage</div>
+        <h2>Serious work<br>starts here.</h2>
+        <p class="sec-lead">Run a free scan in minutes, or book a scoping call for a full Schiffman-Method Audit or Red Team. We work with federal contractors, security teams, and technology leaders navigating the new attack surface AI introduces.</p>
+        <div class="btns" style="margin-bottom:1.6rem">
+          <a class="btn primary" href="https://app.secursion.ai">Run a free scan</a>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:engage@secursion.ai">engage@secursion.ai</a>
+          <a href="https://secursion.ai">secursion.ai</a>
+        </div>
       </div>
+      <form class="form" id="contact-form" novalidate>
+        <div class="form-row">
+          <div class="field"><label for="f-name">Name</label><input type="text" id="f-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="f-email">Email</label><input type="email" id="f-email" name="email" autocomplete="email" required></div>
+        </div>
+        <div class="field"><label for="f-org">Organization</label><input type="text" id="f-org" name="organization" autocomplete="organization"></div>
+        <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" required></textarea></div>
+        <button type="submit" class="btn primary" id="submit-btn">Send message &nbsp;→</button>
+      </form>
     </div>
   </div>
 </section>
@@ -153,14 +273,29 @@
   <div class="wrap">
     <img class="seal" src="assets/seal.png" alt="Verified by Secursion" />
     <div class="fnav">
+      <a href="#products">Products</a>
       <a href="audit.html">Audit</a>
       <a href="red-team.html">Red Team</a>
       <a href="https://app.secursion.ai">Vending</a>
       <a href="https://registry.secursion.ai">Registry</a>
-      <a href="mailto:hello@secursion.ai">Contact</a>
+      <a href="mailto:engage@secursion.ai">Contact</a>
     </div>
     <div class="legal">© 2026 Secursion. AI security, measured. · The Schiffman Method is Secursion's assessment methodology; reports reflect Secursion's professional opinion.</div>
   </div>
 </footer>
+
+<script>
+// Static-host contact form: compose an email to engage@secursion.ai with the entered details.
+document.getElementById('contact-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  var name=document.getElementById('f-name').value.trim();
+  var email=document.getElementById('f-email').value.trim();
+  var org=document.getElementById('f-org').value.trim();
+  var msg=document.getElementById('f-msg').value.trim();
+  if(!name||!email||!msg){ alert('Please add your name, email, and a message.'); return; }
+  var body='Name: '+name+'\nEmail: '+email+'\nOrganization: '+org+'\n\n'+msg;
+  window.location.href='mailto:engage@secursion.ai?subject='+encodeURIComponent('Secursion inquiry — '+name)+'&body='+encodeURIComponent(body);
+});
+</script>
 </body>
 </html>
