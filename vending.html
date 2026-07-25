@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PenTest Vending Machine — Secursion</title>
+<meta name="description" content="Self-serve AI security testing. Point it at your own AI, prove you own it, and get a Schiffman-Method report in minutes. Free scan, or paid tiers up to Expert-Reviewed. Works with any API." />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">SECURSION<span class="cur">_</span></a>
+    <div class="links">
+      <a href="index.html#products">Products</a>
+      <a href="audit.html">Audit</a>
+      <a href="red-team.html">Red Team</a>
+      <a href="registry.html">Registry</a>
+      <a href="/calculator">Calculator</a>
+    </div>
+    <a class="cta" href="https://app.secursion.ai">Run a free scan</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Self-serve · Schiffman Method</div>
+    <h1>Test your AI, <em>in minutes.</em></h1>
+    <p class="lead">Point it at your own AI endpoint, prove you control it, and get a graded A–F security report — no sales call, no waiting. The same attack battery behind our full audit, in instant self-serve form. Start free; go deeper when you're ready.</p>
+    <div class="btns">
+      <a class="btn primary" href="https://app.secursion.ai">Run a free scan</a>
+      <a class="btn ghost" href="/calculator">Estimate your breach cost</a>
+    </div>
+  </div>
+</header>
+
+<div class="trust">
+  <div class="wrap">
+    <span><b>We don't inflate red.</b> The harness deletes false positives before you ever see them — so a finding is a real finding, never a scare.</span>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <div class="sec-eyebrow">How it works</div>
+    <h2>Three steps. A few minutes.</h2>
+    <div class="journey" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stage"><span class="stage-n">01</span><b>Point us at your AI</b><span>Give us the endpoint. Standard OpenAI/Anthropic-style APIs or your own custom format — a built-in connection tester confirms it before anything runs.</span></div>
+      <div class="stage"><span class="stage-n">02</span><b>Prove it's yours</b><span>A one-time ownership check (a hosted file or a token your bot echoes). Fail-closed: nothing runs against an endpoint you can't prove you control.</span></div>
+      <div class="stage"><span class="stage-n">03</span><b>Get a graded report</b><span>We run the attack corpus, delete false positives, and hand back an A–F posture grade with evidence and remediation — emailed to you.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="sec-eyebrow">Pick your depth</div>
+    <h2>From free snapshot to analyst-signed.</h2>
+    <div class="grid" style="grid-template-columns:repeat(4,1fr)">
+      <div class="card">
+        <span class="tag">Free</span>
+        <h3>Free Scan</h3>
+        <p>~5 quick attacks across categories. An overall A–F grade and a preview of what we found. Live today, no card.</p>
+        <span class="go price">$0</span>
+      </div>
+      <div class="card">
+        <span class="tag">Basic</span>
+        <h3>Basic Scan</h3>
+        <p>The full automated attack suite (minus advanced judge cases). A complete graded security report.</p>
+        <span class="go price">$99</span>
+      </div>
+      <div class="card">
+        <span class="tag">Pro</span>
+        <h3>Pro Scan</h3>
+        <p>Everything, including AI-judged and agent tool-abuse attacks. Formal audit-tier report + team-review offer.</p>
+        <span class="go price">$499</span>
+      </div>
+      <div class="card" style="border-left:2px solid var(--accent)">
+        <span class="tag">Hybrid · Signed</span>
+        <h3>Expert-Reviewed</h3>
+        <p>The Pro scan, then a Secursion analyst reviews the findings, prioritizes them, and signs off before delivery (~2 business days). Automation's speed, an expert's judgment.</p>
+        <span class="go price">$1,500</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="sec-eyebrow">What we test</div>
+    <h2>Five ways your AI gets turned against you.</h2>
+    <p class="sec-lead">Every scan runs the corpus across the categories that matter for a deployed LLM or agent — the same ones that put companies in the headlines.</p>
+    <ul class="checks">
+      <li><b>Prompt injection</b> — direct, indirect, and retrieved-content hijacks</li>
+      <li><b>Jailbreak</b> — persona, pretext, and guardrail-bypass attacks</li>
+      <li><b>System-prompt leakage</b> — extraction of your hidden instructions</li>
+      <li><b>Data leakage</b> — PII, secrets, and cross-session exfiltration</li>
+      <li><b>Tool / agent abuse</b> — unauthorized actions and privilege escalation</li>
+      <li><b>Framework mapping</b> — every finding tied to a control you report on</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="sec-eyebrow">Works with your stack</div>
+    <h2>Any AI, not just OpenAI.</h2>
+    <div class="feat">
+      <div>
+        <h4>Standard chat APIs</h4>
+        <p>OpenAI, Anthropic, Azure OpenAI, Together, Groq, vLLM/Ollama — anything that speaks the OpenAI-compatible shape. Point and run.</p>
+      </div>
+      <div>
+        <h4>Your own custom API</h4>
+        <p>Built your own chatbot with its own request format? Tell us the message field and where the reply lives — or let the connection tester auto-detect it for you.</p>
+      </div>
+      <div>
+        <h4>Your key never sticks around</h4>
+        <p>The API key you provide is encrypted for the single run and purged the moment it finishes. Never stored in plain text.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="band">
+      <div class="sec-eyebrow">Start here</div>
+      <h2>See where your AI can be turned against you.</h2>
+      <p class="sec-lead">The free scan shows you have gaps in minutes. The paid tiers show you all of them. Serious findings roll naturally into a <a href="audit.html">full Schiffman-Method Audit</a>.</p>
+      <div class="btns" style="margin-top:1.5rem;">
+        <a class="btn primary" href="https://app.secursion.ai">Run a free scan</a>
+        <a class="btn ghost" href="index.html#pricing">See the full ladder</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img class="seal" src="assets/seal.png" alt="Verified by Secursion" />
+    <div class="fnav">
+      <a href="index.html">Home</a>
+      <a href="audit.html">Audit</a>
+      <a href="red-team.html">Red Team</a>
+      <a href="registry.html">Registry</a>
+      <a href="mailto:engage@secursion.ai">Contact</a>
+    </div>
+    <div class="legal">© 2026 Secursion. The Schiffman Method is Secursion's assessment methodology; reports reflect Secursion's professional opinion and are not a guarantee against compromise.</div>
+  </div>
+</footer>
+</body>
+</html>
