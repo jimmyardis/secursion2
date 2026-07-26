@@ -16,14 +16,16 @@
       <a href="#products">Products</a>
       <a href="#work">Field Notes</a>
       <a href="#why">Why</a>
+      <a href="#founders">Founders</a>
       <a href="#engage">Engage</a>
     </div>
     <a class="cta" href="https://app.secursion.ai">Run a free scan</a>
   </div>
 </nav>
 
-<header class="hero">
-  <div class="wrap">
+<header class="hero" id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="wrap hero-content">
     <div class="eyebrow">Founded by Noah Schiffman · ex-Fortune 500 CISO</div>
     <h1>AI security, <em>measured.</em></h1>
     <p class="lead">Your AI can be talked out of its rules, tricked into leaking data, or driven to act without permission. We measure exactly how — under a named methodology, built by people who work both sides of the threat surface — and hand you a report you can put in front of your board. Deep security expertise, not a checklist.</p>
@@ -33,12 +35,6 @@
     </div>
   </div>
 </header>
-
-<div class="trust">
-  <div class="wrap">
-    <span><b>We deleted our first five findings.</b> They were false positives — the model actually defended. Most scanners would've billed you for them. We don't inflate red.</span>
-  </div>
-</div>
 
 <!-- ── CAPABILITIES ─────────────────────────────────── -->
 <section class="block" id="capabilities">
@@ -118,7 +114,7 @@
         <p>A friendly, plain-language safety check of the AI tools your kids use — chatbots, homework helpers, companion apps — with the exact settings to change. A flat $149.</p>
         <span class="go">Learn more →</span>
       </a>
-      <a class="card" href="mailto:engage@secursion.ai?subject=Schiffman%20Says%20newsletter">
+      <a class="card" href="mailto:jimmy@secursion.ai?subject=Schiffman%20Says%20newsletter">
         <span class="tag">Newsletter</span>
         <h3>Schiffman Says</h3>
         <p>A daily one-paragraph dunk-and-decode of a real security blunder, in the Schiffman Method's blunt voice. Free. Occasionally merciless.</p>
@@ -240,6 +236,29 @@
   </div>
 </section>
 
+<!-- ── FOUNDERS ─────────────────────────────────────── -->
+<section class="block" id="founders">
+  <div class="wrap">
+    <div class="sec-eyebrow">The Founders</div>
+    <h2>Who's behind the method.</h2>
+    <p class="sec-lead">Secursion is boutique on purpose — you work with the people who built it, not a team trained to present them.</p>
+    <div class="founders">
+      <article class="founder">
+        <h3>Noah Schiffman</h3>
+        <p class="founder-role">Founder · Chief Security Officer</p>
+        <p>A former Fortune 500 CISO and security consultant holding top-secret clearance in service of federal contractors. The Schiffman Method — Secursion's assessment methodology — carries his name and the standards he built over decades on both the offensive and defensive sides of enterprise and federal security.</p>
+        <a class="founder-contact" href="mailto:noah@secursion.ai">noah@secursion.ai</a>
+      </article>
+      <article class="founder">
+        <h3>Jimmy Ardis</h3>
+        <p class="founder-role">Founder · Product &amp; Engineering</p>
+        <p>The builder behind Secursion — a federal compliance consultant who turns the Schiffman Method into shipping software: the attack harness, the report engine, the self-serve testing platform, and the AI Incident Registry. Deep security domain expertise, paired with someone who actually ships.</p>
+        <a class="founder-contact" href="mailto:jimmy@secursion.ai">jimmy@secursion.ai</a>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ── ENGAGE ───────────────────────────────────────── -->
 <section class="block" id="engage">
   <div class="wrap">
@@ -252,7 +271,7 @@
           <a class="btn primary" href="https://app.secursion.ai">Run a free scan</a>
         </div>
         <div class="contact-links">
-          <a href="mailto:engage@secursion.ai">engage@secursion.ai</a>
+          <a href="mailto:jimmy@secursion.ai">jimmy@secursion.ai</a>
           <a href="https://secursion.ai">secursion.ai</a>
         </div>
       </div>
@@ -278,14 +297,102 @@
       <a href="red-team.html">Red Team</a>
       <a href="vending.html">Vending</a>
       <a href="registry.html">Registry</a>
-      <a href="mailto:engage@secursion.ai">Contact</a>
+      <a href="mailto:jimmy@secursion.ai">Contact</a>
     </div>
     <div class="legal">© 2026 Secursion. AI security, measured. · The Schiffman Method is Secursion's assessment methodology; reports reflect Secursion's professional opinion.</div>
   </div>
 </footer>
 
+<!-- Hero 3D: icosahedron explode / reassemble (Three.js r128 + GSAP), green brand -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script>
-// Static-host contact form: compose an email to engage@secursion.ai with the entered details.
+(function(){
+  'use strict';
+  var canvas = document.getElementById('hero-canvas');
+  if(!canvas || !window.THREE || !window.gsap) return;
+  var hero = canvas.parentElement;
+  var mobile = window.innerWidth < 768;
+  var W = canvas.clientWidth || hero.clientWidth, H = canvas.clientHeight || hero.clientHeight;
+
+  var renderer = new THREE.WebGLRenderer({canvas:canvas, antialias:!mobile, alpha:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile?1:1.5));
+  renderer.setSize(W, H); renderer.setClearColor(0x000000, 0);
+
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(52, W/H, 0.1, 100);
+  camera.position.set(0,0,6);
+
+  scene.add(new THREE.AmbientLight(0x0e1513, 8));
+  var key = new THREE.PointLight(0x2fe6a0, 5, 22); key.position.set(5,6,5); scene.add(key);
+  var fill = new THREE.PointLight(0x0f7d57, 2, 20); fill.position.set(-6,-4,-3); scene.add(fill);
+
+  var group = new THREE.Group();
+  group.position.set(0, mobile?0.3:0, 0); scene.add(group);
+
+  var RADIUS = mobile?1.1:1.6, EXPLODE_D = mobile?2.4:3.6;
+  var icoGeom = new THREE.IcosahedronGeometry(RADIUS, 0);
+  var posAttr = icoGeom.attributes.position, FACES = posAttr.count/3, pieces = [];
+
+  for(var i=0;i<FACES;i++){
+    var verts=[];
+    for(var j=0;j<3;j++) verts.push(new THREE.Vector3(posAttr.getX(i*3+j),posAttr.getY(i*3+j),posAttr.getZ(i*3+j)));
+    var centroid=new THREE.Vector3().add(verts[0]).add(verts[1]).add(verts[2]).divideScalar(3);
+    var dir=centroid.clone().normalize();
+    var geom=new THREE.BufferGeometry();
+    geom.setAttribute('position', new THREE.BufferAttribute(new Float32Array([
+      verts[0].x,verts[0].y,verts[0].z, verts[1].x,verts[1].y,verts[1].z, verts[2].x,verts[2].y,verts[2].z]),3));
+    geom.computeVertexNormals();
+    var mat=new THREE.MeshStandardMaterial({color:0x0e1513, emissive:new THREE.Color(0x2fe6a0),
+      emissiveIntensity:0.05, metalness:0.85, roughness:0.2, side:THREE.DoubleSide, transparent:true, opacity:0.9});
+    var mesh=new THREE.Mesh(geom, mat);
+    mesh.add(new THREE.LineSegments(new THREE.EdgesGeometry(geom),
+      new THREE.LineBasicMaterial({color:0x2fe6a0, transparent:true, opacity:0.6})));
+    mesh.userData.target=dir.clone().multiplyScalar(EXPLODE_D);
+    mesh.userData.rrot={x:(Math.random()-0.5)*Math.PI*1.4, y:(Math.random()-0.5)*Math.PI*1.4, z:(Math.random()-0.5)*Math.PI*0.9};
+    pieces.push(mesh); group.add(mesh);
+  }
+
+  var phase='idle', fired=false;
+  function explode(){ if(phase!=='idle')return; phase='exploding';
+    var tl=gsap.timeline({onComplete:function(){phase='exploded';}});
+    pieces.forEach(function(p,idx){ var t=p.userData.target,r=p.userData.rrot,pos=idx*0.038;
+      tl.to(p.position,{x:t.x,y:t.y,z:t.z,duration:1.35,ease:'power2.out'},pos);
+      tl.to(p.rotation,{x:r.x,y:r.y,z:r.z,duration:1.35,ease:'power2.out'},pos);
+      tl.to(p.children[0].material,{opacity:0.2,duration:0.9},pos);
+      tl.to(p.material,{opacity:0.65,emissiveIntensity:0,duration:0.85},pos); });
+  }
+  function reassemble(){ if(phase!=='exploded'||fired)return; fired=true; phase='assembling';
+    var sorted=pieces.slice().sort(function(a,b){return b.userData.target.y-a.userData.target.y;});
+    var tl=gsap.timeline({onComplete:function(){phase='done';}});
+    sorted.forEach(function(p,idx){ var pos=idx*0.042;
+      tl.to(p.position,{x:0,y:0,z:0,duration:1.7,ease:'expo.inOut'},pos);
+      tl.to(p.rotation,{x:0,y:0,z:0,duration:1.7,ease:'expo.inOut'},pos);
+      tl.to(p.children[0].material,{opacity:0.6,duration:1.1},pos+0.5);
+      tl.to(p.material,{opacity:0.9,emissiveIntensity:0.1,duration:1.2},pos+0.3); });
+    var allMats=pieces.map(function(p){return p.material;});
+    tl.to(allMats,{emissiveIntensity:0.34,duration:0.38,ease:'power2.in'})
+      .to(allMats,{emissiveIntensity:0.08,duration:1.1,ease:'power2.out'});
+  }
+  setTimeout(explode,600);
+  setTimeout(function(){ if(!fired) reassemble(); },4400);
+  window.addEventListener('scroll',function(){ if(!fired&&phase==='exploded') reassemble(); },{passive:true});
+  gsap.from('.hero-content',{opacity:0,duration:1.6,delay:0.3,ease:'power2.out'});
+
+  var clock=new THREE.Clock();
+  (function tick(){ requestAnimationFrame(tick); var t=clock.getElapsedTime();
+    if(phase==='done'){ group.rotation.y+=0.003; group.rotation.x=Math.sin(t*0.22)*0.06;
+      group.position.y=(mobile?0.3:0)+Math.sin(t*0.38)*0.1; }
+    if(!mobile){ camera.position.x=Math.sin(t*0.14)*0.32; camera.position.y=Math.cos(t*0.09)*0.18; camera.lookAt(group.position); }
+    renderer.render(scene,camera);
+  })();
+  window.addEventListener('resize',function(){ W=canvas.clientWidth||hero.clientWidth; H=canvas.clientHeight||hero.clientHeight;
+    camera.aspect=W/H; camera.updateProjectionMatrix(); renderer.setSize(W,H); });
+})();
+</script>
+
+<script>
+// Static-host contact form: compose an email to jimmy@secursion.ai with the entered details.
 document.getElementById('contact-form').addEventListener('submit', function(e){
   e.preventDefault();
   var name=document.getElementById('f-name').value.trim();
@@ -294,7 +401,7 @@ document.getElementById('contact-form').addEventListener('submit', function(e){
   var msg=document.getElementById('f-msg').value.trim();
   if(!name||!email||!msg){ alert('Please add your name, email, and a message.'); return; }
   var body='Name: '+name+'\nEmail: '+email+'\nOrganization: '+org+'\n\n'+msg;
-  window.location.href='mailto:engage@secursion.ai?subject='+encodeURIComponent('Secursion inquiry — '+name)+'&body='+encodeURIComponent(body);
+  window.location.href='mailto:jimmy@secursion.ai?subject='+encodeURIComponent('Secursion inquiry — '+name)+'&body='+encodeURIComponent(body);
 });
 </script>
 </body>

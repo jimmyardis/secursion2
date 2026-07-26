@@ -150,3 +150,20 @@ section[id],header[id]{scroll-margin-top:80px;}
 .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent-dim);}
 .field textarea{min-height:120px;resize:vertical;}
 .form .btn{cursor:pointer;border:1px solid var(--accent);align-self:flex-start;}
+
+/* 3D hero */
+.hero{position:relative;overflow:hidden;padding:6rem 0;min-height:74vh;display:flex;align-items:center;}
+.hero>.wrap{width:100%;}
+#hero-canvas{position:absolute;top:0;right:0;width:58%;height:100%;z-index:0;pointer-events:none;}
+.hero-content{position:relative;z-index:1;max-width:600px;}
+@media(max-width:900px){.hero{min-height:auto;padding:4rem 0 3rem;} .hero-content{max-width:100%;} #hero-canvas{width:100%;opacity:0.35;}}
+@media(max-width:760px){.hero{min-height:auto;padding:4rem 0 3rem;}}
+
+/* founders */
+.founders{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+@media(max-width:760px){.founders{grid-template-columns:1fr;}}
+.founder{background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--accent);padding:1.6rem;}
+.founder h3{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;margin:0 0 0.2rem;}
+.founder-role{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin:0 0 0.9rem;}
+.founder p{font-size:0.92rem;color:var(--dim);margin:0 0 1rem;}
+.founder-contact{font-family:'JetBrains Mono',monospace;font-size:0.85rem;}
